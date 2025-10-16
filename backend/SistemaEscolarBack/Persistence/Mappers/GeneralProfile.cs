@@ -1,4 +1,5 @@
 using Application.DTOs.DatosPersonales;
+using Application.DTOs.HistorialAcademico;
 using AutoMapper;
 using Persistence.Views;
 
@@ -12,6 +13,11 @@ public class GeneralProfile : Profile
 
         CreateMap<GetDatosAlumno, DatosPersonalesAlumnoDto>();
         CreateMap<GetDatosDocente, DatosPersonalesDocenteDto>();
+
+        CreateMap<GetHistorialAlumno, HistorialAlumnoDto>();
+        CreateMap<GetHistorialDetalle, MateriaDetalleDto>();
+
+        CreateMap<GetEstadoGeneralAlumno, EstadoGeneralAlumnoDto>();
 
         #endregion
     }
