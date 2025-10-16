@@ -5,9 +5,9 @@ public class DatosPersonalesDocenteDto
 {
     public string Rfc { get; set; } = null!;
     public string? Nombre { get; set; }
-    public string? EmailPDoc { get; set; }
-    public string? EmailIDoc { get; set; }
-    public string? TelDoc { get; set; }
+    public string? EmailPersonal { get; set; }
+    public string? EmailInstitucional { get; set; }
+    public string? Telefono { get; set; }
     public string Calle { get; set; } = null!;
     public string NoExt { get; set; } = null!;
     public string NoInt { get; set; } = null!;

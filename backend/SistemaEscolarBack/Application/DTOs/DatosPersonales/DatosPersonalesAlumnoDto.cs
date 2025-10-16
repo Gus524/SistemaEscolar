@@ -6,15 +6,15 @@ public class DatosPersonalesAlumnoDto
 
     public string? Nombre { get; set; }
 
-    public string EmailPAlumno { get; set; } = null!;
+    public string EmailPersonal { get; set; } = null!;
 
-    public string? EmailIAlumno { get; set; }
+    public string? EmailInstitucional { get; set; }
 
     public string? Curp { get; set; }
 
-    public string? TelfAlumno { get; set; }
+    public string? Telefono { get; set; }
 
-    public string? TelmAlumno { get; set; }
+    public string? TelefonoMovil { get; set; }
 
     public string Calle { get; set; } = null!;
 
