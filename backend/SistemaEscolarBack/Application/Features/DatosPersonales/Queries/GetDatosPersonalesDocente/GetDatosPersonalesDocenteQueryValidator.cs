@@ -7,7 +7,7 @@ public class GetDatosPersonalesDocenteQueryValidator : AbstractValidator<GetDato
     public GetDatosPersonalesDocenteQueryValidator()
     {
         RuleFor(p => p.Rfc)
-            .NotEmpty().WithMessage("{PropertyName} no puede ser vacio.")
-            .MaximumLength(13).WithMessage("{PropertyName} no debe exceder {MaxLength} caracteres.");
+            .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
+            .MaximumLength(13).WithMessage("{PropertyName} no debe exceder {MaximumLength} caracteres.");
     }
 }
