@@ -24,4 +24,45 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="SqlScripts\Views\GetHorarios.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetHorarios.sql" />
+      <None Remove="SqlScripts\Views\GetAlumnoCalificaciones.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetAlumnoCalificaciones.sql" />
+      <None Remove="SqlScripts\Views\GetAlumnoHorario.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetAlumnoHorario.sql" />
+      <None Remove="SqlScripts\Views\GetAlumnosGrupo.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetAlumnosGrupo.sql" />
+      <None Remove="SqlScripts\Views\GetCarrerasInst.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetCarrerasInst.sql" />
+      <None Remove="SqlScripts\Views\GetDatosAlumno.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetDatosAlumno.sql" />
+      <None Remove="SqlScripts\Views\GetDatosDocente.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetDatosDocente.sql" />
+      <None Remove="SqlScripts\Views\GetDocenteHorario.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetDocenteHorario.sql" />
+      <None Remove="SqlScripts\Views\GetEstadoGeneralAlumno.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetEstadoGeneralAlumno.sql" />
+      <None Remove="SqlScripts\Views\GetForMapa.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetForMapa.sql" />
+      <None Remove="SqlScripts\Views\GetGruposDocente.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetGruposDocente.sql" />
+      <None Remove="SqlScripts\Views\GetGruposPlan.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetGruposPlan.sql" />
+      <None Remove="SqlScripts\Views\GetHistorialAlumno.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetHistorialAlumno.sql" />
+      <None Remove="SqlScripts\Views\GetHistorialDetalle.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetHistorialDetalle.sql" />
+      <None Remove="SqlScripts\Views\GetInformacionGrupo.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetInformacionGrupo.sql" />
+      <None Remove="SqlScripts\Views\GetInicioAlumno.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetInicioAlumno.sql" />
+      <None Remove="SqlScripts\Views\GetInicioDocente.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetInicioDocente.sql" />
+      <None Remove="SqlScripts\Views\GetInicioGestion.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetInicioGestion.sql" />
+      <None Remove="SqlScripts\Views\GetMapaCurricular.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetMapaCurricular.sql" />
+    </ItemGroup>
+
 </Project>
