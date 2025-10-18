@@ -1,3 +1,4 @@
+using Application;
 using Microsoft.Extensions.Options;
 using Persistence;
 using Scalar.AspNetCore;
@@ -7,6 +8,8 @@ using WebApi.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient();
+builder.Services.AddApplicationLayer();
 builder.Services.AddPersistenceInfraestructure(builder.Configuration);
 builder.Services.AddApiVersioningExtensions();
 builder.Services.AddControllers();
