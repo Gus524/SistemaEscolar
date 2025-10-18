@@ -7,11 +7,11 @@ public class GetEstadoGeneralAlumnoQueryValidator : AbstractValidator<GetEstadoG
     public GetEstadoGeneralAlumnoQueryValidator()
     {
         RuleFor(p => p.NoBoleta)
-            .NotEmpty().WithMessage("{PropertyName} no puede ser vacio.")
+            .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
             .GreaterThan(0).WithMessage("{PropertyName} debe ser mayor a 0.");
         
         RuleFor(p => p.IdPlan)
-            .NotEmpty().WithMessage("{PropertyName} no puede ser vacio.")
+            .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
             .GreaterThan(0).WithMessage("{PropertyName} debe ser mayor a 0.");
     }
 }

@@ -7,7 +7,7 @@ public class GetHistorialDetalleQueryValidator : AbstractValidator<GetHistorialD
     public GetHistorialDetalleQueryValidator()
     {
         RuleFor(p => p.NoBoleta)
-            .NotEmpty().WithMessage("{PropertyName} no puede ser vacio.")
+            .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
             .GreaterThan(0).WithMessage("{PropertyName} debe ser mayor a 0.");
     }
 }
