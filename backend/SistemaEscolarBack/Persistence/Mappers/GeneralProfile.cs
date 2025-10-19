@@ -1,4 +1,5 @@
 using Application.DTOs.DatosPersonales;
+using Application.DTOs.HistorialAcademico;
 using AutoMapper;
 using Persistence.Views;
 
@@ -20,6 +21,11 @@ public class GeneralProfile : Profile
             .ForMember(dest => dest.EmailPersonal, opt => opt.MapFrom(src => src.EmailPDoc))
             .ForMember(dest => dest.EmailInstitucional, opt => opt.MapFrom(src => src.EmailIDoc))
             .ForMember(dest => dest.Telefono, opt => opt.MapFrom(src => src.TelDoc));
+
+        CreateMap<GetHistorialAlumno, HistorialAlumnoDto>();
+        CreateMap<GetHistorialDetalle, MateriaDetalleDto>();
+
+        CreateMap<GetEstadoGeneralAlumno, EstadoGeneralAlumnoDto>();
 
         #endregion
     }
