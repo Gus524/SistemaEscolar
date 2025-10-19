@@ -46,7 +46,9 @@ public class GeneralProfile : Profile
             .ForMember(dest => dest.SegundoParcial, opt => opt.MapFrom(src => src.CalParcial2))
             .ForMember(dest => dest.TercerParcial, opt => opt.MapFrom(src => src.CalParcial3))
             .ForMember(dest => dest.Extra, opt => opt.MapFrom(src => src.CalExtra))
-            .ForMember(dest => dest.Final, opt => opt.MapFrom(src => src.CalFinal));
+            .ForMember(dest => dest.Final, opt => opt.MapFrom(src => src.CalFinal))
+            .ForMember(dest => dest.EmailPersonal, opt => opt.MapFrom(src => src.EmailPAlumno))
+            .ForMember(dest => dest.EmailInstitucional, opt => opt.MapFrom(src => src.EmailIAlumno));
         
         #endregion
     }

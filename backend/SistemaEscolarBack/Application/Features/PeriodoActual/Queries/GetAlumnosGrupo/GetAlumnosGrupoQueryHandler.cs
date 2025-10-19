@@ -1,7 +1,6 @@
 using Application.DTOs.PeriodoActual;
 using Application.Interfaces;
 using Application.Wrapper;
-using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.PeriodoActual.Queries.GetAlumnosGrupo;
