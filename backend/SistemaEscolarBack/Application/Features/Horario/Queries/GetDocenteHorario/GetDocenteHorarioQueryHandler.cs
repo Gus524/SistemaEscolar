@@ -6,7 +6,10 @@ using MediatR;
 
 namespace Application.Features.Horario.Queries.GetDocenteHorario;
 
-public class GetDocenteHorarioQueryHandler(IHorarioRepository repository, IReadRepositoryAsync<Docente> docenteRepository) : IRequestHandler<GetDocenteHorarioQuery, Response<List<DocenteHorarioDto>>>
+public class GetDocenteHorarioQueryHandler(
+    IHorarioRepository repository, 
+    IReadRepositoryAsync<Docente> docenteRepository
+) : IRequestHandler<GetDocenteHorarioQuery, Response<List<DocenteHorarioDto>>>
 {
     public async Task<Response<List<DocenteHorarioDto>>> Handle(GetDocenteHorarioQuery request, CancellationToken cancellationToken)
     {

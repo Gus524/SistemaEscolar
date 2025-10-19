@@ -7,8 +7,7 @@ using MediatR;
 namespace Application.Features.PeriodoActual.Queries.GetAlumnosGrupo;
 
 public class GetAlumnosGrupoQueryHandler(
-    IPeriodoActualRepository periodoRepository,
-    IReadRepositoryAsync<Grupo> grupoRepository
+    IPeriodoActualRepository periodoRepository
 ) : IRequestHandler<GetAlumnosGrupoQuery, Response<List<AlumnosGrupoDto>>>
 {
     public async Task<Response<List<AlumnosGrupoDto>>> Handle(GetAlumnosGrupoQuery request, CancellationToken cancellationToken)

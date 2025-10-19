@@ -6,6 +6,6 @@ namespace Application.Features.PeriodoActual.Queries.GetAlumnosGrupo;
 
 public class GetAlumnosGrupoQuery : IRequest<Response<List<AlumnosGrupoDto>>>
 {
-    public string Grupo { get; set; }
-    public string Clave { get; set; }
+    public string Grupo { get; set; } = null!;
+    public string Clave { get; set; } = null!;
 }

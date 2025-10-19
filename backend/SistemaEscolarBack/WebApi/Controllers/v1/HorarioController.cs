@@ -39,5 +39,4 @@ public class HorarioController(IMediator mediator) : BaseApiController
     {
         return Ok(await mediator.Send(new GetGruposQuery { PlanId = plan, Semestre = semestre, Turno = turno }));
     }
-    
 }
