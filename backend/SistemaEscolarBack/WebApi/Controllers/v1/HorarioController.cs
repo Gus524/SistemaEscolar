@@ -1,5 +1,6 @@
 using Application.Features.Horario.Queries.GetAlumnoHorario;
 using Application.Features.Horario.Queries.GetDocenteHorario;
+using Application.Features.Horario.Queries.GetGrupos;
 using Application.Features.Horario.Queries.GetHorarioGeneral;
 using Application.Features.Horario.Queries.GetHorarioPorGrupo;
 using MediatR;
@@ -27,9 +28,16 @@ public class HorarioController(IMediator mediator) : BaseApiController
         return Ok(await mediator.Send(query));
     }
 
-    [HttpGet("por-grupo/{secuencia}")]
+    [HttpGet("grupo/{secuencia}")]
     public async Task<IActionResult> GetHorarioPorGrupo(string secuencia)
     {
         return Ok(await mediator.Send(new GetHorarioPorGrupoQuery { Secuencia = secuencia }));
     }
+
+    [HttpGet("secuencias")]
+    public async Task<IActionResult> GetSecuencias(int plan, int semestre, string? turno)
+    {
+        return Ok(await mediator.Send(new GetGruposQuery{ PlanId = plan, Semestre = semestre, Turno = turno }));
+    }
+    
 }

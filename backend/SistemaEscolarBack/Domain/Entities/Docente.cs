@@ -30,7 +30,7 @@ public class Docente
 
     public string Delegacion { get; set; } = null!;
 
-    public decimal Cp { get; set; }
+    public string Cp { get; set; }
 
     public virtual ICollection<Ets> Ets { get; set; } = new List<Ets>();
 

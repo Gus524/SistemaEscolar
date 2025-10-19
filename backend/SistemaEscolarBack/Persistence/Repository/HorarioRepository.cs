@@ -54,4 +54,16 @@ public class HorarioRepository(ApplicationDbContext context, IMapper mapper) : I
             .ToListAsync();
         return mapper.Map<List<HorarioPorGrupoDto>>(horario);
     }
+
+    public async Task<List<string?>> GetSecuencias(int plan, int semestre, string? turno)
+    {
+        var query = context.GetGruposPlan
+            .AsNoTracking()
+            .Where(s => s.IdPlan == plan && s.Semestre == semestre);
+
+        if (!string.IsNullOrEmpty(turno))
+            query = query.Where(s => s.Turno == turno);
+
+        return await query.Select(s => s.Secuencia).ToListAsync();
+    }
 }

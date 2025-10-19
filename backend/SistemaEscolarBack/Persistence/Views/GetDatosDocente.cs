@@ -22,7 +22,7 @@ public class GetDatosDocente
 
     public string Delegacion { get; set; } = null!;
 
-    public decimal Cp { get; set; }
+    public string Cp { get; set; }
 
     public string NomAcademia { get; set; } = null!;
 

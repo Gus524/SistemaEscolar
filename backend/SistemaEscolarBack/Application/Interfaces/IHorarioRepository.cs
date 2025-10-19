@@ -8,4 +8,5 @@ public interface IHorarioRepository
     Task<List<AlumnoHorarioDto>> GetAlumnoHorario(long noBoleta);
     Task<List<HorarioGeneralDto>> GetHorarioGeneral(int idPlan, int? semestre, string? turno);
     Task<List<HorarioPorGrupoDto>> GetHorarioPorGrupo(string secuencia);
+    Task<List<string?>> GetSecuencias(int plan, int semestre, string? turno);
 }

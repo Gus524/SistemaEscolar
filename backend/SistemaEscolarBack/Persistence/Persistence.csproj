@@ -65,4 +65,8 @@
       <EmbeddedResource Include="SqlScripts\Views\GetMapaCurricular.sql" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>

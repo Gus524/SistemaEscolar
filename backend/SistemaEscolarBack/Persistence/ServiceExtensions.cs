@@ -27,6 +27,7 @@ public static class ServiceExtensions
         services.AddTransient<IDatosPersonalesRepository, DatosPersonalesRepository>();
         services.AddTransient<IHistorialAcademicoRepository, HistorialAcademicoRepository>();
         services.AddTransient<IHorarioRepository, HorarioRepository>();
+        services.AddTransient<IPeriodoActualRepository, PeriodoActualRepository>();
 
         #endregion
     }
