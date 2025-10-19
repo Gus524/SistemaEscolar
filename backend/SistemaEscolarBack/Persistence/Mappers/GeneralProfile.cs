@@ -1,6 +1,7 @@
 using Application.DTOs.DatosPersonales;
 using Application.DTOs.HistorialAcademico;
 using Application.DTOs.Horario;
+using Application.DTOs.MapaCurricular;
 using Application.DTOs.PeriodoActual;
 using AutoMapper;
 using Persistence.Views;
@@ -49,7 +50,16 @@ public class GeneralProfile : Profile
             .ForMember(dest => dest.Final, opt => opt.MapFrom(src => src.CalFinal))
             .ForMember(dest => dest.EmailPersonal, opt => opt.MapFrom(src => src.EmailPAlumno))
             .ForMember(dest => dest.EmailInstitucional, opt => opt.MapFrom(src => src.EmailIAlumno));
-        
+
+        CreateMap<GetCarrerasInst, CarrerasDto>()
+            .ForMember(dest => dest.NumeroSemestres, opt => opt.MapFrom(src => src.NoSem));
+
+        CreateMap<GetForMapa, PlanEstudiosDto>();
+
+        CreateMap<GetMapaCurricular, MapaCurricularDto>()
+            .ForMember(dest => dest.NombreMateria, opt => opt.MapFrom(src => src.NomMateria))
+            .ForMember(dest => dest.HorasTeoria, opt => opt.MapFrom(src => src.HorasPrac));
+
         #endregion
     }
 }

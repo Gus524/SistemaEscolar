@@ -30,7 +30,7 @@ public class HorarioRepository(ApplicationDbContext context, IMapper mapper) : I
     {
         var query = context.GetHorarios.AsNoTracking();
 
-        query = query.Where(h => h.IdPlan == idPlan);
+        query = query.Where(h => h.IdPlan == idPlan && h.Activo);
 
         if (semestre.HasValue)
         {
@@ -50,7 +50,7 @@ public class HorarioRepository(ApplicationDbContext context, IMapper mapper) : I
     {
         var horario = await context.GetHorarios
             .AsNoTracking()
-            .Where(h => h.Secuencia == secuencia)
+            .Where(h => h.Secuencia == secuencia && h.Activo)
             .ToListAsync();
         return mapper.Map<List<HorarioPorGrupoDto>>(horario);
     }
@@ -59,7 +59,7 @@ public class HorarioRepository(ApplicationDbContext context, IMapper mapper) : I
     {
         var query = context.GetGruposPlan
             .AsNoTracking()
-            .Where(s => s.IdPlan == plan && s.Semestre == semestre);
+            .Where(s => s.Activo && s.IdPlan == plan && s.Semestre == semestre);
 
         if (!string.IsNullOrEmpty(turno))
             query = query.Where(s => s.Turno == turno);
