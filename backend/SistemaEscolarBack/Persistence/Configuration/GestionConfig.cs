@@ -8,13 +8,13 @@ public class GestionConfig : IEntityTypeConfiguration<Gestion>
 {
     public void Configure(EntityTypeBuilder<Gestion> builder)
     {
-        builder.HasNoKey();
+        builder.HasKey(e => e.Usuario).HasName("PRIMARY");
 
         builder.HasIndex(e => e.IdInst, "id_inst");
 
         builder.Property(e => e.IdInst).HasColumnName("id_inst");
         builder.Property(e => e.Usuario)
-            .HasMaxLength(64)
+            .HasMaxLength(32)
             .HasColumnName("usuario");
 
         builder.HasOne(d => d.IdInstNavigation).WithMany()
