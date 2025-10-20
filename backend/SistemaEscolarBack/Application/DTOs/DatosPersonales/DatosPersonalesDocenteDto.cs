@@ -1,4 +1,3 @@
-
 namespace Application.DTOs.DatosPersonales;
 
 public class DatosPersonalesDocenteDto
