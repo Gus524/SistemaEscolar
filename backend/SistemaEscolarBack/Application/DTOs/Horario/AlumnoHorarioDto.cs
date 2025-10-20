@@ -3,7 +3,7 @@ namespace Application.DTOs.Horario;
 public class AlumnoHorarioDto
 {
     public string? Grupo { get; set; }
-    public string NomMateria { get; set; } = null!;
+    public string Materia { get; set; } = null!;
     public string? NombreDocente { get; set; }
     public string? Clave { get; set; }
     public string? Lunes { get; set; }

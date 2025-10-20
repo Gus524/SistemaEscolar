@@ -21,17 +21,27 @@ public class GeneralProfile : Profile
             .ForMember(dest => dest.TelefonoMovil, opt => opt.MapFrom(src => src.TelmAlumno));
             
         CreateMap<GetDatosDocente, DatosPersonalesDocenteDto>()
+            .ForMember(dest => dest.Academia, opt => opt.MapFrom(src => src.NomAcademia))
+            .ForMember(dest => dest.Edificio, opt => opt.MapFrom(src => src.DescEdificio))
             .ForMember(dest => dest.EmailPersonal, opt => opt.MapFrom(src => src.EmailPDoc))
             .ForMember(dest => dest.EmailInstitucional, opt => opt.MapFrom(src => src.EmailIDoc))
             .ForMember(dest => dest.Telefono, opt => opt.MapFrom(src => src.TelDoc));
 
-        CreateMap<GetHistorialAlumno, HistorialAlumnoDto>();
-        CreateMap<GetHistorialDetalle, MateriaDetalleDto>();
+        CreateMap<GetHistorialAlumno, HistorialAlumnoDto>()
+            .ForMember(dest => dest.Carrera, opt => opt.MapFrom(src => src.DescCarr))
+            .ForMember(dest => dest.Plan, opt => opt.MapFrom(src => src.DescPlan));
 
-        CreateMap<GetEstadoGeneralAlumno, EstadoGeneralAlumnoDto>();
+        CreateMap<GetHistorialDetalle, MateriaDetalleDto>()
+            .ForMember(dest => dest.Materia, opt => opt.MapFrom(src => src.NomMateria));
+
+        CreateMap<GetEstadoGeneralAlumno, EstadoGeneralAlumnoDto>()
+            .ForMember(dest => dest.Materia, opt => opt.MapFrom(src => src.NomMateria));
         
-        CreateMap<GetDocenteHorario, DocenteHorarioDto>();
+        CreateMap<GetDocenteHorario, DocenteHorarioDto>()
+            .ForMember(dest => dest.Materia, opt => opt.MapFrom(src => src.NomMateria));
+        
         CreateMap<GetAlumnoHorario, AlumnoHorarioDto>()
+            .ForMember(dest => dest.Materia, opt => opt.MapFrom(src => src.NomMateria))
             .ForMember(dest => dest.NombreDocente, opt => opt.MapFrom(src => src.Nombre));
 
         CreateMap<GetHorarios, HorarioGeneralDto>()

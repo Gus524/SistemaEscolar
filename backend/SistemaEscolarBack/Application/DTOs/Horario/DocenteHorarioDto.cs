@@ -5,7 +5,7 @@ public class DocenteHorarioDto
     public string? Grupo { get; set; }
     public string? Clave { get; set; }
     public int? Inscritos { get; set; }
-    public string NomMateria { get; set; } = null!;
+    public string Materia { get; set; } = null!;
     public string? Lunes { get; set; }
     public string? Martes { get; set; }
     public string? Miercoles { get; set; }
