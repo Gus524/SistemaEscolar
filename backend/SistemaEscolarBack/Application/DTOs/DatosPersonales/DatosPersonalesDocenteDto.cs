@@ -14,6 +14,6 @@ public class DatosPersonalesDocenteDto
     public string Colonia { get; set; } = null!;
     public string Delegacion { get; set; } = null!;
     public decimal Cp { get; set; }
-    public string NomAcademia { get; set; } = null!;
-    public string DescEdificio { get; set; } = null!;
+    public string Academia { get; set; } = null!;
+    public string Edificio { get; set; } = null!;
 }

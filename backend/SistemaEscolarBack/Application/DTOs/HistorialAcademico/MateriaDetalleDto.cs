@@ -3,7 +3,7 @@ namespace Application.DTOs.HistorialAcademico;
 public class MateriaDetalleDto
 {
     public string? Clave { get; set; }
-    public string NomMateria { get; set; } = null!;
+    public string Materia { get; set; } = null!;
     public DateOnly FechaEval { get; set; }
     public string DescPeriodo { get; set; } = null!;
     public string? FormaEval { get; set; }
