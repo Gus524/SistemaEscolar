@@ -23,6 +23,6 @@ public class MapaCurricularController(IMediator mediator) : BaseApiController
     [HttpGet("planes/{carrera}")]
     public async Task<IActionResult> GetPlanes(string carrera)
     {
-        return Ok(await mediator.Send(new GetPlanesEstudioQuery { Carrera = carrera}));
+        return Ok(await mediator.Send(new GetPlanesEstudioQuery { Carrera = carrera }));
     }
 }
