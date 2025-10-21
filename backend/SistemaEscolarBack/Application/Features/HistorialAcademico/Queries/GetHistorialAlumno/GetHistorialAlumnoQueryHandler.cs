@@ -6,7 +6,10 @@ using MediatR;
 
 namespace Application.Features.HistorialAcademico.Queries.GetHistorialAlumno;
 
-public class GetHistorialAlumnoQueryHandler(IHistorialAcademicoRepository repository, IReadRepositoryAsync<Alumno> alumnoRepository) : IRequestHandler<GetHistorialAlumnoQuery, Response<HistorialAlumnoDto>>
+public class GetHistorialAlumnoQueryHandler(
+    IHistorialAcademicoRepository repository, 
+    IReadRepositoryAsync<Alumno> alumnoRepository
+) : IRequestHandler<GetHistorialAlumnoQuery, Response<HistorialAlumnoDto>>
 {
     public async Task<Response<HistorialAlumnoDto>> Handle(GetHistorialAlumnoQuery request, CancellationToken cancellationToken)
     {

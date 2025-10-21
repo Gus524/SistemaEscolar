@@ -1,4 +1,5 @@
 using Application.DTOs.HistorialAcademico;
+using Application.Extensions;
 using Application.Interfaces;
 using Application.Wrapper;
 using Domain.Entities;
@@ -6,7 +7,10 @@ using MediatR;
 
 namespace Application.Features.HistorialAcademico.Queries.GetHistorialDetalle;
 
-public class GetHistorialDetalleQueryHandler(IHistorialAcademicoRepository repository, IReadRepositoryAsync<Alumno> alumnoRepository) : IRequestHandler<GetHistorialDetalleQuery, Response<List<SemestreHistorialDto>>>
+public class GetHistorialDetalleQueryHandler(
+    IHistorialAcademicoRepository repository, 
+    IReadRepositoryAsync<Alumno> alumnoRepository
+) : IRequestHandler<GetHistorialDetalleQuery, Response<List<SemestreHistorialDto>>>
 {
     public async Task<Response<List<SemestreHistorialDto>>> Handle(GetHistorialDetalleQuery request, CancellationToken cancellationToken)
     {
@@ -15,15 +19,7 @@ public class GetHistorialDetalleQueryHandler(IHistorialAcademicoRepository repos
         
         var detalleList = await repository.GetHistorialDetalle(request.NoBoleta);
 
-        var groupedDetalle = detalleList
-            .GroupBy(d => d.Semestre)
-            .Select(g => new SemestreHistorialDto
-            {
-                Semestre = g.Key,
-                Materias = g.ToList()
-            })
-            .OrderBy(s => s.Semestre)
-            .ToList();
+        var groupedDetalle = detalleList.ToSemestreDto();
 
         return Response<List<SemestreHistorialDto>>.Success(groupedDetalle);
     }

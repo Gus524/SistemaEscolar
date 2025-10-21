@@ -29,4 +29,11 @@ public class DatosPersonalesController(IMediator mediator) : BaseApiController
     {
         return Ok(await mediator.Send(new GetDatosPeronalesAlumnoCurrentQuery()));
     }
+    
+    [HttpGet("misDatosDocente")]
+    [Authorize(Roles = "Docente")]
+    public async Task<IActionResult> GetDatosDocenteCurrent()
+    {
+        return Ok(await mediator.Send(new GetDatosPersonalesDocenteQuery()));
+    }
 }
