@@ -110,10 +110,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseCors(specificOrigin);
-
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors(specificOrigin);
 
 app.UseAuthentication();
 app.UseAuthorization();

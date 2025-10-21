@@ -12,7 +12,7 @@ public static class ServiceExtensions
     public static void AddIdentityInfraestructure(this IServiceCollection services)
     {
         services.AddScoped<IAuthenticateService, AuthenticateService>();
-        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        services.AddIdentityCore<ApplicationUser>(options =>
         {
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
@@ -26,7 +26,8 @@ public static class ServiceExtensions
             
             options.User.RequireUniqueEmail = false;
         })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
     }
 }
