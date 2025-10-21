@@ -76,7 +76,7 @@ public class GeneralProfile : Profile
 
         CreateMap<GetMapaCurricular, MapaCurricularDto>()
             .ForMember(dest => dest.NombreMateria, opt => opt.MapFrom(src => src.NomMateria))
-            .ForMember(dest => dest.HorasTeoria, opt => opt.MapFrom(src => src.HorasPrac));
+            .ForMember(dest => dest.HorasPractica, opt => opt.MapFrom(src => src.HorasPrac));
 
         #endregion
     }
