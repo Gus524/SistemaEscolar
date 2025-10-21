@@ -10,6 +10,6 @@ public class GetCarrerasQueryValidator : AbstractValidator<GetCarrerasQuery>
             .NotEmpty()
             .WithMessage("La institución es obligatoria.")
             .GreaterThan(0)
-            .WithMessage("La institución no puede ser negativa.");
+            .WithMessage("La institución debe ser mayor a 0.");
     }
 }
