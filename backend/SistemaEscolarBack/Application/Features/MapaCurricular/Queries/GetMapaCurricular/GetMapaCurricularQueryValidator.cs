@@ -15,6 +15,6 @@ public class GetMapaCurricularQueryValidator : AbstractValidator<GetMapaCurricul
 
         RuleFor(m => m.Carrera)
             .NotEmpty()
-            .WithMessage("La carrera es obligatorio.");
+            .WithMessage("La carrera es obligatoria.");
     }
 }
