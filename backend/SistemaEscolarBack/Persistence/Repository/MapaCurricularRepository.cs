@@ -14,7 +14,7 @@ public class MapaCurricularRepository(
     public async Task<List<CarrerasDto>> GetCarreras(int institucion)
     {
         var carreras = await context.GetCarrerasInst
-            .Where(c => c.IdInst ==  institucion)
+            .Where(c => c.IdInst == institucion)
             .ToListAsync();
         
         return mapper.Map<List<CarrerasDto>>(carreras);
