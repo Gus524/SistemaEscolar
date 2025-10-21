@@ -1,4 +1,4 @@
-using Identity.Data;
+using Common.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
