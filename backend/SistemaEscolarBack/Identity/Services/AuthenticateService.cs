@@ -24,7 +24,7 @@ public class AuthenticateService(
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, userInfo.UserId),
-            new(JwtRegisteredClaimNames.Name, userInfo.UserName),
+            new(ClaimTypes.Name, userInfo.UserName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new("UserType", userInfo.UserType.ToString())
         };
@@ -93,7 +93,7 @@ public class AuthenticateService(
         return new UserTokenDto
         {
             UserId = user.Id,
-            UserName = user.UserName ?? String.Empty,
+            UserName = user.UserName ?? string.Empty,
             UserType = user.UserType,
             Roles = roles,
         };
