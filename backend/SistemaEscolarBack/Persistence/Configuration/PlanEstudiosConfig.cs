@@ -23,7 +23,7 @@ public class PlanEstudiosConfig : IEntityTypeConfiguration<PlanEstudios>
             .HasMaxLength(64)
             .HasColumnName("desc_plan");
         builder.Property(e => e.NoPlan)
-            .HasPrecision(3)
+            .HasPrecision(3, 0)
             .HasColumnName("no_plan");
 
         builder.HasOne(d => d.AbrCarrNavigation).WithMany(p => p.PlanEstudios)

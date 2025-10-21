@@ -2,6 +2,8 @@
 
 public class GetHorarios
 {
+    public string Secuencia { get; set; } = null!;
+    public string Clave { get; set; } = null!;
     public string? Nombre { get; set; }
 
     public string Materia { get; set; } = null!;

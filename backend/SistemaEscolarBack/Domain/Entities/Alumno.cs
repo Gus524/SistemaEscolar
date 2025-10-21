@@ -32,7 +32,7 @@ public class Alumno
 
     public string Delegacion { get; set; } = null!;
 
-    public decimal Cp { get; set; }
+    public string Cp { get; set; }
 
     public virtual ICollection<HistorialAcademico> HistorialAcademico { get; set; } = new List<HistorialAcademico>();
 

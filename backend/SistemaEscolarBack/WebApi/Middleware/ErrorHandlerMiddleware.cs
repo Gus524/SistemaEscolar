@@ -33,7 +33,7 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
 
                 case KeyNotFoundException e:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
-                    responseModel = Response<string>.Fail("El recurso solicitado no fue encontrado.");
+                    responseModel = Response<string>.Fail(e.Message);
                     break;
 
                 default:

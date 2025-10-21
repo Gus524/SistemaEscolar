@@ -23,8 +23,11 @@ public static class ServiceExtensions
         #region Repositories
 
         services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
+        services.AddTransient(typeof(IReadRepositoryAsync<>), typeof(RepositoryAsync<>));
         services.AddTransient<IDatosPersonalesRepository, DatosPersonalesRepository>();
         services.AddTransient<IHistorialAcademicoRepository, HistorialAcademicoRepository>();
+        services.AddTransient<IHorarioRepository, HorarioRepository>();
+        services.AddTransient<IPeriodoActualRepository, PeriodoActualRepository>();
 
         #endregion
     }

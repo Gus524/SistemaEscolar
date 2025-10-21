@@ -1,5 +1,7 @@
 CREATE OR ALTER VIEW GetHorarios AS
 	SELECT  CONCAT(d.nom_doc, ' ', d.ap_doc, ' ', d.am_doc) AS nombre,
+            CONCAT(gh.semestre, gh.abr_carr, gh.turno, gh.no_grupo) AS secuencia,
+            CONCAT(gh.abr_carr, gh.semestre, mc.no_materia) AS clave,
             m.nom_materia AS materia,
             gh.semestre,
             gh.abr_carr, 
