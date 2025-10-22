@@ -12,7 +12,7 @@ public class PeriodoEscolar
 
     public DateOnly? FechaFin { get; set; }
 
-    public bool? Activo { get; set; }
+    public bool? Activo { get; set; } = false;
 
     public virtual ICollection<Ets> Ets { get; set; } = new List<Ets>();
 

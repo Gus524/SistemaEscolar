@@ -12,5 +12,5 @@ public class GetGruposPlan
 
     public string Turno { get; set; } = null!;
 
-    public bool? Activo { get; set; }
+    public bool Activo { get; set; }
 }
