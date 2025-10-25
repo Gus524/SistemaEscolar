@@ -11,10 +11,10 @@ public class GetMapaCurricularQueryValidator : AbstractValidator<GetMapaCurricul
             .NotEmpty()
             .WithMessage("El plan es obligatorio.")
             .GreaterThan(0)
-            .WithMessage("El plan no puede ser menor que 0.");
+            .WithMessage("El plan debe ser mayor a 0.");
 
         RuleFor(m => m.Carrera)
             .NotEmpty()
-            .WithMessage("La carrera es obligatorio.");
+            .WithMessage("La carrera es obligatoria.");
     }
 }
