@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repository;
+using Persistence.Seeders;
 
 namespace Persistence;
 
@@ -17,7 +18,8 @@ public static class ServiceExtensions
             serverVersion: ServerVersion.AutoDetect(configuration.GetConnectionString("DefaultConnection")),
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
         );
-        
+
+        services.AddScoped<IDbSeeder, DbSeeder>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         #region Repositories
