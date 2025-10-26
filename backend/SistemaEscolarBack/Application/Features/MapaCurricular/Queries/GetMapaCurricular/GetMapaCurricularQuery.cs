@@ -6,6 +6,6 @@ namespace Application.Features.MapaCurricular.Queries.GetMapaCurricular;
 
 public class GetMapaCurricularQuery : IRequest<Response<List<MapaCurricularDto>>>
 {
-    public int Plan  { get; set; }
+    public int Plan { get; set; }
     public string Carrera { get; set; } = null!;
 }
