@@ -3,6 +3,7 @@ using Application.DTOs.HistorialAcademico;
 using Application.DTOs.Horario;
 using Application.DTOs.MapaCurricular;
 using Application.DTOs.PeriodoActual;
+using Application.DTOs.Reinscripcion;
 using AutoMapper;
 using Persistence.Views;
 
@@ -77,6 +78,8 @@ public class GeneralProfile : Profile
         CreateMap<GetMapaCurricular, MapaCurricularDto>()
             .ForMember(dest => dest.NombreMateria, opt => opt.MapFrom(src => src.NomMateria))
             .ForMember(dest => dest.HorasPractica, opt => opt.MapFrom(src => src.HorasPrac));
+
+        CreateMap<GetMateriasReinscripcion, MateriasDisponiblesDto>();
 
         #endregion
     }

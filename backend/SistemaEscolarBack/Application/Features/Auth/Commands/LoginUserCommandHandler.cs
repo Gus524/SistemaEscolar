@@ -9,9 +9,9 @@ public class LoginUserCommandHandler(IAuthenticateService authService) : IReques
 {
     public async Task<Response<LoginResponseDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        var userId = await authService.ValidateCredentialsAsync(request.Username, request.Password);
+        var userId = await authService.ValidateCredentialsAsync(request.UserName, request.Password);
         var userInfo = await authService.GetUserForTokenAsync(userId) ??
-                       throw new KeyNotFoundException("No se eocntro información para el usuario.");
+                       throw new KeyNotFoundException("No se encontró información para el usuario.");
 
         var token = authService.GenerateToken(userInfo);
 
