@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.Features.Reinscripcion.Queries.GetMateriasReinscripcionCurrent;
 
-public class GetMateriasReinscripcionCurrentQuery : IRequest<Response<IReadOnlyList<MateriasDisponiblesDto>>>;
+public class GetMateriasReinscripcionCurrentQuery : IRequest<Response<InfoReinscripcionAlumnoDto>>;

@@ -7,6 +7,7 @@ public class MateriasDisponiblesDto
     public int Inscritos { get; set; }
     public int Disponibles { get; set; }
     public string Materia { get; set; } = null!;
+    public int Creditos { get; set; }
     public string? Clave { get; set; }
     public string? Lunes { get; set; }
     public string? Martes { get; set; }

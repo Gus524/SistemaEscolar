@@ -4,7 +4,8 @@ public record IdentificadorGrupoHorario(
     string Carrera,
     int IdPlan,
     int Semestre,
-    char Turno,
+    string Turno,
     int NoGrupo,
-    string NoMateria
+    string NoMateria,
+    int Creditos
 );

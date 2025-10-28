@@ -5,10 +5,10 @@ using MediatR;
 namespace Application.Features.Reinscripcion.Commands.ValidarNuevaMateria;
 
 public class ValidarNuevaMateriaCommand(
-    List<IdentificadorGrupoHorario> horarioActual,
+    List<IdentificadorGrupoHorario>? horarioActual,
     IdentificadorGrupoHorario nuevaMateria
 ) : IRequest<Response<List<IdentificadorGrupoHorario>>>
 {
-    public List<IdentificadorGrupoHorario> HorarioActual { get; } = horarioActual;
+    public List<IdentificadorGrupoHorario>? HorarioActual { get; } = horarioActual;
     public IdentificadorGrupoHorario NuevaMateria { get; } = nuevaMateria;
 }

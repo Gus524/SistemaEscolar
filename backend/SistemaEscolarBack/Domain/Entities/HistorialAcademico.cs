@@ -19,4 +19,7 @@ public class HistorialAcademico
     public virtual ICollection<Inscripcion> Inscripcion { get; set; } = new List<Inscripcion>();
 
     public virtual Alumno NoBoletaNavigation { get; set; } = null!;
+    public virtual TrayectoriaAlumno? TrayectoriaAlumno { get; set; }
+    public virtual ICollection<EstadoGeneral> EstadoGeneral { get; set; } = new List<EstadoGeneral>();
+    
 }

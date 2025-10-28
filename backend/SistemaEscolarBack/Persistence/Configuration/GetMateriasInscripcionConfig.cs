@@ -19,10 +19,16 @@ public class GetMateriasInscripcionConfig : IEntityTypeConfiguration<GetMaterias
         builder.Property(x => x.Grupo)
             .HasMaxLength(10)
             .HasColumnName("grupo");
-        
+
         builder.Property(x => x.Materia)
             .HasMaxLength(100)
             .HasColumnName("nom_materia");
+        
+        builder.Property(x => x.Creditos)
+            .HasColumnName("creditos");
+        
+        builder.Property(x => x.IdPlan)
+            .HasColumnName("id_plan");
         
         builder.Property(x => x.NoGrupo)
             .HasColumnName("no_grupo");

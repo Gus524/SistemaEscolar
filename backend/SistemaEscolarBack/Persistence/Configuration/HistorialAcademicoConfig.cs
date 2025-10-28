@@ -34,5 +34,13 @@ public class HistorialAcademicoConfig : IEntityTypeConfiguration<HistorialAcadem
             .HasForeignKey(d => d.NoBoleta)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Historial_Academico_ibfk_1");
+
+        builder.HasOne(d => d.TrayectoriaAlumno)
+            .WithOne(ta => ta.HistorialAcademico)
+            .HasForeignKey<TrayectoriaAlumno>(ta => new { ta.NoBoleta, ta.IdPlan });
+
+        builder.HasMany(d => d.EstadoGeneral)
+            .WithOne(d => d.HistorialAcademico)
+            .HasForeignKey(d => new { d.NoBoleta, d.IdPlan });
     }
 }
