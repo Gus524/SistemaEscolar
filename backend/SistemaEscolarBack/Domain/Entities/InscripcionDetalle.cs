@@ -31,6 +31,7 @@ public class InscripcionDetalle
     public virtual GrupoHorario GrupoHorario { get; set; } = null!;
 
     public virtual Inscripcion Inscripcion { get; set; } = null!;
+    private InscripcionDetalle() {}
 
     internal InscripcionDetalle(long boleta, int semestre, string turno, string carrera, int grupo, int periodo,
         string noMateria, int plan)

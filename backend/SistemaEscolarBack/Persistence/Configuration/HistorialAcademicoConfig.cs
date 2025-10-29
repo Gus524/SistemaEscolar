@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +25,10 @@ public class HistorialAcademicoConfig : IEntityTypeConfiguration<HistorialAcadem
         builder.Property(e => e.UltimoSemestre)
             .HasDefaultValueSql("'0'")
             .HasColumnName("ultimo_semestre");
+
+        builder.Property(e => e.EstadoHistorial)
+            .HasColumnName("estado_historial")
+            .HasDefaultValueSql("1");
 
         builder.HasOne(d => d.IdPlanNavigation).WithMany(p => p.HistorialAcademico)
             .HasForeignKey(d => d.IdPlan)

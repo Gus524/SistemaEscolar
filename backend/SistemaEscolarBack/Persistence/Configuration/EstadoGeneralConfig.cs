@@ -8,9 +8,9 @@ public class EstadoGeneralConfig : IEntityTypeConfiguration<EstadoGeneral>
 {
     public void Configure(EntityTypeBuilder<EstadoGeneral> builder)
     {
-        builder
-            .HasNoKey()
-            .ToTable("Estado_General");
+        builder.HasKey(e => new { e.NoBoleta, e.IdPlan, e.AbrCarr, e.Semestre, e.NoMateria });
+            
+        builder.ToTable("Estado_General");
 
         builder.HasIndex(e => new { e.IdPlan, e.AbrCarr, e.Semestre, e.NoMateria }, "id_plan");
 
