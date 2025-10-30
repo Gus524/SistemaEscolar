@@ -7,7 +7,7 @@ namespace Application.Features.Reinscripcion.Commands.ValidarNuevaMateria;
 public class ValidarNuevaMateriaCommand(
     List<IdentificadorGrupoHorario>? horarioActual,
     IdentificadorGrupoHorario nuevaMateria
-) : IRequest<Response<List<IdentificadorGrupoHorario>>>
+) : IRequest<Response<Unit>>
 {
     public List<IdentificadorGrupoHorario>? HorarioActual { get; } = horarioActual;
     public IdentificadorGrupoHorario NuevaMateria { get; } = nuevaMateria;

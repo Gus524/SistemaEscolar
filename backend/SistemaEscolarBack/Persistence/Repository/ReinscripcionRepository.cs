@@ -53,4 +53,24 @@ public class ReinscripcionRepository(
 
         return await query.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
     }
+
+    public async Task<List<HorariosValidacionDto>> GetHorariosValidacion(List<string> grupos)
+    {
+        var horarios = await context.GetHorariosValidacion
+            .AsNoTracking()
+            .Where(h => 
+                grupos.Contains(h.GrupoMateria))
+            .ToListAsync();
+        
+        return mapper.Map<List<HorariosValidacionDto>>(horarios);
+    }
+
+    public async Task<HorariosValidacionDto?> GetNuevoHorarioValidacion(string grupo)
+    {
+        var horario = await context.GetHorariosValidacion
+            .AsNoTracking()
+            .FirstOrDefaultAsync(h => h.GrupoMateria == grupo);
+        
+        return mapper.Map<HorariosValidacionDto>(horario);
+    }
 }
