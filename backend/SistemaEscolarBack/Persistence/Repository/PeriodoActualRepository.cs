@@ -8,14 +8,14 @@ namespace Persistence.Repository;
 
 public class PeriodoActualRepository(ApplicationDbContext context, IMapper mapper) : IPeriodoActualRepository
 {
-    public async Task<AlumnoCalificacionesDto> GetAlumnoCalificaciones(long noBoleta, int idPlan)
+    public async Task<List<AlumnoCalificacionesDto>> GetAlumnoCalificaciones(long noBoleta, int idPlan)
     {
         var calificaciones = await context.GetAlumnoCalificaciones
             .AsNoTracking()
             .Where(a => a.NoBoleta == noBoleta && a.IdPlan == idPlan)
             .ToListAsync();
         
-        return mapper.Map<AlumnoCalificacionesDto>(calificaciones);
+        return mapper.Map<List<AlumnoCalificacionesDto>>(calificaciones);
     }
 
     public async Task<List<AlumnosGrupoDto>> GetAlumnosGrupo(string grupo, string clave)
@@ -26,5 +26,14 @@ public class PeriodoActualRepository(ApplicationDbContext context, IMapper mappe
             .ToListAsync();
 
         return mapper.Map<List<AlumnosGrupoDto>>(alumnos);
+    }
+
+    public async Task<List<AlumnoCalificacionesDto>> GetAlumnoCalificaciones(long boleta)
+    {
+        var calificaciones = await context.GetAlumnoCalificaciones
+            .Where(a => a.NoBoleta == boleta)
+            .ToListAsync();
+        
+        return mapper.Map<List<AlumnoCalificacionesDto>>(calificaciones);
     }
 }

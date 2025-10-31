@@ -2,6 +2,7 @@ using Application.Features.MapaCurricular.Queries.GetCarreras;
 using Application.Features.MapaCurricular.Queries.GetMapaCurricular;
 using Application.Features.MapaCurricular.Queries.GetPlanesEstudio;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.v1;
