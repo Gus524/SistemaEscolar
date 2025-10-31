@@ -1,4 +1,7 @@
-﻿namespace Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Domain.ValueObjects;
+
+namespace Domain.Entities;
 
 public class InscripcionDetalle
 {
@@ -31,6 +34,9 @@ public class InscripcionDetalle
     public virtual GrupoHorario GrupoHorario { get; set; } = null!;
 
     public virtual Inscripcion Inscripcion { get; set; } = null!;
+
+    [NotMapped] 
+    public HorarioTemporal? HorarioTemporal { get; private set; }
     private InscripcionDetalle() {}
 
     internal InscripcionDetalle(long boleta, int semestre, string turno, string carrera, int grupo, int periodo,
@@ -44,5 +50,15 @@ public class InscripcionDetalle
         IdPeriodo = periodo;
         NoMateria = noMateria;
         IdPlan = plan;
+    }
+    
+    internal string FormatearGrupo()
+    {
+        return Semestre + AbrCarr + Turno + NoGrupo;
+    }
+
+    internal void CargarHorario(HorarioTemporal horario)
+    {
+        HorarioTemporal = horario;
     }
 }

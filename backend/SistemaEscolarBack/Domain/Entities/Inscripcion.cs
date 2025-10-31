@@ -6,37 +6,38 @@ namespace Domain.Entities;
 public class Inscripcion
 {
     public long NoBoleta { get; set; }
-
     public int IdPeriodo { get; set; }
-
     public int IdPlan { get; set; }
-
     public DateOnly FechaInscripcion { get; set; }
-
     public virtual HistorialAcademico HistorialAcademico { get; set; } = null!;
-
     public virtual PeriodoEscolar IdPeriodoNavigation { get; set; } = null!;
     private List<InscripcionDetalle> _inscripcionDetalle = [];
-
     public virtual IReadOnlyCollection<InscripcionDetalle> InscripcionDetalle => _inscripcionDetalle;
-
-    public void AgregarMateria(InscripcionDetalle nuevoDetalle, HorarioTemporal nuevoHorario, IEnumerable<HorarioTemporal> horarioActual)
+    private Inscripcion() {}
+    public void AgregarMateria(InscripcionDetalle nuevoDetalle, HorarioTemporal nuevoHorario)
     {
         if (_inscripcionDetalle.Any(d =>
                 d.IdPlan == nuevoDetalle.IdPlan && d.Semestre == nuevoDetalle.Semestre &&
                 d.NoMateria == nuevoDetalle.NoMateria))
             throw new InvalidOperationException("No se puede agregar la misma materia más de una vez.");
-        
-        foreach (var horario in horarioActual)
+
+        foreach (var detalleExistente in _inscripcionDetalle)
         {
-            if (nuevoHorario.ComprobarEmpalme(horario))
-                throw new InvalidOperationException("Conflicto de horario al agregar la materia.");
+            if (detalleExistente.HorarioTemporal == null)
+                throw new InvalidOperationException(
+                    $"Error de lógica: El horario para {detalleExistente.NoMateria} no fue cargado en el Agregado.");
+
+            if (nuevoHorario.ComprobarEmpalme(detalleExistente.HorarioTemporal))
+                throw new InvalidOperationException(
+                    $"Conflicto de horario: la materia {detalleExistente.NoMateria} del grupo {detalleExistente.FormatearGrupo()} " +
+                    $"se empalma con la materia {nuevoDetalle.NoMateria} del grupo {nuevoDetalle.FormatearGrupo()}");
         }
+        nuevoDetalle.CargarHorario(nuevoHorario);
         _inscripcionDetalle.Add(nuevoDetalle);
     }
-
-    internal void AddDetalle(InscripcionDetalle nuevoDetalle)
+    public InscripcionDetalle CrearDetalle(long boleta, int semestre, string turno, string carrera, int grupo, int periodo,
+        string noMateria, int plan)
     {
-        _inscripcionDetalle.Add(nuevoDetalle);
+        return new InscripcionDetalle(boleta, semestre, turno, carrera, grupo, periodo, noMateria, plan);
     }
 }
