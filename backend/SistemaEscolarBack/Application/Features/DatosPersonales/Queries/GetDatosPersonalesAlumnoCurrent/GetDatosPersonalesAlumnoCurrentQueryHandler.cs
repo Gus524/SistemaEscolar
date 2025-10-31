@@ -13,7 +13,7 @@ public class GetDatosPersonalesAlumnoCurrentQueryHandler(
     public async Task<Response<DatosPersonalesAlumnoDto>> Handle(GetDatosPersonalesAlumnoCurrentQuery request, CancellationToken cancellationToken)
     {
         var boleta = currentUserService.UserName ??
-                     throw new KeyNotFoundException("No se encontro boleta para el usuario actual.");
+                     throw new KeyNotFoundException("No se encontró boleta para el usuario actual.");
 
         var datos = await datosPersonalesRepository.GetDatosPersonalesAlumno(long.Parse(boleta));
 
