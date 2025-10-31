@@ -13,7 +13,7 @@ public class GetAlumnoHorarioCurrentQueryHandler(
     public async Task<Response<List<AlumnoHorarioDto>>> Handle(GetAlumnoHorarioCurrentQuery request, CancellationToken cancellationToken)
     {
         var boleta = currentUserService.UserName ??
-                     throw new KeyNotFoundException("No se encontro boleta para el alumno.");
+                     throw new KeyNotFoundException("No se encontró boleta para el alumno.");
 
         var horario = await horarioRepository.GetAlumnoHorario(long.Parse(boleta));
         
