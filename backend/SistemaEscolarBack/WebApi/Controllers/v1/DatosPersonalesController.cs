@@ -27,7 +27,7 @@ public class DatosPersonalesController(IMediator mediator) : BaseApiController
     [Authorize(Roles = "Alumno")]
     public async Task<IActionResult> GetDatosAlumnoCurrent()
     {
-        return Ok(await mediator.Send(new GetDatosPeronalesAlumnoCurrentQuery()));
+        return Ok(await mediator.Send(new GetDatosPersonalesAlumnoCurrentQuery()));
     }
     
     [HttpGet("misDatosDocente")]

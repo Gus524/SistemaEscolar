@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Application.Features.DatosPersonales.Queries.GetDatosPersonalesAlumnoCurrent;
 
-public class GetDatosPeronalesAlumnoCurrentQuery : IRequest<Response<DatosPersonalesAlumnoDto>>;
+public class GetDatosPersonalesAlumnoCurrentQuery : IRequest<Response<DatosPersonalesAlumnoDto>>;

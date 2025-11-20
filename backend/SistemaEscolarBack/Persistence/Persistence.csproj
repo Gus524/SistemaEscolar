@@ -64,6 +64,8 @@
       <EmbeddedResource Include="SqlScripts\Views\GetInicioGestion.sql" />
       <None Remove="SqlScripts\Views\GetMapaCurricular.sql" />
       <EmbeddedResource Include="SqlScripts\Views\GetMapaCurricular.sql" />
+      <None Remove="SqlScripts\Views\GetMateriasReinscripcion.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetMateriasReinscripcion.sql" />
     </ItemGroup>
 
     <ItemGroup>

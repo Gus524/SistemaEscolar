@@ -10,7 +10,6 @@
       <Folder Include="DTOs\Horarios\" />
       <Folder Include="DTOs\Responses\" />
       <Folder Include="Features\DatosPersonales\Commands\" />
-      <Folder Include="Mappings\" />
     </ItemGroup>
 
     <ItemGroup>

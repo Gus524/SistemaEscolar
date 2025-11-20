@@ -8,12 +8,12 @@ namespace Application.Features.DatosPersonales.Queries.GetDatosPersonalesAlumnoC
 public class GetDatosPersonalesAlumnoCurrentQueryHandler(
     ICurrentUserService currentUserService,
     IDatosPersonalesRepository datosPersonalesRepository
-) : IRequestHandler<GetDatosPeronalesAlumnoCurrentQuery, Response<DatosPersonalesAlumnoDto>>
+) : IRequestHandler<GetDatosPersonalesAlumnoCurrentQuery, Response<DatosPersonalesAlumnoDto>>
 {
-    public async Task<Response<DatosPersonalesAlumnoDto>> Handle(GetDatosPeronalesAlumnoCurrentQuery request, CancellationToken cancellationToken)
+    public async Task<Response<DatosPersonalesAlumnoDto>> Handle(GetDatosPersonalesAlumnoCurrentQuery request, CancellationToken cancellationToken)
     {
         var boleta = currentUserService.UserName ??
-                     throw new KeyNotFoundException("No se encontro boleta para el usuario actual.");
+                     throw new KeyNotFoundException("No se encontró boleta para el usuario actual.");
 
         var datos = await datosPersonalesRepository.GetDatosPersonalesAlumno(long.Parse(boleta));
 

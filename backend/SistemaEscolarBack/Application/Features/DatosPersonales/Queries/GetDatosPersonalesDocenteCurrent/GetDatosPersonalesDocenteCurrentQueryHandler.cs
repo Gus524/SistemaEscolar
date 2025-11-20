@@ -13,7 +13,7 @@ public class GetDatosPersonalesDocenteCurrentQueryHandler(
     public async Task<Response<DatosPersonalesDocenteDto>> Handle(GetDatosPersonalesDocenteCurrentQuery request, CancellationToken cancellationToken)
     {
         var rfc = currentUserService.UserName ??
-                  throw new KeyNotFoundException("No se encontro rfc para el docente actual.");
+                  throw new KeyNotFoundException("No se encontró rfc para el docente actual.");
 
         var datos = await datosPersonalesRepository.GetDatosPersonalesDocente(rfc);
         return Response<DatosPersonalesDocenteDto>.Success(datos);
