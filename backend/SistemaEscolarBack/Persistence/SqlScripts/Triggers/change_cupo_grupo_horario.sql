@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR ALTER TRIGGER change_cupo_grupo_horario
+CREATE TRIGGER change_cupo_grupo_horario
     AFTER DELETE ON Inscripcion_Detalle
     FOR EACH ROW
 BEGIN

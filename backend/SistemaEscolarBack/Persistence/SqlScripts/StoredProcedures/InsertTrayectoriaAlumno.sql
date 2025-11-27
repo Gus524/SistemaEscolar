@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR ALTER PROCEDURE InsertTrayectoriaAlumno(
+CREATE PROCEDURE InsertTrayectoriaAlumno(
     IN boleta		BIGINT,
     IN plan			INT,
     IN carrera		CHAR(1)

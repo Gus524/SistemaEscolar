@@ -46,9 +46,6 @@ public class GetHorariosValidacionConfig : IEntityTypeConfiguration<GetHorariosV
         builder.Property(x => x.Sobrecupo)
             .HasColumnName("sobrecupo");
         
-        builder.Property(x => x.Inscritos)
-            .HasColumnName("inscritos");
-        
         builder.Property(x => x.LunI)
             .HasColumnName("lun_i");
         

@@ -31,6 +31,11 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
                     responseModel = Response<string>.Fail(e.Errors); 
                     break;
 
+                case InvalidOperationException e:
+                    response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    responseModel = Response<string>.Fail(e.Message);
+                    break;
+                
                 case KeyNotFoundException e:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     responseModel = Response<string>.Fail(e.Message);

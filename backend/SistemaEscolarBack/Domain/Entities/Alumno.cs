@@ -28,7 +28,7 @@ public class Alumno
         var historial = _historialAcademico.FirstOrDefault(h => h.NoBoleta == NoBoleta && h.IdPlan == idPlan) ??
                       throw new KeyNotFoundException("No se encontró un historial para el alumno.");
 
-        var materia = historial.EstadoGeneral.FirstOrDefault(d => d.NoMateria == noMateria) ??
+        var materia = historial.EstadoGeneral.FirstOrDefault(d => d.Semestre == semestre && d.NoMateria == noMateria) ??
                       throw new KeyNotFoundException("No existe la materia en el estado general del alumno.");
         
         if (materia.Estado != "NO CURSADA" && materia.Estado != "REPROBADA")

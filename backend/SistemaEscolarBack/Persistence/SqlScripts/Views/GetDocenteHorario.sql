@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetDocenteHorario AS
+CREATE OR REPLACE VIEW GetDocenteHorario AS
 	SELECT 
 		dh.id_periodo,
 		CONCAT(d.nom_doc, ' ', d.ap_doc, ' ', d.am_doc) AS nombre,

@@ -13,7 +13,6 @@ public class GetHorariosValidacion
     public int? Cupo { get; set; }
     public int? Disponibles { get; set; }
     public int? Sobrecupo { get; set; }
-    public int? Inscritos { get; set; }
     public TimeOnly? LunI { get; set; }
     public TimeOnly? LunF { get; set; }
     public TimeOnly? MarI { get; set; }

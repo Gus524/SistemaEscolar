@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetDatosDocente AS
+CREATE OR REPLACE VIEW GetDatosDocente AS
 	SELECT 	rfc,
 			CONCAT(nom_doc, ' ', ap_doc, ' ', am_doc) AS nombre,
             email_p_doc,
