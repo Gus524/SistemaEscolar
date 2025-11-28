@@ -90,8 +90,9 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+if (!app.Environment.IsEnvironment("Testing"))
 {
+    using var scope = app.Services.CreateScope();
     var dbSeeder = scope.ServiceProvider.GetRequiredService<IDbSeeder>();
     await dbSeeder.InitializeAsync();
     await dbSeeder.SeedUsersAsync();
@@ -121,3 +122,5 @@ app.UseErrorHandlingMiddleware();
 app.MapControllers();
 
 await app.RunAsync();
+
+public partial class Program;

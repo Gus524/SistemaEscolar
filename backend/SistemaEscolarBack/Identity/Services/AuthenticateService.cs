@@ -60,23 +60,21 @@ public class AuthenticateService(
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public async Task<string> ValidateCredentialsAsync(string username, string password)
+    public async Task<string?> ValidateCredentialsAsync(string username, string password)
     {
         var user = await userManager.FindByNameAsync(username);
         if (user == null)
         {
             logger.LogWarning("Validation failed (user not found): {username}", username);
-            throw new ApiException("Usuario o contraseña no válidos.");
+            return null;
         }
         
         var passwordValid = await userManager.CheckPasswordAsync(user, password);
-        if (!passwordValid)
-        {
-            logger.LogWarning("Validation failed (password not valid): {username}", username);
-            throw new ApiException("Usuario o contraseña no válidos.");
-        }
+        if (passwordValid) return user.Id;
+        
+        logger.LogWarning("Validation failed (password not valid): {username}", username);
+        return null;
 
-        return user.Id;
     }
 
     public async Task<UserTokenDto?> GetUserForTokenAsync(string userId)

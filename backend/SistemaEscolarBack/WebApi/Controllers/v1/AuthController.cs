@@ -9,6 +9,6 @@ public class AuthController(IMediator mediator) : BaseApiController
     [HttpPost("auth")]
     public async Task<IActionResult> Auth(LoginUserCommand command)
     {
-        return Ok(await mediator.Send(command));
+        return HandleResult(await mediator.Send(command));
     }
 }

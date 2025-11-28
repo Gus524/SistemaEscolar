@@ -17,30 +17,9 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
             var response = context.Response;
             response.ContentType = "application/json";
 
-            Response<string> responseModel;
+            var responseModel = Response<string>.Fail(error.Message);
 
-            switch (error)
-            {
-                case Application.Exceptions.ApiException e:
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    responseModel = Response<string>.Fail(error.Message);
-                    break;
-
-                case Application.Exceptions.ValidationException e:
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    responseModel = Response<string>.Fail(e.Errors); 
-                    break;
-
-                case KeyNotFoundException e:
-                    response.StatusCode = (int)HttpStatusCode.NotFound;
-                    responseModel = Response<string>.Fail(e.Message);
-                    break;
-
-                default:
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    responseModel = Response<string>.Fail("Ocurrió un error interno en el servidor.");
-                    break;
-            }
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             var result = JsonSerializer.Serialize(responseModel);
 
