@@ -142,4 +142,125 @@ public class AuthControllerIntegrationTests(
         resultData.Succeeded.Should().BeFalse();
         resultData.Message.Should().Be("Credenciales inválidas.");
     }
+
+    [Fact]
+    public async Task Login_WithEmptyParams_ReturnsBadRequest()
+    {
+        string? userNull = null;
+        string? passwordNull = null;
+        var command = new
+        {
+            UserName = userNull,
+            Password = passwordNull
+        };
+        
+        var response = await _client.PostAsJsonAsync("/api/v1/Auth/auth", command);
+        
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        
+        var resultData = await response.Content.ReadFromJsonAsync<Response<LoginResponseDto>>();
+        resultData.Should().NotBeNull();
+        resultData.Succeeded.Should().BeFalse();
+        resultData.Message.Should().Be("Se han producido uno o más errores de validación");
+        var errors = resultData.Errors.ToList();
+        errors.Should().Contain("El usuario es requerido.").And.Contain("La contraseña es requerida.");
+    }
+
+    [Fact]
+    public async Task Login_WithValidAlumnoCredentials_ReturnsOkAndToken()
+    {
+        var testPassword = "Password123!";
+        var testUser = new ApplicationUser
+        {
+            UserName = "alumno_test",
+            UserType = UserType.Alumno
+        };
+
+        var command = new
+        {
+            UserName = testUser.UserName,
+            Password = testPassword
+        };
+        
+        using (var scope = factory.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var result = await userManager.CreateAsync(testUser, testPassword);
+            
+            if (!result.Succeeded) 
+                throw new Exception($"Fallo al seedear: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+        }
+        
+        var response = await _client.PostAsJsonAsync("/api/v1/Auth/auth", command);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var resultData = await response.Content.ReadFromJsonAsync<Response<LoginResponseDto>>();
+        
+        resultData.Should().NotBeNull();
+        resultData.Succeeded.Should().BeTrue();
+        resultData.Data.Token.Should().NotBeNullOrEmpty();
+        resultData.Data.UserName.Should().Be(testUser.UserName);
+        resultData.Data.Role.Should().Be(UserType.Alumno);
+
+        var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jsonToken = handler.ReadJwtToken(resultData.Data.Token);
+        
+        jsonToken.ValidTo.Should().BeAfter(DateTime.UtcNow);
+
+        var roleClaim =
+            jsonToken.Claims.FirstOrDefault(c => c.Type == "UserType" || c.Type == System.Security.Claims.ClaimTypes.Role);
+        
+        roleClaim.Should().NotBeNull("El token debe contener el rol");
+        roleClaim.Value.Should().Be(nameof(UserType.Alumno));
+    }
+    
+    [Fact]
+    public async Task Login_WithValidDocenteCredentials_ReturnsOkAndToken()
+    {
+        var testPassword = "Password123!";
+        var testUser = new ApplicationUser
+        {
+            UserName = "docente_test",
+            UserType = UserType.Docente
+        };
+
+        var command = new
+        {
+            UserName = testUser.UserName,
+            Password = testPassword
+        };
+        
+        using (var scope = factory.Services.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var result = await userManager.CreateAsync(testUser, testPassword);
+            
+            if (!result.Succeeded) 
+                throw new Exception($"Fallo al seedear: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+        }
+        
+        var response = await _client.PostAsJsonAsync("/api/v1/Auth/auth", command);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var resultData = await response.Content.ReadFromJsonAsync<Response<LoginResponseDto>>();
+        
+        resultData.Should().NotBeNull();
+        resultData.Succeeded.Should().BeTrue();
+        resultData.Data.Token.Should().NotBeNullOrEmpty();
+        resultData.Data.UserName.Should().Be(testUser.UserName);
+        resultData.Data.Role.Should().Be(UserType.Docente);
+
+        var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jsonToken = handler.ReadJwtToken(resultData.Data.Token);
+        
+        jsonToken.ValidTo.Should().BeAfter(DateTime.UtcNow);
+
+        var roleClaim =
+            jsonToken.Claims.FirstOrDefault(c => c.Type == "UserType" || c.Type == System.Security.Claims.ClaimTypes.Role);
+        
+        roleClaim.Should().NotBeNull("El token debe contener el rol");
+        roleClaim.Value.Should().Be(nameof(UserType.Docente));
+    }
 }

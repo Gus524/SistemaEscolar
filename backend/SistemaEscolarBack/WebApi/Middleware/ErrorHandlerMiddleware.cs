@@ -19,7 +19,22 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
 
             var responseModel = Response<string>.Fail(error.Message);
 
-            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            switch (error)
+            {
+                case Application.Exceptions.ApiException e:
+                    //custom application error
+                    response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    break;
+                case Application.Exceptions.ValidationException e:
+                    //custom application error
+                    response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    responseModel.Errors = e.Errors;
+                    break;
+                default:
+                    // unhandled error
+                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    break;
+            }
 
             var result = JsonSerializer.Serialize(responseModel);
 
