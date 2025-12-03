@@ -131,7 +131,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdEdificio" }, "id_edificio");
 
-                    b.ToTable("Academia");
+                    b.ToTable("Academia", (string)null);
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb4");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_0900_ai_ci");
@@ -226,7 +226,7 @@ namespace Persistence.Migrations
                     b.HasKey("NoBoleta")
                         .HasName("PRIMARY");
 
-                    b.ToTable("Alumno");
+                    b.ToTable("Alumno", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.AlumnoEts", b =>
@@ -315,7 +315,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdInst" }, "id_inst");
 
-                    b.ToTable("Carrera");
+                    b.ToTable("Carrera", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Docente", b =>
@@ -403,7 +403,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdAcademia" }, "id_academia");
 
-                    b.ToTable("Docente");
+                    b.ToTable("Docente", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.DocenteHorario", b =>
@@ -490,16 +490,33 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdInst" }, "id_inst")
                         .HasDatabaseName("id_inst1");
 
-                    b.ToTable("Edificio");
+                    b.ToTable("Edificio", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.EstadoGeneral", b =>
                 {
+                    b.Property<long>("NoBoleta")
+                        .HasColumnType("bigint")
+                        .HasColumnName("no_boleta");
+
+                    b.Property<int>("IdPlan")
+                        .HasColumnType("int")
+                        .HasColumnName("id_plan");
+
                     b.Property<string>("AbrCarr")
-                        .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("char(1)")
                         .HasColumnName("abr_carr")
+                        .IsFixedLength();
+
+                    b.Property<int>("Semestre")
+                        .HasColumnType("int")
+                        .HasColumnName("semestre");
+
+                    b.Property<string>("NoMateria")
+                        .HasMaxLength(2)
+                        .HasColumnType("char(2)")
+                        .HasColumnName("no_materia")
                         .IsFixedLength();
 
                     b.Property<string>("Estado")
@@ -509,24 +526,7 @@ namespace Persistence.Migrations
                         .HasColumnName("estado")
                         .HasDefaultValueSql("'NO CURSADA'");
 
-                    b.Property<int>("IdPlan")
-                        .HasColumnType("int")
-                        .HasColumnName("id_plan");
-
-                    b.Property<long?>("NoBoleta")
-                        .HasColumnType("bigint")
-                        .HasColumnName("no_boleta");
-
-                    b.Property<string>("NoMateria")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("char(2)")
-                        .HasColumnName("no_materia")
-                        .IsFixedLength();
-
-                    b.Property<int>("Semestre")
-                        .HasColumnType("int")
-                        .HasColumnName("semestre");
+                    b.HasKey("NoBoleta", "IdPlan", "AbrCarr", "Semestre", "NoMateria");
 
                     b.HasIndex(new[] { "IdPlan", "AbrCarr", "Semestre", "NoMateria" }, "id_plan");
 
@@ -598,7 +598,8 @@ namespace Persistence.Migrations
                         .HasName("PRIMARY")
                         .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0, 0, 0, 0 });
 
-                    b.HasIndex(new[] { "IdPlan", "AbrCarr", "Semestre", "NoMateria" }, "id_plan");
+                    b.HasIndex(new[] { "IdPlan", "AbrCarr", "Semestre", "NoMateria" }, "id_plan")
+                        .HasDatabaseName("id_plan1");
 
                     b.HasIndex(new[] { "Rfc" }, "rfc");
 
@@ -622,7 +623,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdInst" }, "id_inst")
                         .HasDatabaseName("id_inst2");
 
-                    b.ToTable("Gestion");
+                    b.ToTable("Gestion", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Grupo", b =>
@@ -661,7 +662,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "AbrCarr" }, "abr_carr");
 
-                    b.ToTable("Grupo");
+                    b.ToTable("Grupo", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.GrupoHorario", b =>
@@ -794,7 +795,7 @@ namespace Persistence.Migrations
                         .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0, 0, 0, 0 });
 
                     b.HasIndex(new[] { "IdPlan", "AbrCarr", "Semestre", "NoMateria" }, "id_plan")
-                        .HasDatabaseName("id_plan1");
+                        .HasDatabaseName("id_plan2");
 
                     b.ToTable("Grupo_Horario", (string)null);
                 });
@@ -808,6 +809,12 @@ namespace Persistence.Migrations
                     b.Property<int>("IdPlan")
                         .HasColumnType("int")
                         .HasColumnName("id_plan");
+
+                    b.Property<int>("EstadoHistorial")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("estado_historial")
+                        .HasDefaultValueSql("1");
 
                     b.Property<float?>("Promedio")
                         .ValueGeneratedOnAdd()
@@ -826,7 +833,7 @@ namespace Persistence.Migrations
                         .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
                     b.HasIndex(new[] { "IdPlan" }, "id_plan")
-                        .HasDatabaseName("id_plan2");
+                        .HasDatabaseName("id_plan3");
 
                     b.ToTable("Historial_Academico", (string)null);
                 });
@@ -882,7 +889,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdPeriodo" }, "id_periodo");
 
                     b.HasIndex(new[] { "IdPlan", "AbrCarr", "Semestre", "NoMateria" }, "id_plan")
-                        .HasDatabaseName("id_plan3");
+                        .HasDatabaseName("id_plan4");
 
                     b.ToTable("Historial_Detalle", (string)null);
                 });
@@ -912,9 +919,10 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdPeriodo" }, "id_periodo")
                         .HasDatabaseName("id_periodo1");
 
-                    b.HasIndex(new[] { "NoBoleta", "IdPlan" }, "no_boleta");
+                    b.HasIndex(new[] { "NoBoleta", "IdPlan" }, "no_boleta")
+                        .HasDatabaseName("no_boleta1");
 
-                    b.ToTable("Inscripcion");
+                    b.ToTable("Inscripcion", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.InscripcionDetalle", b =>
@@ -1017,7 +1025,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "NomInst" }, "nom_inst")
                         .IsUnique();
 
-                    b.ToTable("Institucion");
+                    b.ToTable("Institucion", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.MapaCurricular", b =>
@@ -1101,7 +1109,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdAcademia" }, "id_academia")
                         .HasDatabaseName("id_academia1");
 
-                    b.ToTable("Materia");
+                    b.ToTable("Materia", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PeriodoEscolar", b =>
@@ -1199,13 +1207,21 @@ namespace Persistence.Migrations
                         .HasName("PRIMARY");
 
                     b.HasIndex(new[] { "NoBoleta" }, "no_boleta")
-                        .HasDatabaseName("no_boleta1");
+                        .HasDatabaseName("no_boleta2");
 
-                    b.ToTable("Tramite");
+                    b.ToTable("Tramite", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.TrayectoriaAlumno", b =>
                 {
+                    b.Property<long>("NoBoleta")
+                        .HasColumnType("bigint")
+                        .HasColumnName("no_boleta");
+
+                    b.Property<int>("IdPlan")
+                        .HasColumnType("int")
+                        .HasColumnName("id_plan");
+
                     b.Property<float?>("CredFaltantes")
                         .HasColumnType("float")
                         .HasColumnName("cred_faltantes");
@@ -1222,14 +1238,6 @@ namespace Persistence.Migrations
                         .HasColumnName("cred_permitidos")
                         .HasDefaultValueSql("'0'");
 
-                    b.Property<int?>("IdPlan")
-                        .HasColumnType("int")
-                        .HasColumnName("id_plan");
-
-                    b.Property<long?>("NoBoleta")
-                        .HasColumnType("bigint")
-                        .HasColumnName("no_boleta");
-
                     b.Property<int?>("PerCursados")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -1240,7 +1248,10 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("per_disponibles");
 
-                    b.HasIndex(new[] { "NoBoleta", "IdPlan" }, "no_boleta");
+                    b.HasKey("NoBoleta", "IdPlan");
+
+                    b.HasIndex(new[] { "NoBoleta", "IdPlan" }, "no_boleta")
+                        .HasDatabaseName("no_boleta3");
 
                     b.ToTable("Trayectoria_Alumno", (string)null);
                 });
@@ -2175,6 +2186,110 @@ namespace Persistence.Migrations
                     b.ToView("GetHorarios", (string)null);
                 });
 
+            modelBuilder.Entity("Persistence.Views.GetHorariosValidacion", b =>
+                {
+                    b.Property<string>("AbrCarr")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("abr_carr");
+
+                    b.Property<int>("Creditos")
+                        .HasColumnType("int")
+                        .HasColumnName("creditos");
+
+                    b.Property<int?>("Cupo")
+                        .HasColumnType("int")
+                        .HasColumnName("cupo");
+
+                    b.Property<int?>("Disponibles")
+                        .HasColumnType("int")
+                        .HasColumnName("disponibles");
+
+                    b.Property<string>("GrupoMateria")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("grupo_materia");
+
+                    b.Property<int>("IdPeriodo")
+                        .HasColumnType("int")
+                        .HasColumnName("id_periodo");
+
+                    b.Property<int>("IdPlan")
+                        .HasColumnType("int")
+                        .HasColumnName("id_plan");
+
+                    b.Property<int?>("Inscritos")
+                        .HasColumnType("int")
+                        .HasColumnName("inscritos");
+
+                    b.Property<TimeOnly?>("JueF")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("jue_f");
+
+                    b.Property<TimeOnly?>("JueI")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("jue_i");
+
+                    b.Property<TimeOnly?>("LunF")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("lun_f");
+
+                    b.Property<TimeOnly?>("LunI")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("lun_i");
+
+                    b.Property<TimeOnly?>("MarF")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("mar_f");
+
+                    b.Property<TimeOnly?>("MarI")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("mar_i");
+
+                    b.Property<TimeOnly?>("MieF")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("mie_f");
+
+                    b.Property<TimeOnly?>("MieI")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("mie_i");
+
+                    b.Property<int>("NoGrupo")
+                        .HasColumnType("int")
+                        .HasColumnName("no_grupo");
+
+                    b.Property<string>("NoMateria")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("no_materia");
+
+                    b.Property<int>("Semestre")
+                        .HasColumnType("int")
+                        .HasColumnName("semestre");
+
+                    b.Property<int?>("Sobrecupo")
+                        .HasColumnType("int")
+                        .HasColumnName("sobrecupo");
+
+                    b.Property<string>("Turno")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("turno");
+
+                    b.Property<TimeOnly?>("VieF")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("vie_f");
+
+                    b.Property<TimeOnly?>("VieI")
+                        .HasColumnType("time(6)")
+                        .HasColumnName("vie_i");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("GetHorariosValidacion", (string)null);
+                });
+
             modelBuilder.Entity("Persistence.Views.GetInformacionGrupo", b =>
                 {
                     b.Property<string>("AbrCarr")
@@ -2375,13 +2490,23 @@ namespace Persistence.Migrations
                     b.ToView("GetMapaCurricular", (string)null);
                 });
 
-            modelBuilder.Entity("Persistence.Views.GetMateriasInscripcion", b =>
+            modelBuilder.Entity("Persistence.Views.GetMateriasReinscripcion", b =>
                 {
+                    b.Property<string>("Carrera")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("varchar(3)")
+                        .HasColumnName("abr_carr");
+
                     b.Property<string>("Clave")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)")
                         .HasColumnName("clave");
+
+                    b.Property<int>("Creditos")
+                        .HasColumnType("int")
+                        .HasColumnName("creditos");
 
                     b.Property<int>("Cupo")
                         .HasColumnType("int")
@@ -2396,6 +2521,10 @@ namespace Persistence.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)")
                         .HasColumnName("grupo");
+
+                    b.Property<int>("IdPlan")
+                        .HasColumnType("int")
+                        .HasColumnName("id_plan");
 
                     b.Property<string>("Jueves")
                         .HasMaxLength(20)
@@ -2454,7 +2583,7 @@ namespace Persistence.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("GetMateriasInscripcion", (string)null);
+                    b.ToView("GetMateriasReinscripcion", (string)null);
                 });
 
             modelBuilder.Entity("Common.Data.ApplicationUser", b =>
@@ -2561,8 +2690,10 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.EstadoGeneral", b =>
                 {
                     b.HasOne("Domain.Entities.HistorialAcademico", "HistorialAcademico")
-                        .WithMany()
+                        .WithMany("EstadoGeneral")
                         .HasForeignKey("NoBoleta", "IdPlan")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("Estado_General_ibfk_1");
 
                     b.HasOne("Domain.Entities.MapaCurricular", "MapaCurricular")
@@ -2796,9 +2927,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.TrayectoriaAlumno", b =>
                 {
                     b.HasOne("Domain.Entities.HistorialAcademico", "HistorialAcademico")
-                        .WithMany()
-                        .HasForeignKey("NoBoleta", "IdPlan")
-                        .HasConstraintName("Trayectoria_Alumno_ibfk_1");
+                        .WithOne("TrayectoriaAlumno")
+                        .HasForeignKey("Domain.Entities.TrayectoriaAlumno", "NoBoleta", "IdPlan")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Trayectoria_HistorialAcademico");
 
                     b.Navigation("HistorialAcademico");
                 });
@@ -2899,9 +3032,14 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.HistorialAcademico", b =>
                 {
+                    b.Navigation("EstadoGeneral");
+
                     b.Navigation("HistorialDetalle");
 
                     b.Navigation("Inscripcion");
+
+                    b.Navigation("TrayectoriaAlumno")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Inscripcion", b =>

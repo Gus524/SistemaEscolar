@@ -98,7 +98,8 @@ public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Tramite> Tramite { get; set; }
 
     public DbSet<TrayectoriaAlumno> TrayectoriaAlumno { get; set; }
-    public DbSet<GetMateriasReinscripcion>  GetMateriasInscripcion { get; set; }
+    public DbSet<GetMateriasReinscripcion> GetMateriasInscripcion { get; set; }
+    public DbSet<GetHorariosValidacion> GetHorariosValidacion { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

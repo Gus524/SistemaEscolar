@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetAlumnoCalificaciones AS
+CREATE OR REPLACE VIEW GetAlumnoCalificaciones AS
 	SELECT i.no_boleta, 
 		i.id_plan,
 		i.id_periodo,

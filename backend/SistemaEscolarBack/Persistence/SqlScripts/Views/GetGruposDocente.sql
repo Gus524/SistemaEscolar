@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetGruposDocente AS
+CREATE OR REPLACE VIEW GetGruposDocente AS
 	SELECT
 			m.nom_materia,
             dh.id_periodo,

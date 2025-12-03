@@ -12,9 +12,9 @@ public class TrayectoriaAlumno
 
     public float? CredObtenidos { get; set; }
 
-    public long? NoBoleta { get; set; }
+    public long NoBoleta { get; set; }
 
-    public int? IdPlan { get; set; }
+    public int IdPlan { get; set; }
 
-    public virtual HistorialAcademico? HistorialAcademico { get; set; }
+    public virtual HistorialAcademico HistorialAcademico { get; set; } = null!;
 }

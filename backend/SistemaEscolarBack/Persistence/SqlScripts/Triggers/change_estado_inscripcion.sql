@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR ALTER TRIGGER change_estado_inscripcion
+CREATE TRIGGER change_estado_inscripcion
     AFTER INSERT ON Inscripcion_Detalle
     FOR EACH ROW
 BEGIN

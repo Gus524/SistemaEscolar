@@ -81,6 +81,8 @@ public class GeneralProfile : Profile
 
         CreateMap<GetMateriasReinscripcion, MateriasDisponiblesDto>();
 
+        CreateMap<GetHorariosValidacion, HorariosValidacionDto>();
+
         #endregion
     }
 }

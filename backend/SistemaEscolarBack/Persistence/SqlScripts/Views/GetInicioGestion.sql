@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetInicioGestion AS
+CREATE OR REPLACE VIEW GetInicioGestion AS
 	SELECT 	g.usuario,
 			i.id_inst,
 			i.nom_inst

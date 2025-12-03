@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetAlumnosGrupo AS
+CREATE OR REPLACE VIEW GetAlumnosGrupo AS
 	SELECT 	d.rfc,
 			a.no_boleta,
 			a.email_p_alumno,

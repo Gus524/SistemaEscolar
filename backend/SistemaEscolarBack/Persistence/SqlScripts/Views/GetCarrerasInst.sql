@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetCarrerasInst AS
+CREATE OR REPLACE VIEW GetCarrerasInst AS
 	SELECT 
 	   i.id_inst,
 	   c.abr_carr,

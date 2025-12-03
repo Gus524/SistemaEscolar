@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetForMapa AS
+CREATE OR REPLACE VIEW GetForMapa AS
 	SELECT id_plan,
 		   desc_plan AS plan,
            c.abr_carr
