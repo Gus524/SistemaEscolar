@@ -66,6 +66,10 @@
       <EmbeddedResource Include="SqlScripts\Views\GetMapaCurricular.sql" />
       <None Remove="SqlScripts\Views\GetMateriasReinscripcion.sql" />
       <EmbeddedResource Include="SqlScripts\Views\GetMateriasReinscripcion.sql" />
+      <None Remove="SqlScripts\Triggers\actualizar_trayectoria.sql" />
+      <EmbeddedResource Include="SqlScripts\Triggers\actualizar_trayectoria.sql" />
+      <None Remove="SqlScripts\Views\GetHorariosValidacion.sql" />
+      <EmbeddedResource Include="SqlScripts\Views\GetHorariosValidacion.sql" />
     </ItemGroup>
 
     <ItemGroup>

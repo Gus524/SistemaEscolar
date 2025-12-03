@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetHistorialAlumno AS
+CREATE OR REPLACE VIEW GetHistorialAlumno AS
 	SELECT  a.no_boleta,
 			CONCAT(nom_al, ' ', ap_al, ' ', am_al) AS nombre,
             desc_carr,

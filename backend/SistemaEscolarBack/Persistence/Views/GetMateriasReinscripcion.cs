@@ -4,6 +4,7 @@ public class GetMateriasReinscripcion
 {
     public long NoBoleta { get; set; }
     public string Materia { get; set; } = null!;
+    public int Creditos { get; set; }
     public string Grupo { get; set; } = null!;
     public string Clave { get; set; } = null!;
     public string? Lunes { get; set; }
@@ -13,6 +14,7 @@ public class GetMateriasReinscripcion
     public string? Viernes { get; set; }
     public int Cupo { get; set; }
     public int Disponibles { get; set; }
+    public int IdPlan { get; set; }
     public int Semestre { get; set; }
     public string Turno { get; set; } = null!;
     public int NoGrupo { get; set; }

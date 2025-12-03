@@ -60,8 +60,15 @@ ON
         WHEN (nuevo.calificacion >= 6) THEN 'CURSADA'
 END
 WHERE (eg.id_plan, eg.abr_carr, eg.semestre, eg.no_materia) = (nuevo.id_plan, nuevo.abr_carr, nuevo.semestre, nuevo.no_materia);
-    
-    DROP TEMPORARY TABLE nuevo;
+
+UPDATE Trayectoria_Alumno ta
+    JOIN nuevo
+ON	(ta.no_boleta, ta.id_plan) = (nuevo.no_boleta, nuevo.id_plan)
+    SET
+        per_cursados = per_cursados + 1
+WHERE (ta.id_plan, ta.no_boleta) = (nuevo.id_plan, nuevo.no_boleta);
+
+DROP TEMPORARY TABLE nuevo;
 END //
 
 DELIMITER ;

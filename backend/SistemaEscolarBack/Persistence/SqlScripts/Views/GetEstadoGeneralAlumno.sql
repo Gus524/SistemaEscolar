@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetEstadoGeneralAlumno AS
+CREATE OR REPLACE VIEW GetEstadoGeneralAlumno AS
 	SELECT 	e.no_boleta,
 			e.id_plan,
 			e.estado,

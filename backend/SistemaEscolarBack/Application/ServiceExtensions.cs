@@ -1,5 +1,7 @@
 using System.Reflection;
 using Application.Behaviours;
+using Application.Interfaces;
+using Application.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ public static class ServiceExtensions
 {
     public static void AddApplicationLayer(this IServiceCollection services)
     {
+        services.AddTransient<IGrupoIdentificadorGenerator, GrupoIdentificadorGenerator>();
+        
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

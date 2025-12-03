@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetAlumnoHorario AS
+CREATE OR REPLACE VIEW GetAlumnoHorario AS
 	SELECT i.no_boleta, 
 		i.id_periodo,
 		CONCAT(g.semestre, g.abr_carr, g.turno, g.semestre, g.no_grupo) AS grupo,
