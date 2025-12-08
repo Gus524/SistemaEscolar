@@ -5,13 +5,19 @@ using MediatR;
 
 namespace Application.Features.Auth.Commands;
 
-public class LoginUserCommandHandler(IAuthenticateService authService) : IRequestHandler<LoginUserCommand, Response<LoginResponseDto>>
+internal class LoginUserCommandHandler(IAuthenticateService authService) : IRequestHandler<LoginUserCommand, Response<LoginResponseDto>>
 {
     public async Task<Response<LoginResponseDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
         var userId = await authService.ValidateCredentialsAsync(request.UserName, request.Password);
-        var userInfo = await authService.GetUserForTokenAsync(userId) ??
-                       throw new KeyNotFoundException("No se encontró información para el usuario.");
+        
+        if (userId is null)
+            return Response<LoginResponseDto>.Unauthorized("Credenciales inválidas.");
+        
+        var userInfo = await authService.GetUserForTokenAsync(userId);
+        
+        if (userInfo is null)
+            return Response<LoginResponseDto>.Unauthorized("Credenciales inválidas.");
 
         var token = authService.GenerateToken(userInfo);
 
