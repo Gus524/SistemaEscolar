@@ -3,7 +3,9 @@ import {AuthRequest, User} from '@app/core/models';
 import {AuthApi} from '@app/core/services/auth/auth-api';
 import {AsyncState} from '@app/core/utils/async-state.util';
 import {userAdapter} from '@app/core/adapters';
-import {Router} from '@angular/router';
+import {Router, UrlTree} from '@angular/router';
+import {catchError, of, tap} from 'rxjs';
+import {TokenStorage} from '@app/core/services/token/token-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ import {Router} from '@angular/router';
 export class AuthState {
   private router = inject(Router);
   private api = inject(AuthApi);
+  private storage = inject(TokenStorage);
   private _async = new AsyncState();
 
   public loading = computed(() => this._async.loading());
@@ -27,8 +30,8 @@ export class AuthState {
     this._async.execute(
       this.api.login(request),
       (response) => {
-        localStorage.setItem('token', response.token);
-        this.#currentUser.set(userAdapter(response));
+        this.storage.saveToken(response.token);
+        this.#currentUser.set(userAdapter(response.user));
         this.#token.set(response.token);
         this.router.navigate(['/']);
       }
@@ -36,10 +39,44 @@ export class AuthState {
   }
 
   async logout() {
-    localStorage.removeItem('token');
+    this.clearSessionData();
+    await this.router.navigate(['/login']);
+  }
+
+  restoreSession() {
+    const storedToken = this.storage.getToken();
+
+    if (!storedToken) {
+      this.#token.set(null);
+      this.#currentUser.set(null);
+      return of(true);
+    }
+
+    this.#token.set(storedToken);
+
+    return this.api.me().pipe(
+      tap(user => {
+        this.#currentUser.set(userAdapter(user));
+      }),
+      catchError(() => {
+        this.logout();
+        return of(true);
+      })
+    );
+  }
+
+  accessDenied(): UrlTree {
+    this.clearSessionData();
+    return this.router.createUrlTree(['/login']);
+  }
+
+  forbidden(): UrlTree {
+    return this.router.createUrlTree(['/forbbiden']);
+  }
+
+  private clearSessionData() {
+    this.storage.removeToken();
     this.#token.set(null);
     this.#currentUser.set(null);
-
-    await this.router.navigate(['/login']);
   }
 }

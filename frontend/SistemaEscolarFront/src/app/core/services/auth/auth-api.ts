@@ -6,6 +6,7 @@ import {map, Observable} from 'rxjs';
 import {AuthResponse} from '@app/core/models/auth.response';
 import {ApiResponse} from '@app/core/models/api.response';
 import {publicContext} from '@app/core/contexts/public.context';
+import {UserAuthResponse} from '@app/core/models/user-auth.response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,11 @@ export class AuthApi {
       ).pipe(
         map(response => response.data)
       );
+  }
+
+  me(): Observable<UserAuthResponse> {
+    return this.http
+      .get<ApiResponse<UserAuthResponse>>(`${this.url}/me`)
+      .pipe(map(response => response.data));
   }
 }

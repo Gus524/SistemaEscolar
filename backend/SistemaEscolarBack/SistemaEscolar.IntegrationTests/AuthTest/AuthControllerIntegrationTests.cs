@@ -62,8 +62,8 @@ public class AuthControllerIntegrationTests(
         resultData.Should().NotBeNull();
         resultData.Succeeded.Should().BeTrue();
         resultData.Data.Token.Should().NotBeNullOrEmpty();
-        resultData.Data.UserName.Should().Be(testUser.UserName);
-        resultData.Data.Role.Should().Be(UserType.Gestion);
+        resultData.Data.User.UserName.Should().Be(testUser.UserName);
+        resultData.Data.User.Tipo.Should().Be(UserType.Gestion);
 
         var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
         var jsonToken = handler.ReadJwtToken(resultData.Data.Token);
@@ -200,8 +200,8 @@ public class AuthControllerIntegrationTests(
         resultData.Should().NotBeNull();
         resultData.Succeeded.Should().BeTrue();
         resultData.Data.Token.Should().NotBeNullOrEmpty();
-        resultData.Data.UserName.Should().Be(testUser.UserName);
-        resultData.Data.Role.Should().Be(UserType.Alumno);
+        resultData.Data.User.UserName.Should().Be(testUser.UserName);
+        resultData.Data.User.Tipo.Should().Be(UserType.Alumno);
 
         var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
         var jsonToken = handler.ReadJwtToken(resultData.Data.Token);
@@ -249,8 +249,8 @@ public class AuthControllerIntegrationTests(
         resultData.Should().NotBeNull();
         resultData.Succeeded.Should().BeTrue();
         resultData.Data.Token.Should().NotBeNullOrEmpty();
-        resultData.Data.UserName.Should().Be(testUser.UserName);
-        resultData.Data.Role.Should().Be(UserType.Docente);
+        resultData.Data.User.UserName.Should().Be(testUser.UserName);
+        resultData.Data.User.Tipo.Should().Be(UserType.Docente);
 
         var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
         var jsonToken = handler.ReadJwtToken(resultData.Data.Token);

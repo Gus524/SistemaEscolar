@@ -1,6 +1,42 @@
-:host {
-  display: block;
+@use 'assets/styles/theme' as *;
+
+.logo-container {
+  contain: layout paint;
+}
+
+.logo-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+      circle,
+      rgba(30, 58, 138, 0.35),
+      transparent 70%
+  );
+  filter: blur(30px);
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.logo-container img {
   width: 100%;
-  min-height: 100vdh;
-  overflow-x: hidden;
+  z-index: 1;
+  animation: float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.app-splash-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: #f8f9fa;
+  z-index: 9999;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.loading-text {
+  will-change: background-position;
+  font-size: 2rem;
 }

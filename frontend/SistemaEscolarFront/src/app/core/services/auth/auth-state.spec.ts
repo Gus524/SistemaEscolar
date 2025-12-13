@@ -1,55 +1,47 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { AuthState } from './auth-state';
+import { AuthRequest, AuthResponse, User } from '@app/core/models';
+import { TipoUsuario } from '@app/core/enums';
+import { of, throwError } from 'rxjs';
+import { AuthApi } from '@app/core/services/auth/auth-api';
+import { Router } from '@angular/router';
+import { TokenStorage } from '@app/core/services/token/token-storage';
+import { provideZonelessChangeDetection } from '@angular/core';
+import {UserAuthResponse} from '@app/core/models/user-auth.response';
 
-import {AuthState} from './auth-state';
-import {AuthRequest, AuthResponse, User} from '@app/core/models';
-import {TipoUsuario} from '@app/core/enums';
-import {of} from 'rxjs';
-import {AuthApi} from '@app/core/services/auth/auth-api';
-import {Router} from '@angular/router';
-import {provideZonelessChangeDetection} from '@angular/core';
-
-const MOCK_USER: User = { usuario: "2020600407", nombre: 'Juan Perez', tipoUsuario: TipoUsuario.alumno };
-
-const MOCK_AUTH_RESPONSE: AuthResponse = {
-  token: 'fake-jwt-token',
-  user: MOCK_USER.usuario,
-  userName: MOCK_USER.nombre,
-  role: MOCK_USER.tipoUsuario
-};
+const MOCK_USER: UserAuthResponse = { userName: 'Juan', tipo: TipoUsuario.alumno };
+const MOCK_AUTH_RESPONSE: AuthResponse = { token: 'jwt-token', user: MOCK_USER };
 
 describe('AuthState Service', () => {
   let service: AuthState;
   let apiMock: any;
   let routerMock: any;
-
-  let localStorageMock: any;
+  let tokenStorageMock: any;
 
   beforeEach(() => {
     apiMock = {
-      login: vi.fn()
+      login: vi.fn(),
+      me: vi.fn()
     };
 
     routerMock = {
-      navigate: vi.fn().mockResolvedValue(true)
+      navigate: vi.fn().mockResolvedValue(true),
+      createUrlTree: vi.fn().mockReturnValue('URL_TREE')
     };
 
-    localStorageMock = {
-      getItem: vi.fn(),
-      setItem: vi.fn(),
-      removeItem: vi.fn(),
-      clear: vi.fn(),
-      length: 0,
-      key: vi.fn()
+    tokenStorageMock = {
+      getToken: vi.fn(),
+      saveToken: vi.fn(),
+      removeToken: vi.fn()
     };
-
-    vi.stubGlobal('localStorage', localStorageMock);
 
     TestBed.configureTestingModule({
       providers: [
         AuthState,
         { provide: AuthApi, useValue: apiMock },
         { provide: Router, useValue: routerMock },
+        { provide: TokenStorage, useValue: tokenStorageMock },
         provideZonelessChangeDetection()
       ]
     });
@@ -59,50 +51,80 @@ describe('AuthState Service', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
-    vi.unstubAllGlobals();
   });
 
-  it('debe crearse correctamente', () => {
-    expect(service).toBeTruthy();
-    expect(service.isActive()).toBe(false);
-    expect(service.token()).toBeNull();
+  describe('restoreSession()', () => {
+    it('debe no hacer nada si no hay token en storage', () => {
+      tokenStorageMock.getToken.mockReturnValue(null);
+
+      service.restoreSession().subscribe();
+
+      expect(service.token()).toBeNull();
+      expect(apiMock.me).not.toHaveBeenCalled();
+    });
+
+    it('debe restaurar usuario si hay token y API responde OK', () => {
+      tokenStorageMock.getToken.mockReturnValue('stored-token');
+      apiMock.me.mockReturnValue(of(MOCK_AUTH_RESPONSE));
+
+      service.restoreSession().subscribe();
+
+      expect(service.token()).toBe('stored-token');
+      expect(service.isActive()).toBe(true);
+    });
+
+    it('debe hacer logout si hay token pero la API falla (token invalido)', () => {
+      tokenStorageMock.getToken.mockReturnValue('bad-token');
+      apiMock.me.mockReturnValue(throwError(() => new Error('401')));
+
+      const spyRemove = tokenStorageMock.removeToken;
+
+      service.restoreSession().subscribe();
+
+      expect(spyRemove).toHaveBeenCalled();
+      expect(service.token()).toBeNull();
+      expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+    });
   });
 
   describe('login()', () => {
-    it('debe actualizar el estado y guardar token al recibir respuesta exitosa', () => {
-      const request: AuthRequest = { userName: '123', password: 'secret' };
+    it('debe guardar token en TokenStorage y navegar', () => {
+      const request: AuthRequest = { userName: '1', password: '1' };
       apiMock.login.mockReturnValue(of(MOCK_AUTH_RESPONSE));
-
-      const setItemSpy = vi.spyOn(localStorage, 'setItem');
 
       service.login(request);
 
-      expect(apiMock.login).toHaveBeenCalledWith(request);
-
-      expect(service.token()).toBe('fake-jwt-token');
-
-      expect(service.isActive()).toBe(true);
-
-      expect(setItemSpy).toHaveBeenCalledWith('token', 'fake-jwt-token');
+      expect(tokenStorageMock.saveToken).toHaveBeenCalledWith('jwt-token');
+      expect(service.token()).toBe('jwt-token');
+      expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
     });
   });
 
   describe('logout()', () => {
-    it('debe limpiar el estado, localStorage y navegar al login', async () => {
-      localStorage.setItem('token', 'old-token');
+    it('debe llamar a storage.removeToken y navegar al login', async () => {
       apiMock.login.mockReturnValue(of(MOCK_AUTH_RESPONSE));
       service.login({ userName: 'a', password: 'b' });
 
-      expect(service.token()).toBe('fake-jwt-token');
-
-      const removeItemSpy = vi.spyOn(localStorage, 'removeItem');
-
       await service.logout();
 
+      expect(tokenStorageMock.removeToken).toHaveBeenCalled();
       expect(service.token()).toBeNull();
-      expect(service.isActive()).toBe(false);
-      expect(removeItemSpy).toHaveBeenCalledWith('token');
       expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+    });
+  });
+
+  describe('Helpers de Guard (accessDenied / forbidden)', () => {
+    it('accessDenied debe limpiar sesión y retornar UrlTree al login', () => {
+      service.accessDenied();
+
+      expect(tokenStorageMock.removeToken).toHaveBeenCalled();
+      expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/login']);
+    });
+
+    it('forbidden debe retornar UrlTree a /forbidden', () => {
+      service.forbidden();
+
+      expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/forbbiden']);
     });
   });
 });

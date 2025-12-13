@@ -16,6 +16,8 @@ body {
   color: var(--color-text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 ul, ol {

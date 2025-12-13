@@ -1,8 +1,7 @@
-import {TipoUsuario} from '@app/core/enums/tipo-usuario.enum';
+import {User} from '@app/core/models/user.model';
+import {UserAuthResponse} from '@app/core/models/user-auth.response';
 
 export interface AuthResponse {
   token: string;
-  user: string;
-  userName: string;
-  role: TipoUsuario
+  user: UserAuthResponse;
 }

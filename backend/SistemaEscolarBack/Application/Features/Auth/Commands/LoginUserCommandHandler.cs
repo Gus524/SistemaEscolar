@@ -11,7 +11,7 @@ public class LoginUserCommandHandler(
 {
     public async Task<Response<LoginResponseDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        var userId = await authService.ValidateCredentialsAsync(request.UserName, request.Password);
+        var userId = await authService.ValidateCredentialsAsync(request.UserName!, request.Password!);
         
         if (userId is null)
             return Response<LoginResponseDto>.Unauthorized("Credenciales inválidas.");
@@ -22,13 +22,12 @@ public class LoginUserCommandHandler(
             return Response<LoginResponseDto>.Unauthorized("Credenciales inválidas.");
 
         var token = authService.GenerateToken(userInfo);
+        var user = new AuthUserDto(userInfo.UserName, userInfo.UserType);
 
         var response = new LoginResponseDto
         {
             Token = token,
-            UserId = userInfo.UserId,
-            UserName = userInfo.UserName,
-            Role = userInfo.UserType
+            User = user
         };
         
         return Response<LoginResponseDto>.Success(response, "Sesión iniciada correctamente.");
