@@ -1,3 +1,3 @@
 namespace Application.DTOs.Inicio;
 
-public record InicioDocenteDto(int InstitucionId, string Institucion, string Academia);
+public record InicioDocenteDto(int InstitucionId, string Institucion, string Academia, string Nombre);

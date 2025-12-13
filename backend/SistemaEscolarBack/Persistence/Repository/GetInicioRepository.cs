@@ -14,7 +14,7 @@ internal class GetInicioRepository(
         return await context.GetInicioAlumno
             .Where(a => a.NoBoleta == noBoleta)
             .AsNoTracking()
-            .Select(a => new InicioAlumnoDto(a.IdInst, a.NomInst, a.IdPlan, a.DescCarr))
+            .Select(a => new InicioAlumnoDto(a.IdInst, a.NomInst, a.IdPlan, a.DescCarr, a.Nombre!))
             .FirstOrDefaultAsync();
     }
 
@@ -23,7 +23,7 @@ internal class GetInicioRepository(
         return await context.GetInicioDocente
             .Where(a => a.Rfc == rfc)
             .AsNoTracking()
-            .Select(d => new InicioDocenteDto(d.IdInst, d.NomInst, d.NomAcademia))
+            .Select(d => new InicioDocenteDto(d.IdInst, d.NomInst, d.NomAcademia, d.Nombre!))
             .FirstOrDefaultAsync();
     }
 

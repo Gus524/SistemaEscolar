@@ -35,7 +35,8 @@ public class InicioControllerTests
 
         _mediatorMock.Setup(m => m.Send(It.IsAny<GetInicioAlumnoQuery>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(
-                Response<InicioAlumnoDto>.Success(new InicioAlumnoDto(1, "Institucion test", 1, "Carrera test")));
+                Response<InicioAlumnoDto>.Success(new InicioAlumnoDto(1, "Institucion test", 1, "Carrera test",
+                    "Nombre alumno")));
 
         var result = await _controller.GetInicio();
 
@@ -57,7 +58,8 @@ public class InicioControllerTests
 
         _mediatorMock.Setup(m => m.Send(It.IsAny<GetInicioDocenteQuery>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(
-                Response<InicioDocenteDto>.Success(new InicioDocenteDto(1, "Institucion test", "Academia test")));
+                Response<InicioDocenteDto>.Success(new InicioDocenteDto(1, "Institucion test", "Academia test",
+                    "Nombre docente")));
 
         var result = await _controller.GetInicio();
 
