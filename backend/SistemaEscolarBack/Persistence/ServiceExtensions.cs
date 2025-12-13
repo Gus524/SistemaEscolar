@@ -32,7 +32,8 @@ public static class ServiceExtensions
         services.AddTransient<IPeriodoActualRepository, PeriodoActualRepository>();
         services.AddTransient<IMapaCurricularRepository, MapaCurricularRepository>();
         services.AddTransient<IReinscripcionRepository, ReinscripcionRepository>();
-
+        services.AddTransient<IGetInicioRepository, GetInicioRepository>();
+        
         #endregion
     }
 }

@@ -5,7 +5,9 @@ using MediatR;
 
 namespace Application.Features.Auth.Commands;
 
-internal class LoginUserCommandHandler(IAuthenticateService authService) : IRequestHandler<LoginUserCommand, Response<LoginResponseDto>>
+public class LoginUserCommandHandler(
+    IAuthenticateService authService
+) : IRequestHandler<LoginUserCommand, Response<LoginResponseDto>>
 {
     public async Task<Response<LoginResponseDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {

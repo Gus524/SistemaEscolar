@@ -1,6 +1,7 @@
 using Application.DTOs.DatosPersonales;
 using Application.DTOs.HistorialAcademico;
 using Application.DTOs.Horario;
+using Application.DTOs.Inicio;
 using Application.DTOs.MapaCurricular;
 using Application.DTOs.PeriodoActual;
 using Application.DTOs.Reinscripcion;
@@ -82,7 +83,7 @@ public class GeneralProfile : Profile
         CreateMap<GetMateriasReinscripcion, MateriasDisponiblesDto>();
 
         CreateMap<GetHorariosValidacion, HorariosValidacionDto>();
-
+        
         #endregion
     }
 }
