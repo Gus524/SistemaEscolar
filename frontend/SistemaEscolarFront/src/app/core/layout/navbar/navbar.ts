@@ -14,7 +14,7 @@ import {MenuItem} from '@app/core/models';
     <header class="main-header">
       <nav class="navbar">
         <a class="brand" routerLink="/">
-          <img ngSrc="/src/assets/img/logo/logo_p.png" alt="Logotipo Sistema Escolar" width="50" height="45">
+          <img ngSrc="/assets/img/logo/logo_p.png" alt="Logotipo Sistema Escolar" width="50" height="45">
           <span class="brand-name">Sistema Escolar</span>
         </a>
 
@@ -66,7 +66,7 @@ import {MenuItem} from '@app/core/models';
             <a routerLink="/profile" class="nav-link profile-link">
               <span class="material-symbols-rounded icon">account_circle</span>
             </a>
-            <a routerLink="/auth/logout" class="nav-link logout-link" title="Cerrar Sesión">
+            <a routerLink="/auth/logout" class="nav-link logout-link" title="Cerrar sesión">
               <span class="material-symbols-rounded icon">logout</span>
             </a>
           </li>

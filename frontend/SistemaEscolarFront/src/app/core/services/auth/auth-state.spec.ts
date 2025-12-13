@@ -2,8 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 
 import {AuthState} from './auth-state';
-import {AuthRequest, AuthResponse} from '@app/core/models/auth';
-import {User} from '@app/core/models';
+import {AuthRequest, AuthResponse, User} from '@app/core/models';
 import {TipoUsuario} from '@app/core/enums';
 import {of} from 'rxjs';
 import {AuthApi} from '@app/core/services/auth/auth-api';

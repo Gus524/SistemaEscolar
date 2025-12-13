@@ -1,26 +1,43 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { describe, beforeEach, it, expect } from 'vitest';
-import { TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { App } from './app';
+import {provideRouter, RouterOutlet} from '@angular/router';
+import {By} from '@angular/platform-browser';
 
-describe('App', () => {
+describe('App Component', () => {
+  let component: App;
+  let fixture: ComponentFixture<App>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideZonelessChangeDetection()]
+      providers: [
+        provideRouter([]),
+        provideZonelessChangeDetection()
+      ]
     }).compileComponents();
-  });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
+    fixture = TestBed.createComponent(App);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, SistemaEscolarFront');
+  });
+
+  it('debe crearse correctamente la aplicación', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('Estado Inicial', () => {
+    it(`debe tener el título "SchoolShield" definido en el signal`, () => {
+      const titleValue = (component as any).title();
+      expect(titleValue).toBe('SchoolShield');
+    });
+  });
+
+  describe('Estructura del Template', () => {
+    it('debe contener el RouterOutlet para manejar la navegación', () => {
+      const outlet = fixture.debugElement.query(By.directive(RouterOutlet));
+      expect(outlet).toBeTruthy();
+    });
   });
 });

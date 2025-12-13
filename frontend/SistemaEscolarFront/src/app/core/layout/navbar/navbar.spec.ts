@@ -7,18 +7,24 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import {provideZonelessChangeDetection} from '@angular/core';
 
 const MOCK_MENU_ITEMS: MenuItem[] = [
-  { label: 'Inicio', route: '/home', icon: 'home' },
   {
-    label: 'Gestión',
+    label: 'Alumnos',
+    route: '/gestion/alumnos',
+    icon: 'face'
+  },
+  {
+    label: 'Inscripción',
+    icon: 'how_to_reg',
     children: [
-      { label: 'Usuarios', route: '/users', icon: 'group' },
-      { label: 'Roles', route: '/roles', icon: 'lock' }
+      { label: 'Comprobante', route: '/alumno/comprobante', icon: 'receipt_long' },
+      { label: 'Calificaciones', route: '/alumno/calificaciones', icon: 'grade' }
     ]
   },
   {
-    label: 'Reportes',
+    label: 'Horarios',
+    icon: 'schedule',
     children: [
-      { label: 'Financiero', route: '/finance' }
+      { label: 'Ocupabilidad', route: '/common/ocupabilidad' }
     ]
   }
 ];
@@ -40,32 +46,31 @@ describe('Navbar Component', () => {
     component = fixture.componentInstance;
 
     fixture.componentRef.setInput('items', MOCK_MENU_ITEMS);
-    fixture.detectChanges();
+    fixture.detectChanges(); // Renderizado inicial
   });
 
   it('debe crearse correctamente', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Renderizado del Menú', () => {
-    it('debe renderizar los items de primer nivel correctamente', () => {
+  describe('Renderizado Inicial', () => {
+    it('debe renderizar items simples y botones dropdown', () => {
       const navItems = fixture.debugElement.queryAll(By.css('.nav-list > .nav-item'));
+      const simpleLink = fixture.debugElement.query(By.css('a.nav-link'));
+      const dropdownBtns = fixture.debugElement.queryAll(By.css('button.dropdown-trigger'));
 
       expect(navItems.length).toBe(4);
 
-      const firstLink = navItems[0].query(By.css('.nav-link'));
-      expect(firstLink.nativeElement.textContent).toContain('Inicio');
-    });
+      expect(simpleLink).toBeTruthy();
+      expect(simpleLink.nativeElement.textContent).toContain('Alumnos');
 
-    it('debe renderizar botones dropdown para items con hijos', () => {
-      const dropdownBtn = fixture.debugElement.query(By.css('button.dropdown-trigger'));
-      expect(dropdownBtn).toBeTruthy();
-      expect(dropdownBtn.nativeElement.textContent).toContain('Gestión');
+      expect(dropdownBtns.length).toBe(2);
+      expect(dropdownBtns[0].nativeElement.textContent).toContain('Inscripción');
     });
   });
 
   describe('Interacción: Menú Móvil', () => {
-    it('debe alternar la clase "is-open" al hacer click en el toggle', () => {
+    it('debe alternar la visibilidad del menú al hacer click en el toggle', () => {
       const navList = fixture.debugElement.query(By.css('.nav-list'));
       const toggleBtn = fixture.debugElement.query(By.css('.mobile-toggle'));
 
@@ -87,51 +92,53 @@ describe('Navbar Component', () => {
   });
 
   describe('Interacción: Dropdowns', () => {
-    it('debe mostrar el submenú al hacer click en el trigger', () => {
-      const triggers = fixture.debugElement.queryAll(By.css('.dropdown-trigger'));
-      const gestionTrigger = triggers[0]; // El primero es Gestión
+    it('debe mostrar el submenú (DOM) al hacer click en el trigger', () => {
+      const inscriptionTrigger = fixture.debugElement.queryAll(By.css('.dropdown-trigger'))[0];
 
-      gestionTrigger.nativeElement.click();
+      inscriptionTrigger.nativeElement.click();
       fixture.detectChanges();
 
-      expect(component.activeDropdown()).toBe('Gestión');
+      expect(component.activeDropdown()).toBe('Inscripción');
 
-      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-ui'));
+      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-menu'));
       expect(dropdownMenu).toBeTruthy();
-      expect(dropdownMenu.nativeElement.textContent).toContain('Usuarios');
+
+      expect(dropdownMenu.nativeElement.textContent).toContain('Comprobante');
     });
 
-    it('debe cerrar un dropdown si se hace click nuevamente en él', () => {
-      component.activeDropdown.set('Gestión');
+    it('debe cerrar un dropdown si se hace click nuevamente en él (Toggle)', () => {
+      component.activeDropdown.set('Inscripción');
       fixture.detectChanges();
 
-      const gestionTrigger = fixture.debugElement.query(By.css('.dropdown-trigger'));
+      const inscriptionTrigger = fixture.debugElement.queryAll(By.css('.dropdown-trigger'))[0];
+      expect(fixture.debugElement.query(By.css('.dropdown-menu'))).toBeTruthy();
 
-      gestionTrigger.nativeElement.click();
+      inscriptionTrigger.nativeElement.click();
       fixture.detectChanges();
 
       expect(component.activeDropdown()).toBeNull();
-      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-ui'));
+      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-menu'));
       expect(dropdownMenu).toBeNull();
     });
 
     it('debe cerrar el dropdown A cuando se abre el dropdown B (Exclusividad)', () => {
       const triggers = fixture.debugElement.queryAll(By.css('.dropdown-trigger'));
-      const gestionTrigger = triggers[0];
-      const reportesTrigger = triggers[1];
+      const inscriptionTrigger = triggers[0];
+      const schedulesTrigger = triggers[1];
 
-      gestionTrigger.nativeElement.click();
+      inscriptionTrigger.nativeElement.click();
       fixture.detectChanges();
-      expect(component.activeDropdown()).toBe('Gestión');
+      expect(component.activeDropdown()).toBe('Inscripción');
+      expect(fixture.debugElement.query(By.css('.dropdown-menu')).nativeElement.textContent).toContain('Comprobante');
 
-      reportesTrigger.nativeElement.click();
+      schedulesTrigger.nativeElement.click();
       fixture.detectChanges();
 
-      expect(component.activeDropdown()).toBe('Reportes');
+      expect(component.activeDropdown()).toBe('Horarios');
 
-      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-ui'));
-      expect(dropdownMenu.nativeElement.textContent).toContain('Financiero');
-      expect(dropdownMenu.nativeElement.textContent).not.toContain('Usuarios');
+      const dropdownMenu = fixture.debugElement.query(By.css('.dropdown-menu'));
+      expect(dropdownMenu.nativeElement.textContent).toContain('Ocupabilidad');
+      expect(dropdownMenu.nativeElement.textContent).not.toContain('Comprobante');
     });
   });
 });
