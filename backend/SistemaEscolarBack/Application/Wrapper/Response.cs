@@ -11,7 +11,7 @@ public class Response<T>
     public T? Data { get; set; }
     [JsonIgnore]
     public SuccessType SuccessType { get; set; }
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    [JsonIgnore]
     public ErrorType ErrorType { get; set; }
     public Response() { }
 
