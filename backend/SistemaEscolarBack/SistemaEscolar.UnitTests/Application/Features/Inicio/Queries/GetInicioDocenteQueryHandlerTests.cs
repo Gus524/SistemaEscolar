@@ -23,7 +23,7 @@ public class GetInicioDocenteQueryHandlerTests
         var rfc = "ABCD900101XYZ";
         var query = new GetInicioDocenteQuery(rfc);
         
-        var dtoEsperado = new InicioDocenteDto(1, "UPIITA", "Ingeniería");
+        var dtoEsperado = new InicioDocenteDto(1, "UPIITA", "Ingeniería", "Nombre");
         _repoMock.Setup(x => x.GetInicioDocente(rfc))
             .ReturnsAsync(dtoEsperado);
 
@@ -31,6 +31,7 @@ public class GetInicioDocenteQueryHandlerTests
 
         result.Succeeded.Should().BeTrue();
         result.Data.Institucion.Should().Be("UPIITA");
+        result.Data.Nombre.Should().Be("Nombre");
         _repoMock.Verify(x => x.GetInicioDocente(rfc), Times.Once);
     }
 

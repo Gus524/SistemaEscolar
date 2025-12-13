@@ -25,7 +25,7 @@ public class GetInicioAlumnoQueryHandlerTests
         var boletaLong = 2023640001L;
         var query = new GetInicioAlumnoQuery(boletaString);
         
-        var dtoEsperado = new InicioAlumnoDto(1, "ESCOM", 2009, "Sistemas");
+        var dtoEsperado = new InicioAlumnoDto(1, "ESCOM", 2009, "Sistemas", "Nombre");
         _repoMock.Setup(x => x.GetInicioAlumno(boletaLong))
             .ReturnsAsync(dtoEsperado);
 
@@ -35,6 +35,7 @@ public class GetInicioAlumnoQueryHandlerTests
         result.Data.Should().NotBeNull();
         result.Data.Institucion.Should().Be("ESCOM");
         result.Data.Carrera.Should().Be("Sistemas");
+        result.Data.Nombre.Should().Be("Nombre");
         
         _repoMock.Verify(x => x.GetInicioAlumno(boletaLong), Times.Once);
     }
