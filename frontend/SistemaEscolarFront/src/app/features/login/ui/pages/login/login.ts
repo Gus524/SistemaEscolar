@@ -30,7 +30,7 @@ interface LoginForm {
 
       <section class="form-panel">
         <header class="form-header">
-          <h2 class="form-title">Inicio de Sesión</h2>
+          <h2 class="form-title">Inicio de sesión</h2>
           <p class="form-subtitle">Ingresa tus credenciales institucionales</p>
         </header>
 
@@ -69,7 +69,7 @@ interface LoginForm {
             @if (auth.loading()) {
               Validando...
             } @else {
-              Iniciar Sesión
+              Iniciar sesión
             }
           </button>
         </form>

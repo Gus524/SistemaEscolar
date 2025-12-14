@@ -1,10 +1,11 @@
 import {Component, Inject, PLATFORM_ID, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {isPlatformBrowser, NgOptimizedImage} from '@angular/common';
+import {Loader} from '@app/shared/ui/loader/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgOptimizedImage],
+  imports: [RouterOutlet, NgOptimizedImage, Loader],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

@@ -74,7 +74,7 @@
   margin-bottom: 3rem;
 
   .form-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--color-primary-900);
     margin-bottom: 0.5rem;
     font-weight: 700;
@@ -82,7 +82,7 @@
 
   .form-subtitle {
     color: var(--color-text-muted);
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   @media (max-width: 900px) {
@@ -95,7 +95,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 480px;
+  max-width: 100%;
   width: 100%;
 
   @media (max-width: 900px) {
@@ -109,7 +109,7 @@
   gap: 0.5rem;
 
   .label-text {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--color-primary-700);
     margin-left: 0.5rem;
@@ -118,9 +118,9 @@
   input {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #ced4da; // Borde gris suave
-    border-radius: var(--radius-md); // 8px o 10px
-    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: var(--radius-md);
+    font-size: 1.2rem;
     font-family: inherit;
     background-color: white;
     transition: all 0.2s ease;
@@ -128,7 +128,7 @@
     &:focus {
       outline: none;
       border-color: var(--color-primary-900);
-      box-shadow: 0 0 0 3px rgba(33, 37, 41, 0.1); // Focus ring accesible
+      box-shadow: 0 0 0 3px rgba(33, 37, 41, 0.1);
     }
 
     &.has-error {
@@ -142,21 +142,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(231, 76, 60, 0.1); // Rojo muy suave
+  background-color: rgba(231, 76, 60, 0.1);
   color: var(--color-danger);
   padding: 0.8rem;
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
   font-weight: 500;
 
-  // Icono de error
   span { font-size: 1.2rem; }
 }
 
 .btn-submit {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: var(--color-primary-900); // Negro/Gris oscuro
+  background-color: var(--color-primary-900);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -166,6 +165,7 @@
   transition: transform 0.1s, background-color 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  width: 40%;
 
   &:hover:not(:disabled) {
     background-color: black;

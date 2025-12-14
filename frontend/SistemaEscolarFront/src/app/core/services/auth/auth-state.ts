@@ -1,11 +1,12 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
-import {AuthRequest, User} from '@app/core/models';
 import {AuthApi} from '@app/core/services/auth/auth-api';
 import {AsyncState} from '@app/core/utils/async-state.util';
 import {userAdapter} from '@app/core/adapters';
 import {Router, UrlTree} from '@angular/router';
 import {catchError, of, tap} from 'rxjs';
 import {TokenStorage} from '@app/core/services/token/token-storage';
+import {User} from '@app/core/models/user';
+import {AuthRequest} from '@app/core/models/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthState {
   #token = signal<string | null>(null);
 
   public currentUser = this.#currentUser.asReadonly();
-  public isActive = computed(() => this.#token() !== null);
+  public isActive = computed(() => this.#token() !== null && this.#currentUser() !== null);
   public token = this.#token.asReadonly();
 
   login(request: AuthRequest) {

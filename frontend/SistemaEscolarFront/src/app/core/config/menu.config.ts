@@ -1,5 +1,6 @@
-import {MenuItem} from '@app/core/models';
+
 import {TipoUsuario} from '@app/core/enums';
+import {MenuItem} from '@app/core/models/menu';
 
 const ROUTES = {
   PROFILE: '/profile',
@@ -25,7 +26,7 @@ export const MENU_CONFIG: Record<TipoUsuario, MenuItem[]> = {
       icon: 'schedule',
       children: [
         { label: 'Ocupabilidad', route: ROUTES.COMMON.OCUPABILIDAD, icon: 'event_available' },
-        { label: 'Horarios de clase', route: '/alumno/horario-clases', icon: 'calendar_month' }
+        { label: 'Horario de clase', route: '/alumno/horario-clases', icon: 'calendar_month' }
       ]
     },
     {

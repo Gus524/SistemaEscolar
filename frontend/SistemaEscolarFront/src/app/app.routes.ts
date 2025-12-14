@@ -42,6 +42,12 @@ export const routes: Routes = [
           .then(m => m.gestionRoutes)
       },
       {
+        path: 'common/mapa-curricular',
+        loadComponent: () => import('./features/mapa-curricular/pages/mapa-curricular-page/mapa-curricular-page')
+          .then(m => m.MapaCurricularPage),
+        title: 'Mapa Curricular'
+      },
+      {
         path: 'forbbiden',
         loadComponent: () => import('@app/shared/ui/forbidden-page/forbidden-page')
           .then(m => m.ForbiddenPage),

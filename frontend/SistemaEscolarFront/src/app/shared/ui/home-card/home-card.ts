@@ -23,8 +23,6 @@ import { Component, input } from '@angular/core';
 
     .home-layout {
       width: 100%;
-      padding: 2rem 2rem;
-      margin-top: 1.5rem;
     }
 
     .brand-header {

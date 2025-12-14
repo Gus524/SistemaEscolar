@@ -1,12 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@app/core/config/api.token';
-import {AuthRequest} from '@app/core/models/auth.request';
+import {AuthRequest} from '@app/core/models/auth/auth.request';
 import {map, Observable} from 'rxjs';
-import {AuthResponse} from '@app/core/models/auth.response';
+import {AuthResponse} from '@app/core/models/auth/auth.response';
 import {ApiResponse} from '@app/core/models/api.response';
 import {publicContext} from '@app/core/contexts/public.context';
-import {UserAuthResponse} from '@app/core/models/user-auth.response';
+import {UserAuthResponse} from '@app/core/models/user/user-auth.response';
 
 @Injectable({
   providedIn: 'root'
