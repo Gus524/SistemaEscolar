@@ -12,5 +12,11 @@ export const docenteRoutes: Routes = [
     loadComponent: () => import('./horario/pages/docente-horario-page/docente-horario-page')
       .then(m => m.DocenteHorarioPage),
     title: 'Horario actual'
+  },
+  {
+    path: 'datos-personales',
+    loadComponent: () => import('./datos-personales/mis-datos-docente/mis-datos-docente')
+      .then(m => m.MisDatosDocente),
+    title: 'Datos personales'
   }
 ];

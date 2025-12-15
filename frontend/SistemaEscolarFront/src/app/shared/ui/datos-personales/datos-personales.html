@@ -1,0 +1,89 @@
+<h2>Datos personales</h2>
+<hr>
+
+<article class="profile-layout">
+  <article class="card photo-card">
+    <div class="img-placeholder" role="img" aria-label="Foto de perfil">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <rect width="100%" height="100%" fill="#868e96"></rect>
+      </svg>
+    </div>
+  </article>
+
+  <article class="card info-card">
+
+    <nav class="tab-group" role="tablist" aria-label="Secciones de datos">
+      <button type="button" class="tab-btn"
+              [class.active]="activeTab() === 'GENERALES'"
+              (click)="activeTab.set('GENERALES')"
+              role="tab"
+              [attr.aria-selected]="activeTab() === 'GENERALES'">
+        Generales
+      </button>
+
+      <button type="button" class="tab-btn"
+              [class.active]="activeTab() === 'DIRECCION'"
+              (click)="activeTab.set('DIRECCION')"
+              role="tab"
+              [attr.aria-selected]="activeTab() === 'DIRECCION'">
+        Dirección
+      </button>
+
+      @if (isAlumno()) {
+        <button type="button" class="tab-btn"
+                [class.active]="activeTab() === 'ESCOLARES'"
+                (click)="activeTab.set('ESCOLARES')"
+                role="tab"
+                [attr.aria-selected]="activeTab() === 'ESCOLARES'">
+          Escolares
+        </button>
+      }
+    </nav>
+
+    <section class="tab-content" role="tabpanel">
+
+      @if (activeTab() === 'GENERALES') {
+        <dl class="data-grid">
+          @if (isAlumno()) {
+            <dt>Boleta</dt>           <dd>{{ alumnoData()?.noBoleta }}</dd>
+            <dt>Nombre</dt>           <dd>{{ alumnoData()?.nombre }}</dd>
+            <dt>CURP</dt>             <dd>{{ alumnoData()?.curp }}</dd>
+            <dt>Tel. Móvil</dt>       <dd>{{ alumnoData()?.telefonoMovil || 'N/A' }}</dd>
+            <dt>Email Inst.</dt>      <dd>{{ alumnoData()?.emailInstitucional }}</dd>
+            <dt>Teléfono Fijo</dt>    <dd>{{ alumnoData()?.telefono || 'N/A' }}</dd>
+            <dt>Email Personal</dt>   <dd>{{ alumnoData()?.emailPersonal }}</dd>
+          } @else {
+            <dt>RFC</dt>              <dd>{{ docenteData()?.rfc }}</dd>
+            <dt>Nombre</dt>           <dd>{{ docenteData()?.nombre }}</dd>
+            <dt>Academia</dt>         <dd>{{ docenteData()?.academia }}</dd>
+            <dt>Edificio</dt>         <dd>{{ docenteData()?.edificio }}</dd>
+            <dt>Email Inst.</dt>      <dd>{{ docenteData()?.emailInstitucional }}</dd>
+            <dt>Teléfono</dt>         <dd>{{ docenteData()?.telefono }}</dd>
+            <dt>Email Personal</dt>   <dd>{{ docenteData()?.emailPersonal }}</dd>
+          }
+        </dl>
+      }
+
+      @if (activeTab() === 'DIRECCION') {
+        <dl class="data-grid">
+          <dt>Calle</dt>       <dd>{{ data().calle }}</dd>
+          <dt>No. Ext</dt>     <dd>{{ data().noExt }}</dd>
+          <dt>No. Int</dt>     <dd>{{ data().noInt || 'S/N' }}</dd>
+          <dt>Colonia</dt>     <dd>{{ data().colonia }}</dd>
+          <dt>Delegación</dt>  <dd>{{ data().delegacion }}</dd>
+          <dt>C.P.</dt>        <dd>{{ data().cp }}</dd>
+        </dl>
+      }
+
+      @if (activeTab() === 'ESCOLARES' && isAlumno()) {
+        <dl class="data-grid">
+          <dt>Institución</dt>  <dd>{{ alumnoData()?.institucion }}</dd>
+          <dt>Carrera</dt>      <dd>{{ alumnoData()?.descCarr }}</dd>
+          <dt>Plan</dt>         <dd>{{ alumnoData()?.descPlan }}</dd>
+          <dt>Promedio</dt>     <dd>{{ alumnoData()?.promedio }}</dd>
+        </dl>
+      }
+
+    </section>
+  </article>
+</article>

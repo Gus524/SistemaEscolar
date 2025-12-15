@@ -1,6 +1,7 @@
 using Application.Features.DatosPersonales.Queries.GetDatosPersonales;
 using Application.Features.DatosPersonales.Queries.GetDatosPersonalesAlumnoCurrent;
 using Application.Features.DatosPersonales.Queries.GetDatosPersonalesDocente;
+using Application.Features.DatosPersonales.Queries.GetDatosPersonalesDocenteCurrent;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,6 @@ public class DatosPersonalesController(IMediator mediator) : BaseApiController
     [Authorize(Roles = "Docente")]
     public async Task<IActionResult> GetDatosDocenteCurrent()
     {
-        return Ok(await mediator.Send(new GetDatosPersonalesDocenteQuery()));
+        return Ok(await mediator.Send(new GetDatosPersonalesDocenteCurrentQuery()));
     }
 }

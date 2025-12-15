@@ -1,8 +1,9 @@
-import {Component, inject, input, signal} from '@angular/core';
+import {Component, computed, inject, input, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 import {AuthState} from '@app/core/services/auth';
 import {MenuItem} from '@app/core/models/menu';
+import {TipoUsuario} from '@app/core/enums';
 
 @Component({
   selector: 'app-navbar',
@@ -75,14 +76,15 @@ import {MenuItem} from '@app/core/models/menu';
 
             @if (activeDropdown() === 'USER_MENU') {
               <ul class="dropdown-menu user-dropdown">
-                <li>
-                  <a routerLink="/perfil" class="dropdown-item" (click)="closeMenu()">
-                    <span class="material-symbols-rounded icon-sm">person</span>
-                    Datos Personales
-                  </a>
-                </li>
-
-                <li class="divider"></li>
+                @if (profileRoute(); as route) {
+                  <li>
+                    <a [routerLink]="route" class="dropdown-item" (click)="closeMenu()">
+                      <span class="material-symbols-rounded icon-sm">person</span>
+                      Datos Personales
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                }
 
                 <li>
                   <button (click)="auth.logout()" class="dropdown-item danger">
@@ -106,6 +108,21 @@ export class Navbar {
 
   isMenuOpen = signal(false);
   activeDropdown = signal<string | null>(null);
+
+  profileRoute = computed(() => {
+    const user = this.auth.currentUser();
+
+    if (!user) return null;
+
+    switch (user.tipoUsuario) {
+      case TipoUsuario.alumno:
+        return '/alumno/datos-personales';
+      case TipoUsuario.docente:
+        return '/docente/datos-personales';
+      default:
+        return null;
+    }
+  });
 
   toggleMenu() {
     this.isMenuOpen.update(v => !v);
