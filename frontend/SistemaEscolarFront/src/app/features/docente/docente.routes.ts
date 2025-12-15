@@ -1,3 +1,10 @@
 import {Routes} from '@angular/router';
 
-export const docenteRoutes: Routes = [];
+export const docenteRoutes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./inicio/pages/docente-inicio-page/docente-inicio-page')
+      .then(m => m.DocenteInicioPage),
+    title: 'Inicio'
+  }
+];

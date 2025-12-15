@@ -1,7 +1,8 @@
-import {Component, input, signal} from '@angular/core';
+import {Component, inject, input, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 import {MenuItem} from '@app/core/models';
+import {AuthState} from '@app/core/services/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -14,8 +15,8 @@ import {MenuItem} from '@app/core/models';
     <header class="main-header">
       <nav class="navbar">
         <a class="brand" routerLink="/">
-          <img ngSrc="/assets/img/logo/logo_p.png" alt="Logotipo Sistema Escolar" width="50" height="45">
-          <span class="brand-name">Sistema Escolar</span>
+          <img ngSrc="/assets/img/logo/logo_p.png" alt="Logotipo School Shield" width="50" height="45">
+          <span class="brand-name">School Shield</span>
         </a>
 
         <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Abrir menú">
@@ -62,13 +63,35 @@ import {MenuItem} from '@app/core/models';
             </li>
           }
 
-          <li class="nav-item user-actions">
-            <a routerLink="/profile" class="nav-link profile-link">
+          <li class="nav-item user-menu-container">
+            <button
+              class="nav-link dropdown-trigger user-trigger"
+              (click)="toggleDropdown('USER_MENU')"
+              [class.active]="activeDropdown() === 'USER_MENU'">
+
               <span class="material-symbols-rounded icon">account_circle</span>
-            </a>
-            <a routerLink="/auth/logout" class="nav-link logout-link" title="Cerrar sesión">
-              <span class="material-symbols-rounded icon">logout</span>
-            </a>
+              <span class="material-symbols-rounded arrow" [class.rotate]="activeDropdown() === 'USER_MENU'">expand_more</span>
+            </button>
+
+            @if (activeDropdown() === 'USER_MENU') {
+              <ul class="dropdown-menu user-dropdown">
+                <li>
+                  <a routerLink="/perfil" class="dropdown-item" (click)="closeMenu()">
+                    <span class="material-symbols-rounded icon-sm">person</span>
+                    Datos Personales
+                  </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                  <button (click)="auth.logout()" class="dropdown-item danger">
+                    <span class="material-symbols-rounded icon-sm">logout</span>
+                    Cerrar Sesión
+                  </button>
+                </li>
+              </ul>
+            }
           </li>
 
         </ul>
@@ -78,6 +101,7 @@ import {MenuItem} from '@app/core/models';
   styleUrl: './navbar.scss'
 })
 export class Navbar {
+  protected auth = inject(AuthState);
   items = input.required<MenuItem[]>();
 
   isMenuOpen = signal(false);
@@ -89,5 +113,10 @@ export class Navbar {
 
   toggleDropdown(label: string) {
     this.activeDropdown.update(current => current === label ? null : label);
+  }
+
+  closeMenu() {
+    this.isMenuOpen.set(false);
+    this.activeDropdown.set(null);
   }
 }

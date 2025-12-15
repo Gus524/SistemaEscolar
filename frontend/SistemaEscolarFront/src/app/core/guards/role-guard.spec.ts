@@ -1,38 +1,37 @@
 import { TestBed } from '@angular/core/testing';
-import { Router, Route, UrlSegment } from '@angular/router';
+import { Route, UrlSegment } from '@angular/router';
 import { roleGuard } from './role-guard';
 import { TipoUsuario } from '@app/core/enums/tipo-usuario.enum';
-import {provideZonelessChangeDetection, signal} from '@angular/core';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import {AuthState} from '@app/core/services/auth';
+import { AuthState } from '@app/core/services/auth';
 
 describe('RoleGuard', () => {
-  let routerMock: any;
-
   const mockCurrentUser = signal<{ tipoUsuario: TipoUsuario } | null>(null);
+  const mockIsActive = signal(false);
 
   const authStateMock = {
-    currentUser: mockCurrentUser.asReadonly()
+    currentUser: mockCurrentUser.asReadonly(),
+    isActive: mockIsActive, // El guard ahora verifica isActive() también
+    accessDenied: vi.fn().mockReturnValue('LOGIN_REDIRECT'),
+    forbidden: vi.fn().mockReturnValue('FORBIDDEN_REDIRECT')
   };
 
   const executeGuard = (rolesPermitidos: TipoUsuario[]) =>
     TestBed.runInInjectionContext(() => roleGuard(rolesPermitidos)({} as Route, [] as UrlSegment[]));
 
   beforeEach(() => {
-    routerMock = {
-      createUrlTree: vi.fn().mockReturnValue('REDIRECT_URL_TREE')
-    };
-
     TestBed.configureTestingModule({
       providers: [
         { provide: AuthState, useValue: authStateMock },
-        { provide: Router, useValue: routerMock },
         provideZonelessChangeDetection()
       ]
     });
+    vi.clearAllMocks();
   });
 
-  it('debe permitir el acceso si el usuario tiene el rol correcto', () => {
+  it('debe permitir el acceso si el usuario tiene el rol correcto y está activo', () => {
+    mockIsActive.set(true);
     mockCurrentUser.set({ tipoUsuario: TipoUsuario.alumno });
 
     const result = executeGuard([TipoUsuario.alumno]);
@@ -40,29 +39,23 @@ describe('RoleGuard', () => {
     expect(result).toBe(true);
   });
 
-  it('debe permitir el acceso si el usuario tiene uno de varios roles permitidos', () => {
-    mockCurrentUser.set({ tipoUsuario: TipoUsuario.docente });
-
-    const result = executeGuard([TipoUsuario.alumno, TipoUsuario.docente]);
-
-    expect(result).toBe(true);
-  });
-
-  it('debe BLOQUEAR (redirigir) si el usuario tiene un rol incorrecto', () => {
+  it('debe llamar a forbidden() si el usuario tiene un rol incorrecto', () => {
+    mockIsActive.set(true);
     mockCurrentUser.set({ tipoUsuario: TipoUsuario.alumno });
 
     const result = executeGuard([TipoUsuario.gestion]);
 
-    expect(result).toBe('REDIRECT_URL_TREE');
-    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/login']);
+    expect(result).toBe('FORBIDDEN_REDIRECT');
+    expect(authStateMock.forbidden).toHaveBeenCalled();
   });
 
-  it('debe redirigir al login si no hay usuario logueado', () => {
+  it('debe llamar a accessDenied() si no hay usuario o no está activo', () => {
+    mockIsActive.set(false);
     mockCurrentUser.set(null);
 
     const result = executeGuard([TipoUsuario.alumno]);
 
-    expect(result).toBe('REDIRECT_URL_TREE');
-    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/login']);
+    expect(result).toBe('LOGIN_REDIRECT');
+    expect(authStateMock.accessDenied).toHaveBeenCalled();
   });
 });

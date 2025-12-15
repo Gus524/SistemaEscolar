@@ -2,15 +2,16 @@ import { Routes } from '@angular/router';
 import {MainLayout} from '@app/core/layout/main-layout/main-layout';
 import {authGuard, redirectGuard, roleGuard} from '@app/core/guards';
 import {TipoUsuario} from '@app/core/enums';
+import {publicGuard} from '@app/core/guards/public-guard';
 
 export const routes: Routes = [
   {
     path: 'login',
+    canMatch: [publicGuard],
     loadComponent: () => import('./features/login/ui/pages/login/login')
       .then(m => m.Login),
-    title: 'Iniciar sesión | School Shield'
+    title: 'Iniciar sesión'
   },
-
   {
     path: '',
     component: MainLayout,
@@ -39,6 +40,12 @@ export const routes: Routes = [
         canMatch: [roleGuard([TipoUsuario.gestion])],
         loadChildren: () => import('./features/gestion/gestion.routes')
           .then(m => m.gestionRoutes)
+      },
+      {
+        path: 'forbbiden',
+        loadComponent: () => import('@app/shared/ui/forbidden-page/forbidden-page')
+          .then(m => m.ForbiddenPage),
+        title: 'Acceso denegado'
       }
     ]
   },

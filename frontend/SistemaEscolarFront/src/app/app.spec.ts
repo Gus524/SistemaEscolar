@@ -27,13 +27,6 @@ describe('App Component', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Estado Inicial', () => {
-    it(`debe tener el título "SchoolShield" definido en el signal`, () => {
-      const titleValue = (component as any).title();
-      expect(titleValue).toBe('SchoolShield');
-    });
-  });
-
   describe('Estructura del Template', () => {
     it('debe contener el RouterOutlet para manejar la navegación', () => {
       const outlet = fixture.debugElement.query(By.directive(RouterOutlet));

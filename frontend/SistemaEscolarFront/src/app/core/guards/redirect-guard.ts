@@ -10,7 +10,7 @@ export const redirectGuard: CanActivateFn = (): UrlTree => {
   const user = auth.currentUser();
 
   if (!user) {
-    return router.createUrlTree(['/login']);
+    return auth.accessDenied();
   }
 
   switch (user.tipoUsuario) {
