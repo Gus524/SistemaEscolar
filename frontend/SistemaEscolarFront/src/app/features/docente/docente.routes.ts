@@ -18,5 +18,11 @@ export const docenteRoutes: Routes = [
     loadComponent: () => import('./datos-personales/mis-datos-docente/mis-datos-docente')
       .then(m => m.MisDatosDocente),
     title: 'Datos personales'
+  },
+  {
+    path: 'grupo-detalle/:grupo/:clave',
+    loadComponent: () => import('./horario/pages/alumnos-docente-page/alumnos-docente-page')
+      .then(m => m.AlumnosDocentePage),
+    title: 'Grupo detalle'
   }
 ];
