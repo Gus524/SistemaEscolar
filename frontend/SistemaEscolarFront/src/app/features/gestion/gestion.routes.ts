@@ -65,5 +65,17 @@ export const gestionRoutes: Routes = [
     path: 'historial-academico',
     loadChildren: () => import('./historial-academico/historial.routes')
       .then(m => m.historialRoutes)
+  },
+  {
+    path: 'alumno/datos-personales/:boleta',
+    loadComponent: () => import('./datos-personales/pages/gestion-datos-alumno/gestion-datos-alumno')
+      .then(m => m.GestionDatosAlumno),
+    title: 'Datos personales alumno'
+  },
+  {
+    path: 'docente/datos-personales/:rfc',
+    loadComponent: () => import('./datos-personales/pages/gestion-datos-docente/gestion-datos-docente')
+      .then(m => m.GestionDatosDocente),
+    title: 'Datos personales docente'
   }
 ];
