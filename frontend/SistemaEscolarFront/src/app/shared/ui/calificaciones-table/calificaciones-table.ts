@@ -1,10 +1,10 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, input} from '@angular/core';
 import {CalificacionesAlumnoFacade} from '@app/core/services/calificaciones';
+import {Calificaciones} from '@app/core/models/periodo-actual/calificaciones.model';
 
 @Component({
   selector: 'app-calificaciones-table',
   imports: [],
-  providers: [CalificacionesAlumnoFacade],
   template: `
     <article class="table-container">
       <table class="custom-table">
@@ -21,7 +21,7 @@ import {CalificacionesAlumnoFacade} from '@app/core/services/calificaciones';
           </tr>
         </thead>
         <tbody>
-          @for (row of facade.califaciones() ?? []; track row.clave) {
+          @for (row of calificaciones() ?? []; track row.clave) {
             <tr>
               <td class="fw-bold">{{ row.grupo }}</td>
               <td class="fw-muted">{{ row.clave }}</td>
@@ -46,9 +46,5 @@ import {CalificacionesAlumnoFacade} from '@app/core/services/calificaciones';
   `
 })
 export class CalificacionesTable {
-  protected facade = inject(CalificacionesAlumnoFacade);
-
-  constructor() {
-    this.facade.getCalificaciones();
-  }
+  calificaciones = input.required<Calificaciones[]>();
 }

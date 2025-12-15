@@ -77,5 +77,11 @@ export const gestionRoutes: Routes = [
     loadComponent: () => import('./datos-personales/pages/gestion-datos-docente/gestion-datos-docente')
       .then(m => m.GestionDatosDocente),
     title: 'Datos personales docente'
+  },
+  {
+    path: 'alumno/calificaciones/:boleta',
+    loadComponent: () => import('./calificaciones/pages/gestion-calificaciones-alumno/gestion-calificaciones-alumno')
+      .then(m => m.GestionCalificacionesAlumno),
+    title: 'Calificaciones alumno'
   }
 ];

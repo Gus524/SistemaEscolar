@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@app/core/config/api.token';
 import {map, Observable} from 'rxjs';
-import {Califcaciones} from '@app/core/models/periodo-actual/calificaciones.model';
+import {Calificaciones} from '@app/core/models/periodo-actual/calificaciones.model';
 import {ApiResponse} from '@app/core/models';
 import {AlumnosGrupoRequest} from '@app/core/models/periodo-actual/alumnos-grupo.request';
 import {AlumnosGrupo} from '@app/core/models/periodo-actual/alumnos-grupo.model';
@@ -14,9 +14,9 @@ export class PeriodoActualApi {
   private http = inject(HttpClient);
   private url = `${inject(API_URL)}PeriodoActual`;
 
-  getCalificacionesAlumno(boleta?: number, plan?: number): Observable<Califcaciones[]> {
+  getCalificacionesAlumno(boleta?: number, plan?: number): Observable<Calificaciones[]> {
     if (boleta && plan) {
-      return this.http.get<ApiResponse<Califcaciones[]>>(`${this.url}/calificaciones`, {
+      return this.http.get<ApiResponse<Calificaciones[]>>(`${this.url}/calificaciones`, {
         params: {
           noBoleta: boleta,
           plan: plan
@@ -26,7 +26,7 @@ export class PeriodoActualApi {
           map(response => response.data)
         );
     } else {
-      return this.http.get<ApiResponse<Califcaciones[]>>(`${this.url}/misCalificaciones`)
+      return this.http.get<ApiResponse<Calificaciones[]>>(`${this.url}/misCalificaciones`)
         .pipe(map(response => response.data));
     }
   }
