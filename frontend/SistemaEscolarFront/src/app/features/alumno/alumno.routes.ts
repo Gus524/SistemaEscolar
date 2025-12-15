@@ -24,5 +24,11 @@ export const alumnoRoutes: Routes = [
     loadComponent: () => import('./historial-academico/pages/mi-kardex/mi-kardex')
       .then(m => m.MiKardex),
     title: 'Historial académico'
+  },
+  {
+    path: 'estado-general',
+    loadComponent: () => import('./historial-academico/pages/mi-estado-general/mi-estado-general')
+      .then(m => m.MiEstadoGeneral),
+    title: 'Estado general'
   }
 ];
