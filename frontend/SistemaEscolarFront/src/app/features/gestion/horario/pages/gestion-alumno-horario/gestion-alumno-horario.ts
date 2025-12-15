@@ -1,8 +1,8 @@
 import {Component, effect, inject, input} from '@angular/core';
 import {AlumnoHorarioFacade} from '@app/core/services/horario';
 import {HorarioTable} from '@app/shared/ui/horario-table/horario-table';
-import {DatosPersonalesAlumnoFacade} from '@app/core/services/datos-personales';
 import {DatosAlumno} from '@app/shared/ui/datos-alumno/datos-alumno';
+import {HistorialAlumnoFacade} from '@app/features/gestion/shared/services/historial-alumno-facade';
 
 @Component({
   selector: 'app-gestion-alumno-horario',
@@ -10,9 +10,9 @@ import {DatosAlumno} from '@app/shared/ui/datos-alumno/datos-alumno';
     HorarioTable,
     DatosAlumno
   ],
-  providers: [DatosPersonalesAlumnoFacade, AlumnoHorarioFacade],
+  providers: [HistorialAlumnoFacade, AlumnoHorarioFacade],
   template: `
-    @if (alumno.datos(); as data) {
+    @if (alumno.alumno(); as data) {
       <app-datos-alumno
         [nombre]="data.nombre!!"
         [boleta]="data.noBoleta.toString()"
@@ -26,7 +26,7 @@ import {DatosAlumno} from '@app/shared/ui/datos-alumno/datos-alumno';
 })
 export class GestionAlumnoHorario {
   protected facade = inject(AlumnoHorarioFacade);
-  protected alumno = inject(DatosPersonalesAlumnoFacade);
+  protected alumno = inject(HistorialAlumnoFacade);
   boleta = input.required<number>();
 
   constructor() {
@@ -35,7 +35,7 @@ export class GestionAlumnoHorario {
 
       if (boleta) {
         this.facade.getHorario(boleta);
-        this.alumno.getDatosAlumno(boleta);
+        this.alumno.getHistorial(boleta);
       }
     });
   }

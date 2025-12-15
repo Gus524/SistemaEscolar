@@ -17,7 +17,13 @@ import {EstadoGeneral} from '@app/core/models/historial-academico';
             <small class="academia-text">{{ m.academia }}</small>
           </li>
         } @empty {
-          <li class="empty-msg">Vas al corriente con tu plan de estudios.</li>
+          <li class="empty-msg">
+            @if (variante() === 'ALUMNO') {
+              Vas al corriente con tu plan de estudios.
+            } @else {
+              El alumno va al corriente con su plan de estudios.
+            }
+          </li>
         }
       </ul>
     </article>
@@ -35,7 +41,13 @@ import {EstadoGeneral} from '@app/core/models/historial-academico';
             <small class="academia-text">{{ m.academia }}</small>
           </li>
         } @empty {
-          <li class="empty-msg">No tienes materias reprobadas. ¡Bien hecho!</li>
+          <li class="empty-msg">
+            @if (variante() === 'ALUMNO') {
+              No tienes materias reprobadas. ¡Bien hecho!
+            } @else {
+              El alumno no tiene materias reprobadas.
+            }
+          </li>
         }
       </ul>
     </article>
@@ -152,6 +164,7 @@ import {EstadoGeneral} from '@app/core/models/historial-academico';
 })
 export class EstadoGeneralCards {
   materias = input.required<EstadoGeneral[]>();
+  variante = input<string>('ALUMNO');
 
   reprobadas = computed(() =>
     this.materias().filter(m => m.estado === 'REPROBADA')

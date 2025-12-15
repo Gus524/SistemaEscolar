@@ -2,7 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '@app/core/config/api.token';
 import {map, Observable} from 'rxjs';
-import {EstadoGeneral, EstadoGeneralResponse, HistorialAlumnoResponse} from '@app/core/models/historial-academico';
+import {
+  EstadoGeneral,
+  EstadoGeneralResponse,
+  HistorialAlumno,
+  HistorialAlumnoResponse
+} from '@app/core/models/historial-academico';
 import {ApiResponse} from '@app/core/models';
 import {estadoGeneralAdapter} from '@app/core/adapters';
 
@@ -31,5 +36,11 @@ export class HistorialAcademicoApi {
     return this.http.get<ApiResponse<EstadoGeneralResponse[]>>(`${this.url}/estadoGeneral`,
       { params: { noBoleta: boleta, idPlan: idPlan }})
       .pipe(map(response => response.data.map(estadoGeneralAdapter)))
+  }
+
+  getHistorialAlumno(boleta: number): Observable<HistorialAlumno> {
+    return this.http.get<ApiResponse<HistorialAlumno>>(`${this.url}/alumno`,
+      { params: { noBoleta: boleta } })
+    .pipe(map(response => response.data));
   }
 }

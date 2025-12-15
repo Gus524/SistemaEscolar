@@ -1,7 +1,6 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
 import {HistorialAcademicoApi} from '@app/core/services/historial-academico/historial-academico-api';
 import {AsyncState} from '@app/core/utils/async-state.util';
-import {InicioState} from '@app/core/services/inicio';
 import {EstadoGeneral} from '@app/core/models/historial-academico';
 
 @Injectable()

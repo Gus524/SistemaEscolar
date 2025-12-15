@@ -59,6 +59,13 @@ export const gestionRoutes: Routes = [
   {
     path: 'horario',
     loadChildren: () => import('./horario/horario.routes')
-      .then(m => m.horarioRoutes)
+      .then(m => m.horarioRoutes),
+    title: 'Horario alumno'
+  },
+  {
+    path: 'estado-general/:boleta',
+    loadComponent: () => import('./historial-academico/pages/gestion-estado-general-alumno/gestion-estado-general-alumno')
+      .then(m => m.GestionEstadoGeneralAlumno),
+    title: 'Estado general'
   }
 ];
