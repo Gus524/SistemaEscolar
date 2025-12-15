@@ -1,8 +1,8 @@
 import {Component, inject, input, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
-import {MenuItem} from '@app/core/models';
 import {AuthState} from '@app/core/services/auth';
+import {MenuItem} from '@app/core/models/menu';
 
 @Component({
   selector: 'app-navbar',
@@ -41,7 +41,7 @@ import {AuthState} from '@app/core/services/auth';
                   <ul class="dropdown-menu">
                     @for (sub of item.children; track sub.label) {
                       <li>
-                        <a [routerLink]="sub.route" routerLinkActive="active" class="dropdown-item">
+                        <a [routerLink]="sub.route" routerLinkActive="active" class="dropdown-item" (click)="closeMenu()">
                           @if (sub.icon) {
                             <span class="material-symbols-rounded icon-sm">{{ sub.icon }}</span>
                           }

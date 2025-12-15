@@ -12,7 +12,7 @@ import {RouterOutlet} from '@angular/router';
   template: `
     <app-navbar [items]="menuState.menuItems()" />
 
-    <main class="main-content">
+    <main class="layout-content">
       <router-outlet />
     </main>
 

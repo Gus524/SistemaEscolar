@@ -8,7 +8,7 @@ import { AuthApi } from '@app/core/services/auth/auth-api';
 import { Router } from '@angular/router';
 import { TokenStorage } from '@app/core/services/token/token-storage';
 import { provideZonelessChangeDetection } from '@angular/core';
-import {UserAuthResponse} from '@app/core/models/user-auth.response';
+import {UserAuthResponse} from '@app/core/models/user/user-auth.response';
 
 const MOCK_USER: UserAuthResponse = { userName: 'Juan', tipo: TipoUsuario.alumno };
 const MOCK_AUTH_RESPONSE: AuthResponse = { token: 'jwt-token', user: MOCK_USER };

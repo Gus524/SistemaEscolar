@@ -1,5 +1,8 @@
 @use 'assets/styles/variables';
 @use 'assets/styles/reset';
+@use 'assets/styles/tables';
+@use 'assets/styles/header-info';
+@use 'assets/styles/forms';
 
 ::-webkit-scrollbar {
   width: 8px;
