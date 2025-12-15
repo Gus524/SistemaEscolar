@@ -55,5 +55,10 @@ export const gestionRoutes: Routes = [
       .then(m => m.UnderConstructionPage),
     data: { title: 'Programación de ETS', message: 'Configuración de fechas y asignación de aulas para ETS.' },
     title: 'Calendario ETS'
+  },
+  {
+    path: 'horario',
+    loadChildren: () => import('./horario/horario.routes')
+      .then(m => m.horarioRoutes)
   }
 ];

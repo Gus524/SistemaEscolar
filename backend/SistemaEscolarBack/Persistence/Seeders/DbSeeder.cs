@@ -117,7 +117,7 @@ public class DbSeeder (
         var gestiones = await context.Gestion.Where(g => g.Usuario != null).ToListAsync();
         foreach (var gestion in gestiones)
         {
-            string userName = $"G{gestion.Usuario}"; // Usa Usuario como base
+            string userName = $"{gestion.Usuario}"; // Usa Usuario como base
             var existingUser = await userManager.FindByNameAsync(userName);
             if (existingUser == null)
             {

@@ -16,7 +16,7 @@ export class DatosPersonalesApi {
   getDatosAlumno(boleta?: number): Observable<DatosPersonalesAlumno> {
     if (boleta) {
       return this.http
-      .get<ApiResponse<DatosPersonalesAlumno>>(`${this.url}.datosAlumno`,
+      .get<ApiResponse<DatosPersonalesAlumno>>(`${this.url}/datosAlumno`,
         { params: { noBoleta: boleta }})
       .pipe(map(response => response.data));
     } else {
