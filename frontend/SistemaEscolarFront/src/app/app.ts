@@ -5,7 +5,7 @@ import {Loader} from '@app/shared/ui/loader/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgOptimizedImage, Loader],
+  imports: [RouterOutlet, Loader],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

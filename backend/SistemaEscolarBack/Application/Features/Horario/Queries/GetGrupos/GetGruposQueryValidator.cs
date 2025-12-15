@@ -6,7 +6,7 @@ public class GetGruposQueryValidator : AbstractValidator<GetGruposQuery>
 {
     public GetGruposQueryValidator()
     {
-        RuleFor(s => s.PlanId)
+        RuleFor(s => s.IdPlan)
             .NotEmpty()
             .WithMessage("El plan es requerido.")
             .GreaterThan(0)

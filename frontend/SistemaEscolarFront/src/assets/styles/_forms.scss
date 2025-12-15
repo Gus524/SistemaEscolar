@@ -11,19 +11,16 @@
   margin: 0;
   width: 100%;
 
-  /* Grid Layout: 2 columnas iguales */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   align-items: start;
 
-  /* Responsive: Una sola columna en móviles */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 }
 
-/* Replicando estilos .form-control del login */
 .form-control {
   display: flex;
   flex-direction: column;
@@ -32,26 +29,23 @@
   cursor: pointer;
 
   .label-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-primary-700);
     margin-left: 0.5rem;
   }
 
-  /* Estilos para el SELECT idénticos al INPUT del login */
   select {
     width: 100%;
-    padding: 1rem;
+    padding: 0.8rem;
     border: 1px solid #ced4da;
     border-radius: var(--radius-md);
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-family: inherit;
     background-color: white;
-    color: var(--color-text-body, #212529); /* Color de texto por defecto */
+    color: var(--color-text-body, #212529);
     transition: all 0.2s ease;
-    appearance: none; /* Limpia estilos nativos del navegador */
-
-    /* Icono de flecha personalizado (opcional, para que se vea más moderno) */
+    appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;

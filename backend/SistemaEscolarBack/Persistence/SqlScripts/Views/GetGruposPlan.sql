@@ -1,5 +1,5 @@
 CREATE OR REPLACE VIEW GetGruposPlan AS
-	SELECT  CONCAT(semestre, abr_carr, turno, semestre, no_grupo) AS secuencia,
+	SELECT  CONCAT(semestre, abr_carr, turno, no_grupo) AS secuencia,
 			semestre,
 			p.id_periodo,
             id_plan,

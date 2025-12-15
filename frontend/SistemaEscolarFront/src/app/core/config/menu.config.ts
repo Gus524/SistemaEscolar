@@ -17,7 +17,7 @@ export const MENU_CONFIG: Record<TipoUsuario, MenuItem[]> = {
       label: 'Inscripción',
       icon: 'how_to_reg',
       children: [
-        { label: 'Comprobante Horario', route: '/alumno/comprobante', icon: 'receipt_long' },
+        { label: 'Comprobante Horario', route: '/alumno/comprobante-horario', icon: 'receipt_long' },
         { label: 'Calificaciones', route: '/alumno/calificaciones', icon: 'grade' }
       ]
     },
@@ -26,7 +26,7 @@ export const MENU_CONFIG: Record<TipoUsuario, MenuItem[]> = {
       icon: 'schedule',
       children: [
         { label: 'Ocupabilidad', route: ROUTES.COMMON.OCUPABILIDAD, icon: 'event_available' },
-        { label: 'Horario de clase', route: '/alumno/horario-clases', icon: 'calendar_month' }
+        { label: 'Horario de clase', route: ROUTES.COMMON.HORARIOS, icon: 'calendar_month' }
       ]
     },
     {

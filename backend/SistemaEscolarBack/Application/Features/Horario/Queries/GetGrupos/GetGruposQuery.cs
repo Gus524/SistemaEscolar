@@ -5,7 +5,7 @@ namespace Application.Features.Horario.Queries.GetGrupos;
 
 public class GetGruposQuery : IRequest<Response<List<string?>>>
 {
-    public int PlanId { get; set; }
+    public int IdPlan { get; set; }
     public int Semestre { get; set; }
     public string? Turno { get; set; }
 }

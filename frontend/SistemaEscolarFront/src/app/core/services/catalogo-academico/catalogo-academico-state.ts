@@ -1,4 +1,4 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import {MapaCurricularApi} from '@app/core/services/mapa-curricular/mapa-curricular-api';
 import {InicioState} from '@app/core/services/inicio';
 import {Carrera} from '@app/core/models/carrera';
@@ -20,7 +20,12 @@ export class CatalogoAcademicoState {
   #planesCache = signal<Map<string, Plan[]>>(new Map());
   readonly planes = computed(() => Array.from(this.#planesCache().values()));
   constructor() {
-    this.initCatalogo();
+    effect(() => {
+      const idInstitucion = this.inicio.rawData()?.idInstitucion;
+      if (idInstitucion) {
+        this.initCatalogo();
+      }
+    });
   }
 
   public getPlanByCarrera(carrera: string | null | undefined) {
@@ -29,7 +34,7 @@ export class CatalogoAcademicoState {
   }
 
   private initCatalogo() {
-    const institucion = this.inicio.rawData()?.idInstitucion || 1;
+    const institucion = this.inicio.rawData()!.idInstitucion;
 
     const request$ = this.api.getCarreras(institucion).pipe(
       tap(carreras => {

@@ -43,9 +43,9 @@ public class HorarioController(IMediator mediator) : BaseApiController
 
     [HttpGet("secuencias")]
     [Authorize]
-    public async Task<IActionResult> GetSecuencias(int plan, int semestre, string? turno)
+    public async Task<IActionResult> GetSecuencias(int idPlan, int semestre, string? turno)
     {
-        return Ok(await mediator.Send(new GetGruposQuery { PlanId = plan, Semestre = semestre, Turno = turno }));
+        return Ok(await mediator.Send(new GetGruposQuery { IdPlan = idPlan, Semestre = semestre, Turno = turno }));
     }
 
     [HttpGet("miHorarioAlumno")]

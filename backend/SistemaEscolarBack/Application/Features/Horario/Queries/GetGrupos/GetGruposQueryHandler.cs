@@ -8,7 +8,7 @@ public class GetGruposQueryHandler(IHorarioRepository horarioRepository) : IRequ
 {
     public async Task<Response<List<string?>>> Handle(GetGruposQuery request, CancellationToken cancellationToken)
     {
-        var secuencias = await horarioRepository.GetSecuencias(request.PlanId, request.Semestre, request.Turno);
+        var secuencias = await horarioRepository.GetSecuencias(request.IdPlan, request.Semestre, request.Turno);
 
         return Response<List<string?>>.Success(secuencias);
     }

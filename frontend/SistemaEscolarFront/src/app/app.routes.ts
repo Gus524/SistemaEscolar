@@ -42,10 +42,9 @@ export const routes: Routes = [
           .then(m => m.gestionRoutes)
       },
       {
-        path: 'common/mapa-curricular',
-        loadComponent: () => import('./features/mapa-curricular/pages/mapa-curricular-page/mapa-curricular-page')
-          .then(m => m.MapaCurricularPage),
-        title: 'Mapa Curricular'
+        path: 'common',
+        loadChildren: () => import('./features/common/common.routes')
+          .then(m => m.commonRoutes)
       },
       {
         path: 'forbbiden',
