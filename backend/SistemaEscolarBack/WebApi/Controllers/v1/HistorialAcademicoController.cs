@@ -25,7 +25,7 @@ public class HistorialAcademicoController(IMediator mediator) : BaseApiControlle
     }
 
     [HttpGet("estadoGeneral")]
-    [Authorize(Roles = "Gestion")]
+    [Authorize(Roles = "Gestion,Alumno")]
     public async Task<IActionResult> GetEstadoGeneralAlumno(long noBoleta, int idPlan)
     {
         return Ok(await mediator.Send(new GetEstadoGeneralAlumnoQuery { NoBoleta = noBoleta, IdPlan = idPlan }));

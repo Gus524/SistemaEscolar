@@ -18,5 +18,11 @@ export const alumnoRoutes: Routes = [
     loadComponent: () => import('./calificaciones/pages/mis-calificaciones-page/mis-calificaciones-page')
       .then(m => m.MisCalificacionesPage),
     title: 'Calificaciones'
+  },
+  {
+    path: 'historial',
+    loadComponent: () => import('./historial-academico/pages/mi-kardex/mi-kardex')
+      .then(m => m.MiKardex),
+    title: 'Historial académico'
   }
 ];

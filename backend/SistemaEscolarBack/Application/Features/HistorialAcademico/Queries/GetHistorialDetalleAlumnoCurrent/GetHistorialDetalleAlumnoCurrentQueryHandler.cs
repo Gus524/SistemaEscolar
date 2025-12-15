@@ -15,14 +15,13 @@ public class GetHistorialDetalleAlumnoCurrentQueryHandler(
     {
         var boleta = currentUserService.UserName ?? throw new KeyNotFoundException("Boleta no encontrada para el alumno.");
 
-        var historial = historialRepository.GetHistorialAlumno(long.Parse(boleta));
-        var materias = historialRepository.GetHistorialDetalle(long.Parse(boleta));
+        var historial = await historialRepository.GetHistorialAlumno(long.Parse(boleta));
+        var materias = await historialRepository.GetHistorialDetalle(long.Parse(boleta));
 
-        await Task.WhenAll(historial, materias);
         var response = new HistorialAlumnoResponseDto
         {
-            HistorialAlumno = historial.Result,
-            SemestreHistorial = materias.Result.ToSemestreDto()
+            HistorialAlumno = historial,
+            SemestreHistorial = materias.ToSemestreDto()
         };
         
         return Response<HistorialAlumnoResponseDto>.Success(response);
