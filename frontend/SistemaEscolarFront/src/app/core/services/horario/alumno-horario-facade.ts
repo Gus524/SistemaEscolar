@@ -16,7 +16,7 @@ export class AlumnoHorarioFacade {
 
   getHorario(boleta?: number) {
     this._async.execute(
-      this.api.getAlumnoHorario(),
+      this.api.getAlumnoHorario(boleta),
       response => {
         this.#horario.set(response.map((horarioAdapter)));
       }

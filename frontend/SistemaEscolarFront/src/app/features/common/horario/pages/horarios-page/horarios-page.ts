@@ -11,7 +11,7 @@ import {HorarioTable} from '@app/shared/ui/horario-table/horario-table';
   ],
   template: `
     <app-horario-form />
-    <hr>
+    <hr class="custom-hr">
     @if (state.horarios() !== null) {
       <app-horario-table [horario]="state.horarios()" [variant]="'publico'"/>
     }

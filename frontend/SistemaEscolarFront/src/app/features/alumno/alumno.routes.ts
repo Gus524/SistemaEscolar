@@ -12,5 +12,11 @@ export const alumnoRoutes: Routes = [
     loadComponent: () => import('./horario/pages/alumno-horario-page/alumno-horario-page')
       .then(m => m.AlumnoHorarioPage),
     title: 'Comprobante horario'
+  },
+  {
+    path: 'calificaciones',
+    loadComponent: () => import('./calificaciones/pages/mis-calificaciones-page/mis-calificaciones-page')
+      .then(m => m.MisCalificacionesPage),
+    title: 'Calificaciones'
   }
 ];
