@@ -15,6 +15,12 @@ export const gestionRoutes: Routes = [
     title: 'Alumnos'
   },
   {
+    path: 'docentes',
+    loadComponent: () => import('./docentes/pages/gestion-docentes-page/gestion-docentes-page')
+      .then(m => m.GestionDocentesPage),
+    title: 'Docentes'
+  },
+  {
     path: 'horarios-editar',
     loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
       .then(m => m.UnderConstructionPage),

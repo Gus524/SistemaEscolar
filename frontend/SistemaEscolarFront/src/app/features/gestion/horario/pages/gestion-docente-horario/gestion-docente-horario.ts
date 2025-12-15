@@ -5,6 +5,7 @@ import {DatosDocente} from '@app/shared/ui/datos-docente/datos-docente';
 import {HorarioTable} from '@app/shared/ui/horario-table/horario-table';
 import {AlumnosGrupoRequest} from '@app/core/models/periodo-actual/alumnos-grupo.request';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-gestion-docente-horario',
@@ -14,6 +15,11 @@ import {Router} from '@angular/router';
   ],
   providers: [DocenteHorarioFacade, DatosPersonalesDocenteFacade],
   template: `
+      <header class="header-left">
+        <button type="button" class="btn-back" (click)="location.back()" aria-label="Regresar">
+          <span class="material-symbols-rounded">arrow_back</span>
+        </button>
+      </header>
     @if (docente.datos(); as data) {
       <app-datos-docente
         [nombre]="data.nombre!" [academia]="data.academia!" [titulo]="'Horario'"
@@ -25,6 +31,7 @@ import {Router} from '@angular/router';
   `
 })
 export class GestionDocenteHorario {
+  protected location = inject(Location);
   private router = inject(Router);
   protected horario = inject(DocenteHorarioFacade);
   protected docente = inject(DatosPersonalesDocenteFacade);

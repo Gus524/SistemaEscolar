@@ -1,0 +1,120 @@
+.search-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+
+.search-bar-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  align-items: center;
+
+  .search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.2s;
+    outline: none;
+
+    &:focus {
+      border-color: var(--color-primary-900);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  }
+
+  .btn-search {
+    background-color: var(--color-primary-900);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+
+    &:hover { transform: scale(1.1); }
+    &:disabled { opacity: 0.7; transform: none; }
+  }
+}
+
+.result-dashboard {
+  animation: fadeUp 0.4s ease-out;
+}
+
+.user-summary {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border-left: 5px solid var(--color-primary-900);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 { margin: 0; font-size: 1.5rem; color: var(--color-primary-900); }
+  p { margin: 0; color: var(--color-text-muted); font-size: 1.1rem; }
+
+  .btn-clear {
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--color-text-main);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  gap: 1rem;
+  text-align: center;
+
+  .icon {
+    font-size: 3rem;
+    color: var(--color-primary-900);
+  }
+
+  .label {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-900);
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

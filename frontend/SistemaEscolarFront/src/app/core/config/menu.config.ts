@@ -90,6 +90,11 @@ export const MENU_CONFIG: Record<TipoUsuario, MenuItem[]> = {
       icon: 'face'
     },
     {
+      label: 'Docentes',
+      route: '/gestion/docentes',
+      icon: 'work'
+    },
+    {
       label: 'Horarios',
       icon: 'schedule',
       children: [
