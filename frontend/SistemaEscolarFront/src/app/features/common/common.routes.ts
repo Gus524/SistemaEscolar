@@ -1,4 +1,6 @@
 import {Routes} from '@angular/router';
+import {roleGuard} from '@app/core/guards';
+import {TipoUsuario} from '@app/core/enums';
 
 export const commonRoutes: Routes = [
   {
@@ -12,6 +14,13 @@ export const commonRoutes: Routes = [
     loadComponent: () => import('./horario/pages/horarios-page/horarios-page')
       .then(m => m.HorariosPage),
     title: 'Horarios de clase'
+  },
+  {
+    path: 'grupo-detalle/:grupo/:clave',
+    canMatch: [roleGuard([TipoUsuario.docente,TipoUsuario.gestion])],
+    loadComponent: () => import('./horario/pages/alumnos-docente-page/alumnos-docente-page')
+      .then(m => m.AlumnosDocentePage),
+    title: 'Alumnos de clase'
   },
   {
     path: 'ocupabilidad',

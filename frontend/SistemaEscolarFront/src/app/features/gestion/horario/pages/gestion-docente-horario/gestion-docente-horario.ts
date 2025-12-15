@@ -3,6 +3,8 @@ import {DocenteHorarioFacade} from '@app/core/services/horario';
 import {DatosPersonalesDocenteFacade} from '@app/core/services/datos-personales/datos-personales-docente-facade';
 import {DatosDocente} from '@app/shared/ui/datos-docente/datos-docente';
 import {HorarioTable} from '@app/shared/ui/horario-table/horario-table';
+import {AlumnosGrupoRequest} from '@app/core/models/periodo-actual/alumnos-grupo.request';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gestion-docente-horario',
@@ -18,11 +20,12 @@ import {HorarioTable} from '@app/shared/ui/horario-table/horario-table';
       />
     }
     @if (horario.horario(); as data) {
-      <app-horario-table [horario]="data" variant="docente" />
+      <app-horario-table [horario]="data" variant="docente" (viewDetails)="goToDetails($event)" />
     }
   `
 })
 export class GestionDocenteHorario {
+  private router = inject(Router);
   protected horario = inject(DocenteHorarioFacade);
   protected docente = inject(DatosPersonalesDocenteFacade);
 
@@ -37,5 +40,9 @@ export class GestionDocenteHorario {
         this.docente.getDatosDocente(rfc);
       }
     });
+  }
+
+  async goToDetails(data: AlumnosGrupoRequest) {
+    await this.router.navigate(['/common/grupo-detalle', data.grupo, data.clave]);
   }
 }
