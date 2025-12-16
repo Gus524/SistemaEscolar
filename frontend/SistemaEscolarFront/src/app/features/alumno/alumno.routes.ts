@@ -8,9 +8,9 @@ export const alumnoRoutes: Routes = [
     title: 'Inicio'
   },
   {
-    path: 'horario-clases',
+    path: 'comprobante-horario',
     loadComponent: () => import('./horario/pages/alumno-horario-page/alumno-horario-page')
       .then(m => m.AlumnoHorarioPage),
-    title: 'Horario de clases'
+    title: 'Comprobante horario'
   }
 ];

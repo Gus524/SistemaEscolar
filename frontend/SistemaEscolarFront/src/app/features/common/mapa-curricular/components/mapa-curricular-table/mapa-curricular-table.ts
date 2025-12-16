@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {MapaCurricularState} from '@app/features/mapa-curricular/services/mapa-curricular-state';
+import {MapaCurricularState} from '@app/features/common/mapa-curricular/services/mapa-curricular-state';
 
 @Component({
   selector: 'app-mapa-curricular-table',
@@ -32,7 +32,7 @@ import {MapaCurricularState} from '@app/features/mapa-curricular/services/mapa-c
           } @empty {
             <tr>
               <td colspan="7" class="empty-state">
-                <span class="material-symbols-rounded icon">calendar_today</span>
+                <span class="material-symbols-rounded icon">filter_none</span>
                 <p>
                   {{
                     state.mapa() === null

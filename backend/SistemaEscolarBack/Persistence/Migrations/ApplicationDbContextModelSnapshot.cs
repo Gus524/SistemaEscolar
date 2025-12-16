@@ -131,7 +131,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdEdificio" }, "id_edificio");
 
-                    b.ToTable("Academia", (string)null);
+                    b.ToTable("Academia");
 
                     MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb4");
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_0900_ai_ci");
@@ -226,7 +226,7 @@ namespace Persistence.Migrations
                     b.HasKey("NoBoleta")
                         .HasName("PRIMARY");
 
-                    b.ToTable("Alumno", (string)null);
+                    b.ToTable("Alumno");
                 });
 
             modelBuilder.Entity("Domain.Entities.AlumnoEts", b =>
@@ -315,7 +315,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdInst" }, "id_inst");
 
-                    b.ToTable("Carrera", (string)null);
+                    b.ToTable("Carrera");
                 });
 
             modelBuilder.Entity("Domain.Entities.Docente", b =>
@@ -403,7 +403,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "IdAcademia" }, "id_academia");
 
-                    b.ToTable("Docente", (string)null);
+                    b.ToTable("Docente");
                 });
 
             modelBuilder.Entity("Domain.Entities.DocenteHorario", b =>
@@ -490,7 +490,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdInst" }, "id_inst")
                         .HasDatabaseName("id_inst1");
 
-                    b.ToTable("Edificio", (string)null);
+                    b.ToTable("Edificio");
                 });
 
             modelBuilder.Entity("Domain.Entities.EstadoGeneral", b =>
@@ -623,7 +623,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdInst" }, "id_inst")
                         .HasDatabaseName("id_inst2");
 
-                    b.ToTable("Gestion", (string)null);
+                    b.ToTable("Gestion");
                 });
 
             modelBuilder.Entity("Domain.Entities.Grupo", b =>
@@ -662,7 +662,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "AbrCarr" }, "abr_carr");
 
-                    b.ToTable("Grupo", (string)null);
+                    b.ToTable("Grupo");
                 });
 
             modelBuilder.Entity("Domain.Entities.GrupoHorario", b =>
@@ -922,7 +922,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "NoBoleta", "IdPlan" }, "no_boleta")
                         .HasDatabaseName("no_boleta1");
 
-                    b.ToTable("Inscripcion", (string)null);
+                    b.ToTable("Inscripcion");
                 });
 
             modelBuilder.Entity("Domain.Entities.InscripcionDetalle", b =>
@@ -1025,7 +1025,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "NomInst" }, "nom_inst")
                         .IsUnique();
 
-                    b.ToTable("Institucion", (string)null);
+                    b.ToTable("Institucion");
                 });
 
             modelBuilder.Entity("Domain.Entities.MapaCurricular", b =>
@@ -1109,7 +1109,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "IdAcademia" }, "id_academia")
                         .HasDatabaseName("id_academia1");
 
-                    b.ToTable("Materia", (string)null);
+                    b.ToTable("Materia");
                 });
 
             modelBuilder.Entity("Domain.Entities.PeriodoEscolar", b =>
@@ -1209,7 +1209,7 @@ namespace Persistence.Migrations
                     b.HasIndex(new[] { "NoBoleta" }, "no_boleta")
                         .HasDatabaseName("no_boleta2");
 
-                    b.ToTable("Tramite", (string)null);
+                    b.ToTable("Tramite");
                 });
 
             modelBuilder.Entity("Domain.Entities.TrayectoriaAlumno", b =>
@@ -2218,10 +2218,6 @@ namespace Persistence.Migrations
                     b.Property<int>("IdPlan")
                         .HasColumnType("int")
                         .HasColumnName("id_plan");
-
-                    b.Property<int?>("Inscritos")
-                        .HasColumnType("int")
-                        .HasColumnName("inscritos");
 
                     b.Property<TimeOnly?>("JueF")
                         .HasColumnType("time(6)")

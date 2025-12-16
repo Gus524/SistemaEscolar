@@ -2,11 +2,11 @@ import {Component, effect, inject, output} from '@angular/core';
 import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FiltroMapaForm, FiltrosMapa} from '@app/core/models/filtros';
 import {CarreraPlanSelector} from '@app/shared/ui/carrera-plan-selector/carrera-plan-selector';
-import {MapaCurricularState} from '@app/features/mapa-curricular/services/mapa-curricular-state';
+import {MapaCurricularState} from '@app/features/common/mapa-curricular/services/mapa-curricular-state';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {
   MapaCurricularTable
-} from '@app/features/mapa-curricular/components/mapa-curricular-table/mapa-curricular-table';
+} from '@app/features/common/mapa-curricular/components/mapa-curricular-table/mapa-curricular-table';
 import {Loader} from '@app/shared/ui/loader/loader';
 
 @Component({
