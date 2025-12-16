@@ -16,7 +16,7 @@ import {RouterLink} from '@angular/router';
   ],
   template: `
     <main class="search-container">
-      <h1 class="mb-4">Gestión de Docentes</h1>
+      <h1 class="mb-4">Gestión de docentes</h1>
 
       <section class="search-bar-section">
         <input
@@ -36,7 +36,7 @@ import {RouterLink} from '@angular/router';
         <app-loader />
       }
 
-      @if (docenteEncontrado(); as docente) {
+      @if (!facade.error() && docenteEncontrado(); as docente) {
         <div class="result-dashboard">
 
           <article class="user-summary">
@@ -66,7 +66,7 @@ import {RouterLink} from '@angular/router';
 
           </section>
         </div>
-      } @else if (hasSearched()) {
+      } @else if (facade.error()) {
         <p class="text-center text-muted">No se encontró ningún docente con ese RFC.</p>
       }
     </main>
@@ -74,7 +74,7 @@ import {RouterLink} from '@angular/router';
   styleUrl: './gestion-docentes-page.scss'
 })
 export class GestionDocentesPage {
-  private facade = inject(DatosPersonalesDocenteFacade);
+  protected facade = inject(DatosPersonalesDocenteFacade);
 
   searchControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
   asyncState = new AsyncState();
@@ -85,6 +85,7 @@ export class GestionDocentesPage {
   constructor() {
     effect(() => {
       const docente = this.facade.datos();
+      this.hasSearched.set(true);
 
       if (docente) {
         this.docenteEncontrado.set(docente);

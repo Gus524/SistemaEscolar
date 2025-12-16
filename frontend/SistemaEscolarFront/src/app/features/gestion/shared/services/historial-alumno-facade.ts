@@ -11,6 +11,7 @@ import {response} from 'express';
 export class HistorialAlumnoFacade {
   private api = inject(HistorialAcademicoApi);
   private _async = new AsyncState();
+  error = this._async.error;
 
   #alumno = signal<HistorialAlumno | null>(null);
   alumno = this.#alumno.asReadonly();

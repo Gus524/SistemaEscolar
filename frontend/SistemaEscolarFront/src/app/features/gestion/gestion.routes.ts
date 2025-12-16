@@ -9,8 +9,8 @@ export const gestionRoutes: Routes = [
   },
   {
     path: 'alumnos',
-    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
-      .then(m => m.UnderConstructionPage),
+    loadComponent: () => import('./alumnos/pages/gestion-alumnos-page/gestion-alumnos-page')
+      .then(m => m.GestionAlumnosPage),
     data: { title: 'Gestión de Alumnos', message: 'Módulo para la administración, búsqueda y edición de alumnos inscritos.' },
     title: 'Alumnos'
   },
