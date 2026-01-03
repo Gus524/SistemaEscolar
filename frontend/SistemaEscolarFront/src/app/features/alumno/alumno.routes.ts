@@ -30,5 +30,11 @@ export const alumnoRoutes: Routes = [
     loadComponent: () => import('./historial-academico/pages/mi-estado-general/mi-estado-general')
       .then(m => m.MiEstadoGeneral),
     title: 'Estado general'
+  },
+  {
+    path: 'datos-personales',
+    loadComponent: () => import('./datos-personales/pages/mis-datos-alumno/mis-datos-alumno')
+      .then(m => m.MisDatosAlumno),
+    title: 'Datos personales'
   }
 ];

@@ -3,7 +3,7 @@ import {TipoUsuario} from '@app/core/enums';
 import {MenuItem} from '@app/core/models/menu';
 
 const ROUTES = {
-  PROFILE: '/profile',
+  PROFILE: '/datos-personales',
   LOGOUT: '/auth/logout',
   COMMON: {
     MAP: '/common/mapa-curricular',
