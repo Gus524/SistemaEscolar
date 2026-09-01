@@ -17,28 +17,22 @@ public class ErrorHandlerMiddleware(RequestDelegate next)
             var response = context.Response;
             response.ContentType = "application/json";
 
-            Response<string> responseModel;
+            var responseModel = Response<string>.Fail(error.Message);
 
             switch (error)
             {
                 case Application.Exceptions.ApiException e:
+                    //custom application error
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    responseModel = Response<string>.Fail(error.Message);
                     break;
-
                 case Application.Exceptions.ValidationException e:
+                    //custom application error
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    responseModel = Response<string>.Fail(e.Errors); 
+                    responseModel.Errors = e.Errors;
                     break;
-
-                case KeyNotFoundException e:
-                    response.StatusCode = (int)HttpStatusCode.NotFound;
-                    responseModel = Response<string>.Fail("El recurso solicitado no fue encontrado.");
-                    break;
-
                 default:
+                    // unhandled error
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    responseModel = Response<string>.Fail("Ocurrió un error interno en el servidor.");
                     break;
             }
 

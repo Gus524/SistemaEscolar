@@ -1,9 +1,11 @@
+using System.Reflection;
 using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repository;
+using Persistence.Seeders;
 
 namespace Persistence;
 
@@ -17,10 +19,21 @@ public static class ServiceExtensions
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
         );
 
+        services.AddScoped<IDbSeeder, DbSeeder>();
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
         #region Repositories
 
         services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
-
+        services.AddTransient(typeof(IReadRepositoryAsync<>), typeof(RepositoryAsync<>));
+        services.AddTransient<IDatosPersonalesRepository, DatosPersonalesRepository>();
+        services.AddTransient<IHistorialAcademicoRepository, HistorialAcademicoRepository>();
+        services.AddTransient<IHorarioRepository, HorarioRepository>();
+        services.AddTransient<IPeriodoActualRepository, PeriodoActualRepository>();
+        services.AddTransient<IMapaCurricularRepository, MapaCurricularRepository>();
+        services.AddTransient<IReinscripcionRepository, ReinscripcionRepository>();
+        services.AddTransient<IGetInicioRepository, GetInicioRepository>();
+        
         #endregion
     }
 }

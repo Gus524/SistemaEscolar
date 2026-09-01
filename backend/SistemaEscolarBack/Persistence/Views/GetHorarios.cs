@@ -2,6 +2,8 @@
 
 public class GetHorarios
 {
+    public string Secuencia { get; set; } = null!;
+    public string Clave { get; set; } = null!;
     public string? Nombre { get; set; }
 
     public string Materia { get; set; } = null!;
@@ -36,5 +38,5 @@ public class GetHorarios
 
     public string NoMateria { get; set; } = null!;
 
-    public bool? Activo { get; set; }
+    public bool Activo { get; set; }
 }

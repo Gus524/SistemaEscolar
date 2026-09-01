@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR ALTER TRIGGER check_inscripcion_alumno
+CREATE TRIGGER check_inscripcion_alumno
 BEFORE INSERT ON Inscripcion_Detalle
 FOR EACH ROW
 BEGIN

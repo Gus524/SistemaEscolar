@@ -8,9 +8,9 @@ public class TrayectoriaAlumnoConfig : IEntityTypeConfiguration<TrayectoriaAlumn
 {
     public void Configure(EntityTypeBuilder<TrayectoriaAlumno> builder)
     {
-        builder
-            .HasNoKey()
-            .ToTable("Trayectoria_Alumno");
+        builder.HasKey(t => new { t.NoBoleta, t.IdPlan });
+
+        builder.ToTable("Trayectoria_Alumno");
 
         builder.HasIndex(e => new { e.NoBoleta, e.IdPlan }, "no_boleta");
 
@@ -28,8 +28,8 @@ public class TrayectoriaAlumnoConfig : IEntityTypeConfiguration<TrayectoriaAlumn
             .HasColumnName("per_cursados");
         builder.Property(e => e.PerDisponibles).HasColumnName("per_disponibles");
 
-        builder.HasOne(d => d.HistorialAcademico).WithMany()
-            .HasForeignKey(d => new { d.NoBoleta, d.IdPlan })
-            .HasConstraintName("Trayectoria_Alumno_ibfk_1");
+        builder.HasOne(d => d.HistorialAcademico).WithOne(t => t.TrayectoriaAlumno)
+            .HasForeignKey<TrayectoriaAlumno>(d => new { d.NoBoleta, d.IdPlan })
+            .HasConstraintName("FK_Trayectoria_HistorialAcademico");
     }
 }

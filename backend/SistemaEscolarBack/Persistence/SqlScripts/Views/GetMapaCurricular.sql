@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetMapaCurricular AS
+CREATE OR REPLACE VIEW GetMapaCurricular AS
 	SELECT CONCAT(mc.abr_carr, mc.semestre, mc.no_materia) AS clave, 
 	   m.nom_materia, 
        m.tipo_materia,

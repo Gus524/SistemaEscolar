@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetInformacionGrupo AS
+CREATE OR REPLACE VIEW GetInformacionGrupo AS
 	SELECT gh.semestre, 
 		   gh.turno,
 		   gh.no_grupo,

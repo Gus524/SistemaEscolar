@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetInicioDocente AS
+CREATE OR REPLACE VIEW GetInicioDocente AS
 	SELECT CONCAT(d.nom_doc, ' ', d.ap_doc, ' ', d.am_doc) AS nombre,
 	   a.nom_academia,
        i.nom_inst,

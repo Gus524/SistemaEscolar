@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetInicioAlumno AS
+CREATE OR REPLACE VIEW GetInicioAlumno AS
 	SELECT CONCAT(a.nom_al, " ", a.ap_al, ' ', a.am_al) as nombre,
 		   a.no_boleta,
 		   i.id_inst,

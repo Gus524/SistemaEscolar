@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE OR ALTER TRIGGER add_historial_alumno
+CREATE TRIGGER add_historial_alumno
 AFTER INSERT ON Historial_Academico
 FOR EACH ROW
 BEGIN

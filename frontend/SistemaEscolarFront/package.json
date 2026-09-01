@@ -1,0 +1,63 @@
+{
+  "name": "sistema-escolar-front",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:SistemaEscolarFront": "node dist/SistemaEscolarFront/server/server.mjs",
+    "e2e": "ng e2e"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/cdk": "^21.0.3",
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-browser-dynamic": "^21.0.4",
+    "@angular/platform-server": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "@angular/ssr": "^20.3.4",
+    "express": "^5.1.0",
+    "jsdom": "^27.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.4",
+    "@angular/cli": "^20.3.4",
+    "@angular/compiler-cli": "^20.3.0",
+    "@playwright/test": "1.56.0",
+    "@testing-library/angular": "^18.1.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/express": "^5.0.1",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.17.19",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "baseline-browser-mapping": "^2.9.6",
+    "jasmine-core": "~5.9.0",
+    "playwright-ng-schematics": "2.1.1",
+    "testing-library": "^0.0.2",
+    "typescript": "~5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

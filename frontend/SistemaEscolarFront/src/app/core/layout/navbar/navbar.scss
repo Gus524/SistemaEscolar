@@ -1,0 +1,234 @@
+@use 'assets/styles/theme' as *;
+
+$header-height: 70px;
+
+.main-header {
+  background-color: var(--color-primary-900);
+  height: $header-height;
+  padding: 0 1rem;
+
+  box-shadow: var(--shadow-sm);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  color: var(--color-text-light);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  color: #FFFFFF;
+
+  font-weight: 600;
+  font-size: 1.25rem;
+
+  .brand-name {
+    @media (max-width: 480px) { display: none; }
+  }
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+
+  @media (max-width: 992px) {
+    position: fixed;
+    top: $header-height;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - #{$header-height});
+
+    background-color: var(--color-primary-800);
+
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.5rem;
+    overflow-y: auto;
+    transition: right 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: -4px 0 10px rgba(0,0,0,0.3);
+
+    &.is-open {
+      right: 0;
+    }
+  }
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: rgba(255, 255, 255, 0.75);
+
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  &:hover, &.active {
+    color: #FFFFFF;
+    background-color: rgba(255,255,255, 0.08);
+  }
+
+  &.logout-link {
+    &:hover {
+      background-color: rgba(var(--color-danger), 0.15);
+      color: var(--color-danger);
+    }
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    &.rotate { transform: rotate(180deg); }
+  }
+}
+
+.dropdown-menu {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+
+  background-color: var(--color-bg-card);
+
+  min-width: 220px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.5rem;
+
+  border: 1px solid var(--color-border);
+
+  transform-origin: top right;
+  animation: slideIn 0.2s ease-out;
+  z-index: 1001;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-bg-card);
+    transform: rotate(45deg);
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 992px) {
+    position: static;
+    background-color: rgba(0,0,0, 0.2);
+    box-shadow: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    margin-top: 0.5rem;
+    padding: 0;
+
+    &::before { display: none; }
+
+    animation: none;
+  }
+
+  li {
+    width: 100%;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+
+    color: var(--color-text-main);
+
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s;
+
+    .icon-sm {
+      color: var(--color-text-muted);
+    }
+
+    &:hover, &.active {
+      background-color: var(--color-bg-body);
+      color: var(--color-primary-900);
+
+      .icon-sm {
+        color: var(--color-accent);
+      }
+    }
+
+    @media (max-width: 992px) {
+      color: rgba(255,255,255, 0.8);
+      &:hover, &.active {
+        color: white;
+        background-color: rgba(255,255,255, 0.05);
+      }
+    }
+  }
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+
+  &:hover {
+    background-color: rgba(255,255,255, 0.1);
+  }
+
+  @media (max-width: 992px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.material-symbols-rounded {
+  line-height: 1;
+  font-size: 1.25rem;
+
+  &.icon-sm {
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

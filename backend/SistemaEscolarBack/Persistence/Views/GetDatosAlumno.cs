@@ -26,7 +26,7 @@ public class GetDatosAlumno
 
     public string Delegacion { get; set; } = null!;
 
-    public decimal Cp { get; set; }
+    public string Cp { get; set; }
 
     public string DescCarr { get; set; } = null!;
 

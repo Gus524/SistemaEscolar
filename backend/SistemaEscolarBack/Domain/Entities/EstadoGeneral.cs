@@ -4,7 +4,7 @@ public class EstadoGeneral
 {
     public string? Estado { get; set; }
 
-    public long? NoBoleta { get; set; }
+    public long NoBoleta { get; set; }
 
     public string AbrCarr { get; set; } = null!;
 
@@ -14,7 +14,7 @@ public class EstadoGeneral
 
     public string NoMateria { get; set; } = null!;
 
-    public virtual HistorialAcademico? HistorialAcademico { get; set; }
+    public virtual HistorialAcademico HistorialAcademico { get; set; } = null!;
 
     public virtual MapaCurricular MapaCurricular { get; set; } = null!;
 }

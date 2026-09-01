@@ -1,0 +1,35 @@
+import {Routes} from '@angular/router';
+import {roleGuard} from '@app/core/guards';
+import {TipoUsuario} from '@app/core/enums';
+
+export const commonRoutes: Routes = [
+  {
+    path: 'mapa-curricular',
+    loadComponent: () => import('./mapa-curricular/pages/mapa-curricular-page/mapa-curricular-page')
+      .then(m => m.MapaCurricularPage),
+    title: 'Mapa Curricular'
+  },
+  {
+    path: 'horarios',
+    loadComponent: () => import('./horario/pages/horarios-page/horarios-page')
+      .then(m => m.HorariosPage),
+    title: 'Horarios de clase'
+  },
+  {
+    path: 'grupo-detalle/:grupo/:clave',
+    canMatch: [roleGuard([TipoUsuario.docente,TipoUsuario.gestion])],
+    loadComponent: () => import('./horario/pages/alumnos-docente-page/alumnos-docente-page')
+      .then(m => m.AlumnosDocentePage),
+    title: 'Alumnos de clase'
+  },
+  {
+    path: 'ocupabilidad',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: {
+      title: 'Ocupabilidad',
+      message: 'Estamos optimizando la consulta de cupos disponibles por grupo y asignatura.'
+    },
+    title: 'Ocupabilidad'
+  }
+]

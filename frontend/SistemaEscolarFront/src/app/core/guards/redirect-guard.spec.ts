@@ -1,0 +1,73 @@
+import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { TipoUsuario } from '@app/core/enums/tipo-usuario.enum';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
+import { redirectGuard } from './redirect-guard';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { AuthState } from '@app/core/services/auth';
+
+describe('RedirectGuard', () => {
+  let routerMock: any;
+  const mockCurrentUser = signal<{ tipoUsuario: TipoUsuario } | null>(null);
+  const mockIsActive = signal(false);
+
+  const authStateMock = {
+    currentUser: mockCurrentUser.asReadonly(),
+    isActive: mockIsActive,
+    accessDenied: vi.fn().mockReturnValue('LOGIN_REDIRECT')
+  };
+
+  const executeGuard = () => TestBed.runInInjectionContext(() => redirectGuard(null as any, null as any));
+
+  beforeEach(() => {
+    routerMock = {
+      createUrlTree: vi.fn().mockReturnValue('URL_TREE')
+    };
+
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthState, useValue: authStateMock },
+        { provide: Router, useValue: routerMock },
+        provideZonelessChangeDetection()
+      ]
+    });
+    vi.clearAllMocks();
+  });
+
+  it('debe llamar a accessDenied() si no hay usuario o sesión activa', () => {
+    mockIsActive.set(false);
+    mockCurrentUser.set(null);
+
+    const result = executeGuard();
+
+    expect(result).toBe('LOGIN_REDIRECT');
+    expect(authStateMock.accessDenied).toHaveBeenCalled();
+  });
+
+  it('debe redirigir a /alumno si el usuario es ALUMNO', () => {
+    mockIsActive.set(true);
+    mockCurrentUser.set({ tipoUsuario: TipoUsuario.alumno });
+
+    executeGuard();
+
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/alumno']);
+  });
+
+  it('debe redirigir a /docente si el usuario es DOCENTE', () => {
+    mockIsActive.set(true);
+    mockCurrentUser.set({ tipoUsuario: TipoUsuario.docente });
+
+    executeGuard();
+
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/docente']);
+  });
+
+  it('debe redirigir a /gestion si el usuario es GESTIÓN', () => {
+    mockIsActive.set(true);
+    mockCurrentUser.set({ tipoUsuario: TipoUsuario.gestion });
+
+    executeGuard();
+
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/gestion']);
+  });
+});

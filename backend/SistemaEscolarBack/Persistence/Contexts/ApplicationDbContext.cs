@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
+using Common.Data;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Persistence.Views;
 
 namespace Persistence.Contexts;
 
-public sealed class ApplicationDbContext : DbContext
+public sealed class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -95,10 +98,13 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Tramite> Tramite { get; set; }
 
     public DbSet<TrayectoriaAlumno> TrayectoriaAlumno { get; set; }
-    
+    public DbSet<GetMateriasReinscripcion> GetMateriasInscripcion { get; set; }
+    public DbSet<GetHorariosValidacion> GetHorariosValidacion { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         
     }

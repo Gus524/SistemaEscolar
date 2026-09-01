@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW GetHistorialDetalle AS
+CREATE OR REPLACE VIEW GetHistorialDetalle AS
 	SELECT	CONCAT(mc.abr_carr, mc.semestre, mc.no_materia) AS clave,
 			m.nom_materia,
             dh.fecha_eval,

@@ -1,0 +1,6 @@
+@if (!isBrowser()) {
+  <app-loader />
+}
+@if (isBrowser()) {
+  <router-outlet />
+}
