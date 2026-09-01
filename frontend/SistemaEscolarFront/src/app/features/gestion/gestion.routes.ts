@@ -9,10 +9,16 @@ export const gestionRoutes: Routes = [
   },
   {
     path: 'alumnos',
-    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
-      .then(m => m.UnderConstructionPage),
+    loadComponent: () => import('./alumnos/pages/gestion-alumnos-page/gestion-alumnos-page')
+      .then(m => m.GestionAlumnosPage),
     data: { title: 'Gestión de Alumnos', message: 'Módulo para la administración, búsqueda y edición de alumnos inscritos.' },
     title: 'Alumnos'
+  },
+  {
+    path: 'docentes',
+    loadComponent: () => import('./docentes/pages/gestion-docentes-page/gestion-docentes-page')
+      .then(m => m.GestionDocentesPage),
+    title: 'Docentes'
   },
   {
     path: 'horarios-editar',
@@ -60,5 +66,28 @@ export const gestionRoutes: Routes = [
     path: 'horario',
     loadChildren: () => import('./horario/horario.routes')
       .then(m => m.horarioRoutes)
+  },
+  {
+    path: 'historial-academico',
+    loadChildren: () => import('./historial-academico/historial.routes')
+      .then(m => m.historialRoutes)
+  },
+  {
+    path: 'alumno/datos-personales/:boleta',
+    loadComponent: () => import('./datos-personales/pages/gestion-datos-alumno/gestion-datos-alumno')
+      .then(m => m.GestionDatosAlumno),
+    title: 'Datos personales alumno'
+  },
+  {
+    path: 'docente/datos-personales/:rfc',
+    loadComponent: () => import('./datos-personales/pages/gestion-datos-docente/gestion-datos-docente')
+      .then(m => m.GestionDatosDocente),
+    title: 'Datos personales docente'
+  },
+  {
+    path: 'alumno/calificaciones/:boleta',
+    loadComponent: () => import('./calificaciones/pages/gestion-calificaciones-alumno/gestion-calificaciones-alumno')
+      .then(m => m.GestionCalificacionesAlumno),
+    title: 'Calificaciones alumno'
   }
 ];

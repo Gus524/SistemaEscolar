@@ -29,6 +29,6 @@ export class DocenteHorarioPage {
   }
 
   async goToDetail(ruta: AlumnosGrupoRequest) {
-    await this.router.navigate([`/docente/grupo-detalle`, ruta.grupo, ruta.clave]);
+    await this.router.navigate([`/common/grupo-detalle`, ruta.grupo, ruta.clave]);
   }
 }

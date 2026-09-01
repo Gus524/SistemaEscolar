@@ -8,21 +8,14 @@ namespace Application.Features.HistorialAcademico.Queries.GetHistorialDetalleAlu
 
 public class GetHistorialDetalleAlumnoCurrentQueryHandler(
     ICurrentUserService currentUserService,
-    IHistorialAcademicoRepository historialRepository
+    IGetHistorialDetalleAlumno getHistorial
 ) : IRequestHandler<GetHistorialDetalleAlumnoCurrentQuery, Response<HistorialAlumnoResponseDto>>
 {
     public async Task<Response<HistorialAlumnoResponseDto>> Handle(GetHistorialDetalleAlumnoCurrentQuery request, CancellationToken cancellationToken)
     {
         var boleta = currentUserService.UserName ?? throw new KeyNotFoundException("Boleta no encontrada para el alumno.");
 
-        var historial = await historialRepository.GetHistorialAlumno(long.Parse(boleta));
-        var materias = await historialRepository.GetHistorialDetalle(long.Parse(boleta));
-
-        var response = new HistorialAlumnoResponseDto
-        {
-            HistorialAlumno = historial,
-            SemestreHistorial = materias.ToSemestreDto()
-        };
+        var response = await getHistorial.GetHistorialDetalleAlumno(long.Parse(boleta));
         
         return Response<HistorialAlumnoResponseDto>.Success(response);
     }

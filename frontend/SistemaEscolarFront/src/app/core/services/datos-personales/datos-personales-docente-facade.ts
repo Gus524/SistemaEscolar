@@ -12,6 +12,7 @@ export class DatosPersonalesDocenteFacade {
 
   #datos = signal<DatosPersonalesDocente | null>(null);
   datos = this.#datos.asReadonly();
+  error = this._async.error;
 
   getDatosDocente(rfc?: string){
     this._async.execute(

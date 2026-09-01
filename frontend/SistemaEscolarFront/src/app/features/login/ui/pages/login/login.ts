@@ -19,13 +19,13 @@ interface LoginForm {
       <aside class="brand-panel">
         <figure class="logo-container">
           <img
-            ngSrc="/assets/img/logo/logo_p.png"
+            ngSrc="/assets/img/logo/logo-header.png"
             alt="Logotipo School Shield"
             width="600"
             height="600"
           >
         </figure>
-        <h1 class="brand-title">Bienvenido a<br>School Shield</h1>
+        <h1 class="brand-title">Bienvenido </h1>
       </aside>
 
       <section class="form-panel">

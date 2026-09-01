@@ -1,4 +1,4 @@
-export interface Califcaciones {
+export interface Calificaciones {
   periodo: number;
   grupo: string;
   materia: string;

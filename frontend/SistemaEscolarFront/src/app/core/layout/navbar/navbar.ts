@@ -16,7 +16,7 @@ import {TipoUsuario} from '@app/core/enums';
     <header class="main-header">
       <nav class="navbar">
         <a class="brand" routerLink="/">
-          <img ngSrc="/assets/img/logo/logo_p.png" alt="Logotipo School Shield" width="50" height="45">
+          <img ngSrc="/assets/img/logo/logo-nuevo.png" alt="Logotipo School Shield" width="60" height="60">
           <span class="brand-name">School Shield</span>
         </a>
 

@@ -65,39 +65,6 @@ import {AlumnosGrupo} from '@app/core/models/periodo-actual/alumnos-grupo.model'
     }
   `,
   styles: [`
-    .table-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-
-      h2 { margin: 0; font-size: 1.5rem; }
-    }
-
-    .btn-back {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      color: var(--color-primary-900);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.2s;
-
-      &:hover {
-        background-color: rgba(0,0,0,0.05);
-      }
-
-      .material-symbols-rounded { font-size: 1.5rem; }
-    }
-
     .group-layout {
       table-layout: fixed;
     }

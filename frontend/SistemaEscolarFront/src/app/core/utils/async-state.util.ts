@@ -22,7 +22,7 @@ export class AsyncState {
     ).subscribe({
       next: (data) => onSuccess(data),
       error: (err: HttpErrorResponse) => {
-        const msg = err.error.Message || err?.error?.message || errorMessage;
+        const msg = err?.message || err?.error?.message ||errorMessage;
         this._error.set(msg);
       }
     })

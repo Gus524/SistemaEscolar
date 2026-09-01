@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Features.HistorialAcademico.Queries.GetHistorialDetalle;
 
-public class GetHistorialDetalleQuery : IRequest<Response<List<SemestreHistorialDto>>>
+public class GetHistorialDetalleQuery : IRequest<Response<HistorialAlumnoResponseDto>>
 {
     public long NoBoleta { get; set; }
 }
