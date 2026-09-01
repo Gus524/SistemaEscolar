@@ -29,7 +29,8 @@ export class HorarioApi {
 
   getAlumnoHorario(boleta?: number): Observable<AlumnoHorario[]> {
     if (boleta !== undefined) {
-      return this.http.get<ApiResponse<AlumnoHorario[]>>(`${this.url}/alumno`, {params: {boleta}})
+      return this.http.get<ApiResponse<AlumnoHorario[]>>(`${this.url}/alumno`,
+        { params: { noBoleta: boleta} })
         .pipe(map(response => response.data));
     } else {
       return this.http.get<ApiResponse<AlumnoHorario[]>>(`${this.url}/miHorarioAlumno`)

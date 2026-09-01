@@ -36,5 +36,40 @@ export const alumnoRoutes: Routes = [
     loadComponent: () => import('./datos-personales/pages/mis-datos-alumno/mis-datos-alumno')
       .then(m => m.MisDatosAlumno),
     title: 'Datos personales'
+  },
+  {
+    path: 'tramites/solicitud',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: { title: 'Solicitud de Trámites', message: 'Pronto podrás gestionar tus constancias y boletas desde aquí.' },
+    title: 'Solicitud de Trámites'
+  },
+  {
+    path: 'tramites/seguimiento',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: { title: 'Seguimiento de Trámites', message: 'El módulo de rastreo de solicitudes está en desarrollo.' },
+    title: 'Seguimiento'
+  },
+  {
+    path: 'agenda',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: { title: 'Agenda Escolar', message: 'Tu agenda personalizada con eventos y fechas importantes estará lista pronto.' },
+    title: 'Agenda Escolar'
+  },
+  {
+    path: 'equivalencias',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: { title: 'Equivalencias', message: 'Consulta de tablas de equivalencia entre planes de estudio.' },
+    title: 'Equivalencias'
+  },
+  {
+    path: 'calendario-ets',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: { title: 'Calendario de ETS', message: 'Las fechas para Exámenes a Título de Suficiencia se publicarán aquí.' },
+    title: 'Calendario ETS'
   }
 ];

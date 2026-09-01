@@ -1,0 +1,107 @@
+@use 'assets/styles/theme' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.construction-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Ocupa la mayoría de la pantalla */
+  padding: 1rem;
+  background-color: var(--color-bg-body, #f8f9fa);
+}
+
+.content-card {
+  background: white;
+  padding: 3rem;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid var(--color-border, #eee);
+  animation: floatUp 0.6s ease-out;
+
+  .illustration-container {
+    margin: 0 auto 2rem;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(var(--color-primary-rgb), 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .construction-icon {
+      width: 64px;
+      height: 64px;
+      color: var(--color-primary-900);
+      opacity: 0.8;
+    }
+  }
+
+  .title {
+    font-family: var(--font-family-main);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .message {
+    color: var(--color-text-muted, #666);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary-900);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-md, 8px);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      background-color: black;
+    }
+
+    .material-symbols-rounded {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .content-card {
+    padding: 2rem 1.5rem;
+
+    .title { font-size: 1.5rem; }
+    .illustration-container { width: 100px; height: 100px; }
+  }
+}

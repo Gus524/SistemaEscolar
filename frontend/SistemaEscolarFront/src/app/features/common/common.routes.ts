@@ -12,5 +12,15 @@ export const commonRoutes: Routes = [
     loadComponent: () => import('./horario/pages/horarios-page/horarios-page')
       .then(m => m.HorariosPage),
     title: 'Horarios de clase'
+  },
+  {
+    path: 'ocupabilidad',
+    loadComponent: () => import('@app/shared/ui/under-construction-page/under-construction-page')
+      .then(m => m.UnderConstructionPage),
+    data: {
+      title: 'Ocupabilidad',
+      message: 'Estamos optimizando la consulta de cupos disponibles por grupo y asignatura.'
+    },
+    title: 'Ocupabilidad'
   }
 ]
